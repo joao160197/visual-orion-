@@ -1,0 +1,64 @@
+{
+  "navigation": {
+    "home": "Início",
+    "features": "Soluções",
+    "contact": "Contato",
+    "company": "Empresa"
+  },
+  "localeSwitcher": {
+    "label": "Mudar idioma",
+    "locale": {
+      "en": "Inglês",
+      "pt": "Português",
+      "es-AR": "Espanhol (AR)"
+    }
+  },
+  "contactPage": {
+    "title": "Contato",
+    "description": "Fique à vontade para nos contatar usando o formulário abaixo.",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "submit": "Enviar Mensagem",
+    "locations": {
+      "us": {
+        "title": "KING Automation Estados Unidos",
+        "address": "4300 Stone Station Rd, Roebuck, South Carolina - 29376",
+        "phone": "(864) 877-8871",
+        "fax": "Fax: (864) 877-8872",
+        "email": "king.us@kingautomation.com"
+      },
+      "brazil": {
+        "title": "KING Automation Brasil",
+        "address": "Condomínio Perini Business Park, Sala 08, bloco L\nRua Dona Francisca, nº 8300 - Joinville, SC - 89.219-600",
+        "phone": "+55 (47) 3418-4155",
+        "email": "king.br@kingautomation.com"
+      }
+    },
+    "about": {
+      "learnMore": "Conheça mais sobre nós",
+      "yearsOfExperience": "Anos de experiência",
+      "contactUs": "Entre em contato",
+      "ourSolutions": "Nossas Soluções",
+      "innovationText": "Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.",
+      "solutions": {
+        "automotive": {
+          "title": "Automotivo",
+          "learnMore": "Saiba mais →"
+        },
+        "logistics": {
+          "title": "Logístico",
+          "learnMore": "Saiba mais →"
+        },
+        "waterTreatment": {
+          "title": "Tratamento de Água",
+          "learnMore": "Saiba mais →"
+        },
+        "foodAndBeverage": {
+          "title": "Alimentos e Bebidas",
+          "learnMore": "Saiba mais →"
+        }
+      }
+    }
+  }
+}
