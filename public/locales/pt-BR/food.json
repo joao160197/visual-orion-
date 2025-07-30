@@ -1,0 +1,13 @@
+{
+  "title": "Alimentos e Bebidas",
+  "description": "Soluções em automação para a indústria de alimentos e bebidas",
+  "sections": {
+    "introduction": "Introdução",
+    "solutions": "Nossas Soluções",
+    "benefits": "Benefícios"
+  },
+  "fallback": {
+    "title": "Alimentos e Bebidas",
+    "description": "Conteúdo em desenvolvimento. Em breve mais informações."
+  }
+}

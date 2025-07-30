@@ -23,7 +23,7 @@ export default function FeaturesPage() {
     {
       title: "Alimentos e bebidas",
       icon: <Pizza size={40} />,
-      href: "/pt/Alimentos",
+      href: "/pt/Food",
     },
   ];
 

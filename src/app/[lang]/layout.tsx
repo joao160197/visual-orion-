@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import { getGlobalData } from "@/data/loader";
 import { getDictionary } from "../../get-dictionary";
 import { i18n, Locale } from "../../i18n-config";
+import { I18nProvider } from "@/components/providers/I18nProvider";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -60,13 +61,12 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={lang}>
-      <body
-        className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}
-        suppressHydrationWarning={true}
-      >
-        <Header logo={logo} dictionary={dictionary.navigation} />
-        <main>{children}</main>
+    <html lang={lang} className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="bg-background">
+        <I18nProvider lang={lang}>
+          <Header logo={logo} dictionary={dictionary.navigation} />
+          <main className="min-h-screen">{children}</main>
+        </I18nProvider>
       </body>
     </html>
   );

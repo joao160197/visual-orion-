@@ -176,7 +176,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
     { id: 1, attributes: { title: 'Automotivo', slug: 'automotivo', icon: '🚗' } },
     { id: 2, attributes: { title: 'Logístico', slug: 'logistico', icon: '🚚' } },
     { id: 3, attributes: { title: 'Tratamento de Água', slug: 'tratamento-agua', icon: '💧' } },
-    { id: 4, attributes: { title: 'Alimentos e Bebidas', slug: 'alimentos-bebidas', icon: '🍽️' } },
+    { id: 4, attributes: { title: 'Alimentos e Bebidas', slug: 'Food', icon: '🍽️' } },
   ];
   
   const solutionsToShow = solutions.length > 0 ? solutions : fallbackSolutions;

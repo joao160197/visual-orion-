@@ -1,23 +1,70 @@
 import VoltarButton from "@/components/BackButton";
+import { getWaterTreatmentContent } from "@/services/contentService";
+import Image from 'next/image';
 
-export default function TratamentoAguaPage() {
-  return (
-    <section className="py-20 px-6 max-w-5xl mx-auto text-center">
-      <VoltarButton />
-      <h1 className="text-4xl font-bold text-[#004a6d] mb-6">
-        Tratamento de Água
-      </h1>
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Ftratamento-de-agua.jpg?alt=media&token=15ad587a-f642-413c-aa17-4a4680caf211"
-        alt="Estação de tratamento de água"
-        className="w-full max-w-3xl mx-auto rounded-lg shadow-md mb-8"
-      />
-      <p className="text-lg text-gray-700 leading-relaxed">
-        Desenvolvemos sistemas para monitoramento, controle e automação de
-        estações de tratamento de água e efluentes. Nossos equipamentos garantem
-        a conformidade ambiental e o uso eficiente dos recursos hídricos,
-        promovendo sustentabilidade com confiabilidade.
-      </p>
-    </section>
-  );
+interface PageProps {
+  params: {
+    lang: string;
+  };
+}
+
+export default async function TratamentoAguaPage({ params }: PageProps) {
+  const { lang } = params;
+  
+  try {
+    // Obtém os dados do Strapi
+    const response = await getWaterTreatmentContent(lang);
+    const { titleWater, textWater, imageWater } = response.data;
+    
+    // URL base para imagens do Strapi
+    const imageUrl = imageWater.data 
+      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageWater.data.attributes.url}`
+      : '/images/water-treatment-banner.jpg';
+    
+    const imageAlt = imageWater.data?.attributes.alternativeText || 'Tratamento de Água';
+    
+    return (
+      <section className="py-20 px-6 max-w-5xl mx-auto">
+        <div className="mb-8">
+          <VoltarButton />
+        </div>
+        
+        <h1 className="text-4xl font-bold text-[#004a6d] text-center mb-8">
+          {titleWater}
+        </h1>
+        
+        <div className="prose max-w-3xl mx-auto text-justify">
+          {/* Imagem */}
+          <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-[400px] bg-gray-100">
+            <Image
+              src={imageUrl}
+              alt={imageAlt}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 75vw"
+            />
+          </div>
+          
+          <div className="prose-lg">
+            {textWater.split('\n').map((paragraph: string, index: number) => (
+              <p key={index} className="mb-4">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  } catch (error) {
+    console.error('Erro ao carregar a página de Tratamento de Água:', error);
+    return (
+      <section className="py-20 px-6 max-w-5xl mx-auto text-center">
+        <VoltarButton />
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4">
+          <p>Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente mais tarde.</p>
+        </div>
+      </section>
+    );
+  }
 }

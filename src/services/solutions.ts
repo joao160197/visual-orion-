@@ -16,8 +16,6 @@ export async function getSolutions(locale: string = 'pt'): Promise<SolutionsResp
   const url = `${path}?${queryString}`;
   
   try {
-    console.log(`[getSolutions] Buscando soluções de: ${url}`);
-    
     const response = await fetchAPI(url, {
       method: 'GET',
       authToken: token,
@@ -25,7 +23,6 @@ export async function getSolutions(locale: string = 'pt'): Promise<SolutionsResp
     });
     
     if (!response.data) {
-      console.warn('[getSolutions] Nenhum dado retornado da API');
       return { 
         data: [], 
         meta: { 
@@ -41,7 +38,6 @@ export async function getSolutions(locale: string = 'pt'): Promise<SolutionsResp
     
     return response as SolutionsResponse;
   } catch (error) {
-    console.error('[getSolutions] Erro ao buscar soluções:', error);
     // Retorna um array vazio em caso de erro para não quebrar a UI
     return { 
       data: [], 

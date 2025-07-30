@@ -1,11 +1,26 @@
 export function getStrapiUrl(path: string = ""): string {
-  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-  console.log(`[getStrapiUrl] Recebido path: "${path}" (Tipo: ${typeof path})`);
-  console.log(`[getStrapiUrl] Base URL: "${baseUrl}"`);
-  // Remove trailing slash from baseUrl and leading slash from path to avoid double slashes
-  const cleanBaseUrl = baseUrl.replace(/\/$/, '');
-  const cleanPath = path.replace(/^\//, '');
-  const fullUrl = `${cleanBaseUrl}/${cleanPath}`.replace(/\/$/, ''); // Remove trailing slash from final URL if path was empty
-  console.log(`[getStrapiUrl] URL completa construída: "${fullUrl}"`);
-  return fullUrl;
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+    
+    // Se o path estiver vazio, retorna apenas a URL base
+    if (!path) {
+      return baseUrl;
+    }
+    
+    // Se o path já for uma URL completa, retorna diretamente
+    if (path.startsWith('http')) {
+      return path;
+    }
+    
+    // Remove barras iniciais e finais desnecessárias
+    const cleanBaseUrl = baseUrl.replace(/\/+$/, ''); // Remove barras no final
+    const cleanPath = path.replace(/^\/+/, ''); // Remove barras no início
+    
+    // Constrói a URL final
+    return `${cleanBaseUrl}/${cleanPath}`;
+    
+  } catch (error) {
+    // Em caso de erro, retorna uma URL padrão para evitar quebras
+    return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  }
 }

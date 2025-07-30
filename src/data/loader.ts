@@ -154,21 +154,18 @@ export async function getHomePage(locale: string) {
       }
     });
     
-    console.log(`[getHomePage] Buscando dados da home page para locale: ${locale}`);
     const response = await fetchAPI(`/api/home-page?${query}`, { 
       method: 'GET',
       next: { revalidate: 60 } 
     });
     
     if (!response || !response.data) {
-      console.error('[getHomePage] Dados inválidos recebidos da API');
       return null;
     }
     
-    console.log('[getHomePage] Dados da home page carregados com sucesso');
     return response;
   } catch (error) {
-    console.error('[getHomePage] Erro ao buscar dados da home page:', error);
+    console.error('Erro ao buscar dados da página inicial:', error);
     return null;
   }
 }
@@ -179,7 +176,6 @@ export async function getHomePage(locale: string) {
  * @returns Dados da página Company ou null em caso de erro
  */
 export async function getCompanyPage(locale: string) {
-  console.log(`[getCompanyPage] Iniciando busca de dados para locale: ${locale}`);
   try {
     // Configura a query para buscar os dados da página Company
     const query = qs.stringify({
@@ -255,10 +251,7 @@ export async function getCompanyPage(locale: string) {
       encodeValuesOnly: true // Importante para o Strapi v4+
     });
     
-    console.log('Query completa:', query);
     const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}/api/company?${query}`;
-    console.log('URL da API:', apiUrl);
-    
     // Faz a requisição para a API do Strapi
     const response = await fetch(apiUrl, { 
       method: 'GET',
@@ -275,11 +268,7 @@ export async function getCompanyPage(locale: string) {
     
     const responseData = await response.json();
     
-    // Log detalhado da resposta da API
-    console.log('[getCompanyPage] Resposta bruta da API:', JSON.stringify(responseData, null, 2));
-    
     if (!responseData || !responseData.data) {
-      console.error('[getCompanyPage] Dados inválidos recebidos da API');
       return {
         data: {
           attributes: {
@@ -301,16 +290,13 @@ export async function getCompanyPage(locale: string) {
       responseData.data.attributes.blocks = blocks;
     }
     
-    console.log('[getCompanyPage] Dados processados com sucesso');
     return responseData;
   } catch (error) {
-    console.error('Erro ao buscar dados da página Company:', error);
     return null;
   }
 }
 
 export async function getGlobalData(locale: string) {
-  console.log(`[getGlobalData] Iniciando busca de dados globais para locale: ${locale}`);
   try {
     const query = qs.stringify({
       locale: locale,
@@ -323,14 +309,10 @@ export async function getGlobalData(locale: string) {
       encodeValuesOnly: true // Importante para o Strapi v4+
     });
     
-    console.log(`[getGlobalData] Query: ${query}`);
-    
     const response = await fetchAPI(`/api/global?${query}`, {
       method: 'GET',
       next: { revalidate: 60 }
     });
-    
-    console.log('[getGlobalData] Dados globais carregados com sucesso');
     
     // Verifica se há dados e formata o logo corretamente
     if (response && response.data) {
@@ -349,20 +331,12 @@ export async function getGlobalData(locale: string) {
         
         // Atualiza o objeto de resposta com o logo formatado
         response.data.attributes.Logo = formattedLogo;
-        
-        console.log('[getGlobalData] Logo formatado:', formattedLogo);
-      } else {
-        console.warn('[getGlobalData] Nenhum dado de logo encontrado na resposta');
       }
     }
     
     return response;
   } catch (error) {
-    console.error(
-      `[loader.ts - getGlobalData] Erro em getGlobalData para locale ${locale}:`,
-      error // O erro já deve vir formatado de fetchAPI
-    );
-    throw error; 
+    throw error;
   }
 }
 

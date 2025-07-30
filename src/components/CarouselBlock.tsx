@@ -58,7 +58,6 @@ type CarouselBlockProps = {
 // Função auxiliar para extrair URL de imagem que pode ser usada em vários lugares
 const extractCarouselImageUrl = (image: ImageData | null | undefined): string | null => {
   if (!image) {
-    console.log('[extractCarouselImageUrl] Nenhuma imagem fornecida');
     return null;
   }
   
@@ -67,9 +66,7 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
     
     // Se for uma string, assume que já é uma URL
     if (typeof image === 'string') {
-      const url = getStrapiUrl(image);
-      console.log('URL direta processada:', url);
-      return url;
+      return getStrapiUrl(image);
     }
     
     // Função auxiliar para buscar em objetos com case insensitive
@@ -128,13 +125,6 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
     }
     
     if (!url) {
-      console.log('[extractCarouselImageUrl] Nenhuma URL de imagem encontrada nos dados:', 
-        JSON.stringify({
-          hasData: !!dataObj,
-          hasAttributes: !!attributes,
-          keys: Object.keys(image)
-        }, null, 2)
-      );
       return null;
     }
     
@@ -142,18 +132,9 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
     url = url.replace(/^\/\//, '/');
     
     // Garante que a URL seja absoluta usando getStrapiUrl
-    const fullUrl = getStrapiUrl(url);
-    console.log('[extractCarouselImageUrl] URL final processada:', fullUrl);
-    
-    return fullUrl;
+    return getStrapiUrl(url);
     
   } catch (error) {
-    console.error('[extractCarouselImageUrl] Erro ao processar imagem:', error);
-    console.error('Dados da imagem com erro:', 
-      image && typeof image === 'object' 
-        ? JSON.stringify(image, Object.getOwnPropertyNames(image), 2)
-        : image
-    );
     return null;
   }
 };
@@ -183,12 +164,8 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
   const [autoplay, setAutoplay] = useState(true);
   
   if (!Array.isArray(images) || images.length === 0) {
-    console.warn('[CarouselBlock] Nenhuma imagem encontrada.');
-    console.log('[CarouselBlock] Propriedades recebidas:', { title, images });
     return null;
   }
-  
-  console.log('[CarouselBlock] Total de imagens recebidas:', images.length);
 
   // Função para avançar para o próximo slide
   const nextSlide = useCallback(() => {
@@ -223,9 +200,12 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
   // Filtra imagens nulas ou indefinidas
   const validImages = (images || []).filter(img => img !== null && img !== undefined);
   
+  // Log para depuração
+  console.log('Imagens do carrossel:', validImages);
+  
   // Se não houver imagens válidas, não renderiza o componente
   if (validImages.length === 0) {
-    console.warn('[CarouselBlock] Nenhuma imagem válida fornecida.');
+    console.warn('Nenhuma imagem válida encontrada para o carrossel');
     return null;
   }
 
@@ -242,7 +222,6 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
             const altText = getImageAlt(img, index);
             
             if (!imageUrl) {
-              console.warn(`[CarouselBlock] Não foi possível obter a URL da imagem ${index}`);
               return null;
             }
             
@@ -262,7 +241,6 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                     priority={index === 0} // Prioriza o carregamento da primeira imagem
                     onError={(e) => {
-                      console.error(`Erro ao carregar a imagem: ${imageUrl}`);
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                     }}

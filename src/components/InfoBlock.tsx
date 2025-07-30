@@ -31,23 +31,14 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
   content = '',
   image,
 }) => {
-  // Debug
-  console.log("===== INFO BLOCK RENDERIZANDO =====");
-  console.log(`Headline: ${headline}`);
-  console.log(`Content: ${content?.substring(0, 20)}...`);
-  console.log(`Reversed: ${reversed} (tipo: ${typeof reversed})`);
-  
+  // Processamento da imagem - lida com diferentes formatos de imagem do Strapi
   // Processamento da imagem - lida com diferentes formatos de imagem do Strapi
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageAlt, setImageAlt] = useState(headline || 'Imagem do bloco');
   
   useEffect(() => {
     try {
-      console.log('=== INFO BLOCK - PROCESSAMENTO DE IMAGEM ===');
-      console.log('Dados da imagem recebidos:', JSON.stringify(image, null, 2));
-      
       if (!image) {
-        console.log('Nenhuma imagem fornecida para o InfoBlock');
         setImageUrl(null);
         return;
       }
@@ -92,21 +83,11 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
         : getAltText(image);
       
       setImageAlt(altText);
-      
-      console.log('URL da imagem processada:', url);
-      console.log('Texto alternativo definido:', altText);
     } catch (error) {
-      console.error('Erro ao processar imagem no InfoBlock:', error);
-      console.error('Dados da imagem com erro:', JSON.stringify(image, null, 2));
       setImageUrl(null);
     }
   }, [image, headline]);
 
-  // Processa a propriedade reversed
-  console.log('=== PROCESSAMENTO DE REVERSED ===');
-  console.log('Valor bruto de reversed:', reversed);
-  console.log('Tipo de reversed:', typeof reversed);
-  
   // Converte para booleano de forma robusta
   const isReversed = (
     reversed === true || 
@@ -114,13 +95,9 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
     (typeof reversed === 'number' && reversed === 1)
   );
   
-  console.log('Valor final de isReversed:', isReversed);
-  
   // Define as classes CSS com base no valor de isReversed
   const flexDirection = isReversed ? 'md:flex-row-reverse' : 'md:flex-row';
   const containerClasses = `flex flex-col items-center gap-8 ${flexDirection} py-12 px-4`;
-  
-  console.log('Classes de container finais:', containerClasses);
 
   return (
     <div className="w-full">
@@ -137,7 +114,6 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
                 onError={(e) => {
-                  console.error('Erro ao carregar imagem:', e);
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                 }}

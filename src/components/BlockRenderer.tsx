@@ -9,22 +9,16 @@ import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 export const extractImageUrl = (imageData: any): string | null => {
   try {
     if (!imageData) {
-      console.log('Nenhum dado de imagem fornecido');
       return null;
     }
     
-    console.log('=== EXTRACT IMAGE URL ===');
-    console.log('Dados da imagem recebidos:', JSON.stringify(imageData, null, 2));
-    
     // Se for uma string, assume que já é uma URL
     if (typeof imageData === 'string') {
-      console.log('URL direta encontrada:', imageData);
       return getStrapiUrl(imageData);
     }
     
     // Se for um array, pega o primeiro item
     if (Array.isArray(imageData)) {
-      console.log('Array de imagens encontrado, pegando a primeira');
       return extractImageUrl(imageData[0]);
     }
     
@@ -40,24 +34,18 @@ export const extractImageUrl = (imageData: any): string | null => {
     // Verifica URL em diferentes níveis de aninhamento
     if (dataObj?.attributes?.url) {
       url = dataObj.attributes.url;
-      console.log('URL encontrada em data.attributes.url:', url);
     } else if (dataObj?.attributes?.Url) {
       url = dataObj.attributes.Url;
-      console.log('URL encontrada em data.attributes.Url:', url);
     } else if (attributes?.url) {
       url = attributes.url;
-      console.log('URL encontrada em attributes.url:', url);
     } else if (attributes?.Url) {
       url = attributes.Url;
-      console.log('URL encontrada em attributes.Url:', url);
     } else if (imageData.url) {
       // URL direta
       url = imageData.url;
-      console.log('URL direta (url):', url);
     } else if (imageData.Url) {
       // URL direta com letra maiúscula
       url = imageData.Url;
-      console.log('URL direta (Url):', url);
     } else {
       // Tenta encontrar em algum formato disponível (case insensitive)
       const formats = imageData.formats || imageData.Formats || 
@@ -71,15 +59,12 @@ export const extractImageUrl = (imageData: any): string | null => {
       
       if (format?.url) {
         url = format.url;
-        console.log('URL encontrada em formatos (url):', url);
       } else if (format?.Url) {
         url = format.Url;
-        console.log('URL encontrada em formatos (Url):', url);
       }
     }
     
     if (!url) {
-      console.log('Nenhuma URL de imagem encontrada nos dados');
       return null;
     }
     
@@ -89,24 +74,16 @@ export const extractImageUrl = (imageData: any): string | null => {
     }
     
     // Garante que a URL seja absoluta usando getStrapiUrl
-    const fullUrl = getStrapiUrl(url);
-    console.log('URL final da imagem:', fullUrl);
-    return fullUrl;
+    return getStrapiUrl(url);
     
   } catch (error) {
-    console.error('Erro ao extrair URL da imagem:', error);
-    console.error('Dados da imagem com erro:', JSON.stringify(imageData, null, 2));
     return null;
   }
 };
 
 // Normaliza o bloco vindo do Strapi
 const normalizeBlock = (block: any) => {
-  console.log('=== NORMALIZANDO BLOCO ===');
-  console.log('Bloco original:', JSON.stringify(block, null, 2));
-  
   if (!block) {
-    console.log('Bloco é nulo ou indefinido');
     return null;
   }
   
@@ -126,7 +103,6 @@ const normalizeBlock = (block: any) => {
       normalized.Image = block.attributes.Image;
     }
     
-    console.log('Bloco normalizado (com atributos):', JSON.stringify(normalized, null, 2));
     return normalized;
   }
   
@@ -136,7 +112,6 @@ const normalizeBlock = (block: any) => {
     ...block
   };
   
-  console.log('Bloco normalizado (sem atributos):', JSON.stringify(normalized, null, 2));
   return normalized;
 };
 
@@ -215,11 +190,7 @@ const extractImageData = (imageData: any) => {
 // Função principal para renderizar blocos
 export function renderBlocks(blocks: any[], locale?: string) {
   try {
-    console.log('=== RENDERIZANDO BLOCOS ===');
-    console.log('Blocos recebidos:', JSON.stringify(blocks, null, 2));
-    
     if (!blocks || (Array.isArray(blocks) && blocks.length === 0)) {
-      console.log('Nenhum bloco para renderizar');
       return null;
     }
 
@@ -252,16 +223,12 @@ export function renderBlocks(blocks: any[], locale?: string) {
           // Se já estiver no formato esperado
           return block;
         } catch (error) {
-          console.error('Erro ao processar bloco:', error);
           return null;
         }
       })
       .filter(Boolean);
     
-    console.log('Blocos processados:', JSON.stringify(processedBlocks, null, 2));
-    
     if (processedBlocks.length === 0) {
-      console.log('Nenhum bloco válido para renderizar após o processamento');
       return null;
     }
 
@@ -269,118 +236,67 @@ export function renderBlocks(blocks: any[], locale?: string) {
       <div className="space-y-12">
         {processedBlocks.map((block, index) => {
           if (!block) {
-            console.warn(`Bloco ${index} é nulo ou indefinido`);
             return null;
           }
           
           const blockId = block.id || `block-${index}`;
           const componentType = block.__component || block.type;
-          
-          console.log(`\n=== PROCESSANDO BLOCO ${index + 1} ===`);
-          console.log('ID:', blockId);
-          console.log('Tipo:', componentType);
-          console.log('Conteúdo do bloco:', JSON.stringify(block, null, 2));
 
-          // --- INFO BLOCK ---
-          if (componentType === 'blocks.info-block' || componentType === 'info-block') {
-            console.log('=== PROCESSANDO INFO BLOCK ===');
-            
-            // Extrai os dados do bloco
-            const headline = block.headline || block.title || '';
-            const content = block.content || block.description || block.body || '';
-            
-            // Processa o campo reversed (suporta 'reversed' e 'revarsed' com variações de case)
-            const reversedValue = (
-              block.revased === true || block.revased === 'true' || block.revased === 'TRUE' ||
-              block.reversed === true || block.reversed === 'true' || block.reversed === 'TRUE' ||
-              block.revased === 1 || block.reversed === 1 ||
-              block.revased === '1' || block.reversed === '1'
-            );
-            
-            console.log(`[InfoBlock] Cabeçalho: ${headline}`);
-            console.log(`[InfoBlock] Conteúdo: ${content.substring(0, 50)}...`);
-            console.log(`[InfoBlock] Reverso: ${reversedValue}`);
-
-            // Obtém a imagem independentemente de ser 'image' ou 'Image' e mantém a estrutura original
-            let imageItem = 
-              block.image !== undefined ? block.image : 
-              block.Image !== undefined ? block.Image :
-              null;
-              
-            console.log('[InfoBlock] Dados da imagem bruta:', JSON.stringify(imageItem, null, 2));
-            
-            // Se for um array, pega o primeiro item
-            if (Array.isArray(imageItem)) {
-              imageItem = imageItem[0] || null;
-            }
-            
-            // Não transformamos mais a estrutura, mantemos como está vindo do Strapi
-            // A função extractImageUrl já sabe lidar com diferentes formatos
-            
-            console.log('[InfoBlock] Dados da imagem processados:', imageItem);
-
-            return (
-              <div key={blockId} className="w-full">
-                <InfoBlock
-                  headline={headline}
-                  content={content}
-                  image={imageItem}
-                  reversed={reversedValue}
+          // Renderiza o bloco com base no tipo
+          switch (componentType) {
+            case 'blocks.carousel':
+            case 'blocks.carousel-block':
+            case 'shared.carousel':
+              console.log('Renderizando bloco do carrossel:', block);
+              return (
+                <CarouselBlock
+                  key={blockId}
+                  title={block.title}
+                  images={block.images || []}
                 />
-              </div>
-            );
+              );
+            case 'blocks.info':
+            case 'shared.info':
+              return (
+                <InfoBlock
+                  key={blockId}
+                  headline={block.headline || block.title}
+                  content={block.content}
+                  image={block.Image?.data || block.image}
+                  reversed={block.reversed}
+                />
+              );
+            case 'blocks.about':
+            case 'shared.about':
+              return (
+                <AboutSection
+                  key={blockId}
+                  title={block.title}
+                  about={block.about}
+                  image={block.image}
+                />
+              );
+            default:
+              if (process.env.NODE_ENV === 'development') {
+                return (
+                  <div key={blockId} className="p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded">
+                    <h3 className="font-bold">Bloco não reconhecido</h3>
+                    <p>Tipo: {componentType || 'não especificado'}</p>
+                    <details className="mt-2 text-sm">
+                      <summary>Detalhes do bloco</summary>
+                      <pre className="whitespace-pre-wrap mt-1 p-2 bg-yellow-50 rounded">
+                        {JSON.stringify(block, null, 2)}
+                      </pre>
+                    </details>
+                  </div>
+                );
+              }
+              return null;
           }
-
-          // --- CAROUSEL BLOCK ---
-          if (componentType === 'blocks.carousel-block' || componentType === 'blocks.carousel_block') {
-            let carouselImages = processCarouselImages(block.images || block.Images || block.image || block.Image);
-
-            if (carouselImages.length === 0) {
-              carouselImages = [
-                {
-                  url: "/uploads/sunset_vista_homem_1024x683_97b996126d.jpg",
-                  name: "Pôr do sol com vista para o mar",
-                  alternativeText: "Pôr do sol com vista para o mar"
-                },
-                {
-                  url: "/uploads/boys_helping_climb_1024x628_ad3d35491a.jpg",
-                  name: "Jovens escalando uma montanha",
-                  alternativeText: "Jovens escalando uma montanha"
-                }
-              ];
-            }
-
-            return (
-              <CarouselBlock
-                key={`carousel-${blockId}`}
-                title={block.title}
-                images={carouselImages}
-              />
-            );
-          }
-
-          // --- ABOUT SECTION ---
-          if (componentType === 'blocks.about-section' || componentType === 'blocks.aboutSection') {
-            const image = block.image?.data?.attributes || block.image || block.Image?.data?.attributes || block.Image;
-            return (
-              <AboutSection
-                key={`about-section-${blockId}`}
-                title={block.title}
-                about={block.about}
-                image={image}
-              />
-            );
-          }
-
-          // --- BLOCO DESCONHECIDO ---
-          console.warn(`[BlockRenderer] Tipo de bloco desconhecido: ${componentType}`);
-          return null;
         })}
       </div>
     );
   } catch (error) {
-    console.error('[BlockRenderer] Erro ao renderizar blocos:', error);
-
     if (process.env.NODE_ENV === 'development') {
       return (
         <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded">

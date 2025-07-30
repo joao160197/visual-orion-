@@ -1,0 +1,14 @@
+{
+  "about": {
+    "yearsOfExperience": "Anos de Experiência"
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre",
+    "services": "Serviços",
+    "contact": "Contato"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados"
+  }
+}

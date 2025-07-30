@@ -56,101 +56,60 @@ export default function FaleConoscoSection({
 
   // Processa a imagem quando o componente é montado ou a imagem muda
   useEffect(() => {
-    console.log('Dados da imagem recebidos no FaleConoscoSection:', JSON.stringify(image, null, 2));
-    
     // Se não houver imagem, usar a imagem padrão
     if (!image) {
-      console.log('Nenhuma imagem fornecida ao componente, usando imagem padrão');
       setImageUrl(defaultImageUrl);
       return;
     }
 
     try {
-      // Tenta extrair a URL da imagem de diferentes maneiras
-      let url: string | null = null;
-      let altText = titulo || 'Fale Conosco';
-      
-      // Extrai a URL da imagem de diferentes estruturas de dados
-      const extractUrl = (obj: any): { url: string | null, alt: string } => {
-        if (!obj) return { url: null, alt: altText };
-        
+      // Função para extrair a URL da imagem de diferentes formatos do Strapi
+      const extractImageUrl = (imgData: any): { url: string | null, alt: string } => {
+        if (!imgData) return { url: null, alt: titulo || 'Fale Conosco' };
+
         // Se for um array, pega o primeiro item
-        if (Array.isArray(obj)) {
-          return extractUrl(obj[0]);
+        if (Array.isArray(imgData)) {
+          return extractImageUrl(imgData[0]);
         }
         
-        // Se tiver o formato do Strapi v4
-        if (obj.data) {
-          return extractUrl(obj.data);
+        // Se for o formato do Strapi v4
+        if (imgData.data) {
+          return extractImageUrl(imgData.data);
         }
         
         // Se for um objeto de atributos
-        if (obj.attributes) {
-          return extractUrl(obj.attributes);
+        if (imgData.attributes) {
+          return extractImageUrl(imgData.attributes);
         }
         
-        // Se tiver a URL diretamente
-        if (obj.url) {
+        // Se for um formato direto com URL
+        if (imgData.url) {
+          let url = imgData.url;
+          // Se a URL for relativa, adiciona o domínio do Strapi
+          if (url.startsWith('/')) {
+            url = url.substring(1); // Remove a barra inicial
+          }
+          
           return { 
-            url: obj.url, 
-            alt: obj.alternativeText || obj.caption || obj.name || altText 
+            url: getStrapiUrl(url),
+            alt: imgData.alternativeText || imgData.caption || imgData.name || titulo || 'Fale Conosco'
           };
         }
         
-        // Se for um objeto com formato { formats: { ... } }
-        if (obj.formats) {
-          const format = obj.formats.large || obj.formats.medium || obj.formats.small || obj.formats.thumbnail;
-          if (format?.url) {
-            return { 
-              url: format.url, 
-              alt: obj.alternativeText || obj.caption || obj.name || altText 
-            };
-          }
-        }
-        
-        return { url: null, alt: altText };
+        return { url: null, alt: titulo || 'Fale Conosco' };
       };
       
       // Extrai a URL e o texto alternativo
-      const { url: extractedUrl, alt: extractedAlt } = extractUrl(image);
-      url = extractedUrl;
-      altText = extractedAlt || altText;
+      const { url, alt } = extractImageUrl(image);
       
-      // Se encontrou uma URL, atualiza o estado
       if (url) {
-        // Garante que a URL é absoluta
-        let finalUrl = url;
-        if (!url.startsWith('http') && !url.startsWith('//') && !url.startsWith('data:')) {
-          // Remove barras iniciais duplicadas e adiciona o domínio do Strapi
-          const cleanUrl = url.startsWith('uploads/') ? url : `uploads/${url}`;
-          finalUrl = getStrapiUrl(cleanUrl);
-        }
-        
-        console.log('URL da imagem processada:', finalUrl);
-        
-        // Verifica se a URL é acessível
-        const img = new window.Image();
-        img.onload = () => {
-          console.log('Imagem carregada com sucesso:', finalUrl);
-          // Usar a URL diretamente, pois já foi validada
-          setImageUrl(finalUrl);
-          setImageAlt(altText);
-        };
-        img.onerror = () => {
-          console.error('Erro ao carregar a imagem, usando imagem padrão');
-          setImageUrl(defaultImageUrl);
-          setImageAlt('Imagem padrão - Homem de negócios');
-        };
-        
-        // Define a fonte da imagem após configurar os manipuladores de eventos
-        img.src = finalUrl;
+        setImageUrl(url);
+        setImageAlt(alt);
       } else {
-        console.warn('Não foi possível extrair a URL da imagem, usando imagem padrão');
         setImageUrl(defaultImageUrl);
         setImageAlt('Imagem padrão - Homem de negócios');
       }
     } catch (error) {
-      console.error('Erro ao processar a imagem, usando imagem padrão:', error);
       setImageUrl(defaultImageUrl);
       setImageAlt('Imagem padrão - Homem de negócios');
     }
@@ -193,11 +152,14 @@ export default function FaleConoscoSection({
                   backgroundSize: 'cover',
                   minHeight: '400px',
                   width: '100%',
-                  height: '100%'
+                  height: '100%',
+                  transition: 'background-image 0.3s ease-in-out'
                 }}
-                onLoad={() => console.log('Imagem de fundo carregada com sucesso:', imageUrl || defaultImageUrl)}
                 onError={() => {
-                  console.error('Erro ao carregar imagem de fundo, usando imagem padrão');
+                  // Tenta carregar a imagem padrão em caso de erro
+                  if (imageUrl !== defaultImageUrl) {
+                    setImageUrl(defaultImageUrl);
+                  }
                   setImageUrl(defaultImageUrl);
                   setImageAlt('Imagem padrão - Homem de negócios');
                 }}
