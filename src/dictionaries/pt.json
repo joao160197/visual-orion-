@@ -35,30 +35,47 @@
         "email": "king.br@kingautomation.com"
       }
     },
-    "about": {
-      "learnMore": "Conheça mais sobre nós",
-      "yearsOfExperience": "Anos de experiência",
-      "contactUs": "Entre em contato",
-      "ourSolutions": "Nossas Soluções",
-      "innovationText": "Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.",
-      "solutions": {
-        "automotive": {
-          "title": "Automotivo",
-          "learnMore": "Saiba mais →"
-        },
-        "logistics": {
-          "title": "Logístico",
-          "learnMore": "Saiba mais →"
-        },
-        "waterTreatment": {
-          "title": "Tratamento de Água",
-          "learnMore": "Saiba mais →"
-        },
-        "foodAndBeverage": {
-          "title": "Alimentos e Bebidas",
-          "learnMore": "Saiba mais →"
-        }
+    "contactUs": "Entre em contato",
+    "innovationText": "Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.",
+    "solutions": {
+      "automotive": {
+        "learnMore": "Saiba mais →"
       }
+    }
+  },
+  "about": {
+    "title": "Mais Sobre nós",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra nisl nec suscipit imperdiet. Quisque vitae faucibus ex. Ut ac tincidunt ex, in rhoncus ex. Phasellus ullamcorper facilisis quam eu porta. Pellentesque faucibus cursus ex, et rhoncus ex.",
+    "learnMore": "Saiba Mais",
+    "yearsOfExperience": "Anos de Experiência",
+    "noImage": "Imagem não disponível"
+  },
+  "solutions": {
+    "title": "Nossas Soluções",
+    "subtitle": "Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.",
+    "learnMore": "Saber mais →",
+    "items": {
+      "automotive": "Automotivo",
+      "logistics": "Logístico",
+      "waterTreatment": "Tratamento de Água",
+      "foodAndBeverage": "Alimentos e Bebidas"
+    }
+  },
+  "homePage": {
+    "welcome": "Bem-vindo",
+    "noBlocks": "Não há blocos de conteúdo para exibir.",
+    "solutionsTitle": "Nossas Soluções",
+    "solutionsSubtitle": "Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.",
+    "learnMore": "Saiba mais →"
+  },
+  "featuresPage": {
+    "title": "Nossos Campos de Atuação",
+    "subtitle": "Com uma lista ampla de clientes, temos conhecimento em diversos tipos de segmentos.",
+    "items": {
+      "automotive": "Automotivo",
+      "logistics": "Logístico",
+      "waterTreatment": "Tratamento de água",
+      "foodAndBeverage": "Alimentos e bebidas"
     }
   }
 }

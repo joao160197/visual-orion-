@@ -15,7 +15,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "description": "Feel free to reach out to us using the form below.",
+    "description": "Feel free to contact us using the form below.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -35,30 +35,47 @@
         "email": "king.br@kingautomation.com"
       }
     },
-    "about": {
-      "learnMore": "Learn more about us",
-      "yearsOfExperience": "Years of experience",
-      "contactUs": "Contact us",
-      "ourSolutions": "Our Solutions",
-      "innovationText": "We believe that innovation and technology are fundamental to your business success.",
-      "solutions": {
-        "automotive": {
-          "title": "Automotive",
-          "learnMore": "Learn more →"
-        },
-        "logistics": {
-          "title": "Logistics",
-          "learnMore": "Learn more →"
-        },
-        "waterTreatment": {
-          "title": "Water Treatment",
-          "learnMore": "Learn more →"
-        },
-        "foodAndBeverage": {
-          "title": "Food and Beverage",
-          "learnMore": "Learn more →"
-        }
+    "contactUs": "Contact us",
+    "innovationText": "We believe that innovation and technology are fundamental to your business success.",
+    "solutions": {
+      "automotive": {
+        "learnMore": "Learn more →"
       }
+    }
+  },
+  "about": {
+    "title": "More About Us",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra nisl nec suscipit imperdiet. Quisque vitae faucibus ex. Ut ac tincidunt ex, in rhoncus ex. Phasellus ullamcorper facilisis quam eu porta. Pellentesque faucibus cursus ex, et rhoncus ex.",
+    "learnMore": "Learn More",
+    "yearsOfExperience": "Years of Experience",
+    "noImage": "Image not available"
+  },
+  "solutions": {
+    "title": "Our Solutions",
+    "subtitle": "We believe that innovation and technology are fundamental to the success of your business.",
+    "learnMore": "Learn more →",
+    "items": {
+      "automotive": "Automotive",
+      "logistics": "Logistics",
+      "waterTreatment": "Water Treatment",
+      "foodAndBeverage": "Food and Beverage"
+    }
+  },
+  "homePage": {
+    "welcome": "Welcome",
+    "noBlocks": "No content blocks to display.",
+    "solutionsTitle": "Our Solutions",
+    "solutionsSubtitle": "We believe that innovation and technology are fundamental to the success of your business.",
+    "learnMore": "Learn more →"
+  },
+  "featuresPage": {
+    "title": "Our Fields of Operation",
+    "subtitle": "With a broad list of clients, we have knowledge in different types of segments.",
+    "items": {
+      "automotive": "Automotive",
+      "logistics": "Logistics",
+      "waterTreatment": "Water Treatment",
+      "foodAndBeverage": "Food and Beverage"
     }
   }
 }

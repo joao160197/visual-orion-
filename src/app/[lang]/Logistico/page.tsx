@@ -15,13 +15,10 @@ export default async function LogisticoPage({ params }: PageProps) {
     // Obtém os dados do Strapi
     const response = await getLogisticContent(lang);
     const { titleLogistic, textLogistic, imageLogistic } = response.data;
-    
-    // URL base para imagens do Strapi
-    const imageUrl = imageLogistic.data 
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageLogistic.data.attributes.url}`
-      : '/images/logistic-banner.jpg';
-    
-    const imageAlt = imageLogistic.data?.attributes.alternativeText || 'Soluções Logísticas';
+
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+    const imageUrl = imageLogistic?.url ? `${strapiUrl}${imageLogistic.url}` : '/images/logistic-banner.jpg';
+    const imageAlt = imageLogistic?.alternativeText || 'Soluções Logísticas';
     
     return (
       <section className="py-20 px-6 max-w-5xl mx-auto">

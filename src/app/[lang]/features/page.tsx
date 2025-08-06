@@ -1,29 +1,38 @@
-"use client";
-
 import Link from "next/link";
 import { Car, LineChart, Waves, Pizza } from "lucide-react";
+import { getDictionary } from "../../../get-dictionary";
+import { Locale } from "../../../i18n-config";
 
-export default function FeaturesPage() {
+interface FeaturesPageProps {
+  params: {
+    lang: Locale;
+  };
+}
+
+export default async function FeaturesPage({ params: { lang } }: FeaturesPageProps) {
+  const dictionary = await getDictionary(lang);
+  const featuresDictionary = dictionary.featuresPage;
+
   const features = [
     {
-      title: "Automotivo",
+      title: featuresDictionary.items.automotive,
       icon: <Car size={40} />,
-      href: "/pt/AutomativePage",
+      href: `/${lang}/AutomativePage`,
     },
     {
-      title: "Logístico",
+      title: featuresDictionary.items.logistics,
       icon: <LineChart size={40} />,
-      href: "/pt/Logistico",
+      href: `/${lang}/Logistico`,
     },
     {
-      title: "Tratamento de água",
+      title: featuresDictionary.items.waterTreatment,
       icon: <Waves size={40} />,
-      href: "/pt/TratamentoAgua",
+      href: `/${lang}/TratamentoAgua`,
     },
     {
-      title: "Alimentos e bebidas",
+      title: featuresDictionary.items.foodAndBeverage,
       icon: <Pizza size={40} />,
-      href: "/pt/Food",
+      href: `/${lang}/Food`,
     },
   ];
 
@@ -31,10 +40,10 @@ export default function FeaturesPage() {
     <section className="py-20 px-6 text-center">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold text-[#004a6d] mb-4">
-          Nossos Campos de Atuação
+          {featuresDictionary.title}
         </h1>
         <p className="text-gray-700 mb-12">
-          Com uma lista ampla de clientes, temos conhecimento em diversos tipos de segmentos.
+          {featuresDictionary.subtitle}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 place-items-center">

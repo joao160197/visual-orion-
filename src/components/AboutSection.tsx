@@ -23,12 +23,22 @@ const AboutSectionClient = dynamic(
   }
 );
 
+interface AboutDictionary {
+  title: string;
+  description: string;
+  learnMore: string;
+  yearsOfExperience: string;
+  noImage: string;
+}
+
 type AboutSectionProps = {
   title?: string;
   about?: string; 
   image?: any;
+  dictionary: AboutDictionary;
 };
 
+// Este é apenas um componente de wrapper que renderiza o componente do cliente
 // Este é apenas um componente de wrapper que renderiza o componente do cliente
 const AboutSection: React.FC<AboutSectionProps> = (props) => {
   return <AboutSectionClient {...props} />;

@@ -6,9 +6,11 @@ import AboutSection from "@/components/AboutSection";
 import FaleConoscoSection from "@/components/FaleConoscoSection";
 import Footer from "@/components/Footer";
 import { getSolutions } from "@/services/solutions";
+import { getDictionary } from "../../get-dictionary";
 import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 import Link from 'next/link';
 import { Locale } from '@/i18n-config';
+
 
 interface HomePageProps {
   params: {
@@ -22,7 +24,9 @@ export async function generateStaticParams() {
 
 export default async function Home({ params: { lang } }: HomePageProps) {
   // Buscar dados da página inicial
+  const dictionary = await getDictionary(lang as Locale);
   const homePageData = await getHomePage(lang);
+
 
   if (!homePageData?.data) {
     notFound();
@@ -172,14 +176,12 @@ export default async function Home({ params: { lang } }: HomePageProps) {
   }
   
   // Dados de fallback para desenvolvimento
-  const fallbackSolutions = [
-    { id: 1, attributes: { title: 'Automotivo', slug: 'automotivo', icon: '🚗' } },
-    { id: 2, attributes: { title: 'Logístico', slug: 'logistico', icon: '🚚' } },
-    { id: 3, attributes: { title: 'Tratamento de Água', slug: 'tratamento-agua', icon: '💧' } },
-    { id: 4, attributes: { title: 'Alimentos e Bebidas', slug: 'Food', icon: '🍽️' } },
+  const solutionsToShow = [
+    { id: 1, title: dictionary.solutions.items.automotive, slug: 'automotivo', icon: '🚗' },
+    { id: 2, title: dictionary.solutions.items.logistics, slug: 'logistico', icon: '🚚' },
+    { id: 3, title: dictionary.solutions.items.waterTreatment, slug: 'tratamento-agua', icon: '💧' },
+    { id: 4, title: dictionary.solutions.items.foodAndBeverage, slug: 'Food', icon: '🍽️' },
   ];
-  
-  const solutionsToShow = solutions.length > 0 ? solutions : fallbackSolutions;
 
   // Logs de depuração removidos para limpar o console
 
@@ -188,7 +190,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       {/* Cabeçalho da página */}
       <section className="text-center py-12">
         <h1 className="text-5xl font-bold font-GoodTimes text-[#3c4494]">
-          {title || "Bem-vindo"}
+          {title || dictionary.homePage.welcome}
         </h1>
         <p className="text-lg font-ReportSb text-gray-600 mt-4 max-w-3xl mx-auto">
           {description || ""}
@@ -201,7 +203,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
           renderBlocks(blocks, lang)
         ) : (
           <div className="text-center py-8">
-            <p>Não há blocos de conteúdo para exibir.</p>
+            <p>{dictionary.homePage.noBlocks}</p>
           </div>
         )}
       </section>
@@ -209,9 +211,10 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       {/* Seção Sobre Nós */}
       {about && (
         <AboutSection 
-          title={about.title} 
-          about={about.about} 
-          image={about.image} 
+          title={about.title as string | undefined}
+          about={about.about as string | undefined}
+          image={about.image as any | undefined}
+          dictionary={dictionary.about}
         />
       )}
 
@@ -219,10 +222,10 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       <section className="bg-[#0f4c75] text-white py-16 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
-            Nossas Soluções
+            {dictionary.solutions.title}
           </h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto text-gray-200">
-            Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.
+            {dictionary.solutions.subtitle}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -233,12 +236,12 @@ export default async function Home({ params: { lang } }: HomePageProps) {
                   'automotivo': 'AutomativePage',
                   'logistico': 'Logistico',
                   'tratamento-agua': 'TratamentoAgua',
-                  'alimentos-bebidas': 'Alimentos'
+                  'Food': 'AlimentosBebidasPage' // Corrigido para corresponder ao slug
                 };
                 return routes[slug] || slug;
               };
               
-              const route = getRouteFromSlug(solution.attributes.slug);
+              const route = getRouteFromSlug(solution.slug);
               
               return (
                 <Link 
@@ -248,10 +251,10 @@ export default async function Home({ params: { lang } }: HomePageProps) {
                 >
                   <div className="bg-white/10 p-6 rounded-lg h-full transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105">
                     <div className="bg-white/20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <span className="text-2xl">{solution.attributes.icon}</span>
+                      <span className="text-2xl">{solution.icon}</span>
                     </div>
-                    <h3 className="text-xl font-medium mb-2">{solution.attributes.title}</h3>
-                    <p className="text-sm text-white/80">Saiba mais →</p>
+                    <h3 className="text-xl font-medium mb-2">{solution.title}</h3>
+                    <p className="text-sm text-white/80">{dictionary.solutions.learnMore}</p>
                   </div>
                 </Link>
               );
@@ -268,17 +271,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
           linkBotao={faleConosco?.href || `/${lang}/contato`}
           image={faleConosco?.image}
           lang={lang as Locale}
-          dictionary={{
-            contactPage: {
-              contactUs: 'Entre em contato',
-              innovationText: 'Acreditamos que a inovação e a tecnologia são fundamentais para o sucesso do seu negócio.',
-              solutions: {
-                automotive: {
-                  learnMore: 'Saiba mais →'
-                }
-              }
-            }
-          }}
+          dictionary={{ contactPage: dictionary.contactPage }}
         />
       </div>
       

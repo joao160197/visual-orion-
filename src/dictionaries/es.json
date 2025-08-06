@@ -8,16 +8,16 @@
   "localeSwitcher": {
     "label": "Cambiar idioma",
     "locale": {
-      "en": "Inglés",
-      "pt": "Portugués",
+      "en": "Inglês",
+      "pt": "Português",
       "es-AR": "Español (AR)"
     }
   },
   "contactPage": {
     "title": "Contacto",
-    "description": "Contáctenos utilizando el formulario a continuación.",
+    "description": "No dude en contactarnos usando el formulario a continuación.",
     "name": "Nombre",
-    "email": "Correo electrónico",
+    "email": "Email",
     "message": "Mensaje",
     "submit": "Enviar Mensaje",
     "locations": {
@@ -35,30 +35,47 @@
         "email": "king.br@kingautomation.com"
       }
     },
-    "about": {
-      "learnMore": "Conozca más sobre nosotros",
-      "yearsOfExperience": "Años de experiencia",
-      "contactUs": "Contáctenos",
-      "ourSolutions": "Nuestras Soluciones",
-      "innovationText": "Creemos que la innovación y la tecnología son fundamentales para el éxito de su negocio.",
-      "solutions": {
-        "automotive": {
-          "title": "Automotriz",
-          "learnMore": "Saber más →"
-        },
-        "logistics": {
-          "title": "Logística",
-          "learnMore": "Saber más →"
-        },
-        "waterTreatment": {
-          "title": "Tratamiento de Agua",
-          "learnMore": "Saber más →"
-        },
-        "foodAndBeverage": {
-          "title": "Alimentos y Bebidas",
-          "learnMore": "Saber más →"
-        }
+    "contactUs": "Contáctenos",
+    "innovationText": "Creemos que la innovación y la tecnología son fundamentales para el éxito de su negocio.",
+    "solutions": {
+      "automotive": {
+        "learnMore": "Saber más →"
       }
+    }
+  },
+  "about": {
+    "title": "Más Sobre nosotros",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra nisl nec suscipit imperdiet. Quisque vitae faucibus ex. Ut ac tincidunt ex, in rhoncus ex. Phasellus ullamcorper facilisis quam eu porta. Pellentesque faucibus cursus ex, et rhoncus ex.",
+    "learnMore": "Saber Más",
+    "yearsOfExperience": "Años de Experiencia",
+    "noImage": "Imagen no disponible"
+  },
+  "solutions": {
+    "title": "Nuestras Soluciones",
+    "subtitle": "Creemos que la innovación y la tecnología son fundamentales para el éxito de su negocio.",
+    "learnMore": "Saber más →",
+    "items": {
+      "automotive": "Automotriz",
+      "logistics": "Logística",
+      "waterTreatment": "Tratamiento de Agua",
+      "foodAndBeverage": "Alimentos y Bebidas"
+    }
+  },
+  "homePage": {
+    "welcome": "Bienvenido",
+    "noBlocks": "No hay bloques de contenido para mostrar.",
+    "solutionsTitle": "Nuestras Soluciones",
+    "solutionsSubtitle": "Creemos que la innovación y la tecnología son fundamentales para el éxito de su negocio.",
+    "learnMore": "Saber más →"
+  },
+  "featuresPage": {
+    "title": "Nuestros Campos de Actuación",
+    "subtitle": "Con una amplia lista de clientes, tenemos conocimiento en diversos tipos de segmentos.",
+    "items": {
+      "automotive": "Automotriz",
+      "logistics": "Logística",
+      "waterTreatment": "Tratamiento de Agua",
+      "foodAndBeverage": "Alimentos y Bebidas"
     }
   }
 }

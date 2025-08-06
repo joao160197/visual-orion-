@@ -3,58 +3,35 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 import { extractImageUrl } from './BlockRenderer';
-import i18n from '@/i18n/i18n';
+
+interface AboutDictionary {
+  title: string;
+  description: string;
+  learnMore: string;
+  yearsOfExperience: string;
+  noImage: string;
+}
 
 type AboutSectionProps = {
   title?: string;
   about?: string; 
   image?: any;
+  dictionary: AboutDictionary;
 };
 
-const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
-  // Verifica se o i18next está pronto antes de usar o useTranslation
-  const { t, ready } = useTranslation();
+const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictionary }) => {
   const [count, setCount] = useState(0);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
-  
-  // Garante que estamos no cliente
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  
-  // Define o texto alternativo com fallback seguro
-  const safeTitle = title || 'Sobre nós';
-  const [imageAlt, setImageAlt] = useState(safeTitle);
-  
-  // Atualiza o imageAlt quando o título ou a tradução estiverem prontos
-  useEffect(() => {
-    if (ready && isClient) {
-      setImageAlt(title || t('about.title', safeTitle));
-    } else {
-      setImageAlt(safeTitle);
-    }
-  }, [title, ready, t, isClient, safeTitle]);
+  const [imageAlt, setImageAlt] = useState(title || dictionary.title);
 
   // Processa a imagem quando o componente é montado ou a imagem muda
   useEffect(() => {
-    if (!image) {
-      console.log('Nenhuma imagem fornecida para o AboutSection');
-      setImageUrl(null);
-      return;
-    }
-
-    try {
-      console.log('=== ABOUT SECTION IMAGE PROCESSING ===');
-      console.log('Dados da imagem recebidos:', JSON.stringify(image, null, 2));
-      
-      // Extrai a URL da imagem usando a função auxiliar
+    if (image) {
       const url = extractImageUrl(image);
       setImageUrl(url);
       
-      // Extrai o texto alternativo de várias possíveis localizações
+      // Define o texto alternativo com base nos dados da imagem ou no título
       const altText = 
         image.alternativeText || 
         image.AlternativeText ||
@@ -63,17 +40,16 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
         image.data?.attributes?.alternativeText ||
         image.data?.attributes?.AlternativeText ||
         title || 
-        t('about.title', 'Sobre nós');
+        dictionary.title;
       
       setImageAlt(altText);
       
-      console.log('URL da imagem processada:', url);
-      console.log('Texto alternativo:', altText);
-    } catch (error) {
-      console.error('Erro ao processar imagem do AboutSection:', error);
+    } else {
+      // Se não houver imagem, define a URL como nula e usa o texto de fallback
       setImageUrl(null);
+      setImageAlt(dictionary.noImage);
     }
-  }, [image, title, t]);
+  }, [image, title, dictionary.title, dictionary.noImage]);
 
   // Anima o contador
   useEffect(() => {
@@ -95,28 +71,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
     return () => clearInterval(timer);
   }, []);
 
-  // Função auxiliar para tradução segura
-  const safeTranslate = (key: string, defaultValue: string) => {
-    if (!ready || !isClient) return defaultValue;
-    return t(key, defaultValue);
-  };
 
-  // Se não estiver pronto, mostra um esqueleto de carregamento
-  if (!ready || !isClient) {
-    return (
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="animate-pulse">
-            <div className="h-10 bg-gray-200 rounded w-1/3 mb-6"></div>
-            <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-2/3 mb-8"></div>
-            <div className="h-12 bg-gray-200 rounded w-40"></div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="py-16 bg-white">
@@ -125,13 +80,13 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
           {/* Text Content */}
           <div className="md:w-1/2">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              {title || safeTranslate('about.title', 'Sobre Nós')}
+              {title || dictionary.title}
             </h2>
             
             <div 
               className="prose prose-lg text-gray-600 mb-8"
               dangerouslySetInnerHTML={{ 
-                __html: about || safeTranslate('about.description', 'Descrição sobre a empresa...')
+                __html: about || dictionary.description
               }} 
             />
             
@@ -139,7 +94,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
               href="/company" 
              className="mt-4 px-6 py-2 border border-pink-600 text-pink-600 rounded hover:bg-pink-600 hover:text-white transition"
             >
-              {safeTranslate('about.learnMore', 'Saiba Mais')}
+              {dictionary.learnMore}
             </Link>
           </div>
           
@@ -159,7 +114,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
             ) : (
               <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
                 <span className="text-gray-500">
-                  {safeTranslate('about.noImage', 'Imagem não disponível')}
+                  {dictionary.noImage}
                 </span>
               </div>
             )}
@@ -167,7 +122,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image }) => {
             <div className="absolute bottom-[-20px] left-4 bg-white px-6 py-4 rounded-lg shadow-lg border border-gray-200">
               <p className="text-3xl font-bold text-pink-600">{count}+</p>
               <p className="text-sm text-gray-700">
-                {safeTranslate('about.yearsOfExperience', 'Anos de Experiência')}
+                {dictionary.yearsOfExperience}
               </p>
             </div>
           </div>

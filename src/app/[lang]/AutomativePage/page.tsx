@@ -15,13 +15,10 @@ export default async function AutomotivoPage({ params }: PageProps) {
     // Obtém os dados do Strapi
     const response = await getAutomotiveContent(lang);
     const { titleAuto, textAuto, imageAuto } = response.data;
-    
-    // URL base para imagens do Strapi
-    const imageUrl = imageAuto.data 
-      ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageAuto.data.attributes.url}`
-      : '/images/automotive-banner.jpg';
-    
-    const imageAlt = imageAuto.data?.attributes.alternativeText || 'Setor Automotivo';
+
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+    const imageUrl = imageAuto?.url ? `${strapiUrl}${imageAuto.url}` : '/images/automotive-banner.jpg';
+    const imageAlt = imageAuto?.alternativeText || 'Setor Automotivo';
     
     return (
       <section className="py-20 px-6 max-w-5xl mx-auto">

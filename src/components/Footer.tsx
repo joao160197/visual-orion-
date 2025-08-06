@@ -37,24 +37,7 @@ export default function Footer() {
         const apiData = await getFooter();
         
         if (apiData) {
-          // Extrai os dados básicos
-          const footerData = {
-            title1: apiData.title1 || '',
-            title2: apiData.title2 || '',
-            text1: apiData.text1 || '',
-            text2: apiData.text2 || '',
-            image: apiData.image || null
-          };
-          
-          // Verifica se o footer está vazio (todos os campos são vazios)
-          const isEmpty = !footerData.title1 && !footerData.title2 && 
-                         !footerData.text1 && !footerData.text2 && 
-                         !footerData.image;
-          
-          if (!isEmpty) {
-            // Define os dados no estado apenas se não estiver vazio
-            setFooterData(footerData);
-          }
+          setFooterData(apiData);
         }
       } catch (err) {
         const error = err instanceof Error ? err : new Error('Erro desconhecido ao buscar dados do footer');
@@ -92,20 +75,15 @@ export default function Footer() {
   // Usa os dados da API ou os valores padrão
   const data = footerData || defaultData;
   
-  // Função auxiliar para extrair dados de diferentes estruturas
-  const getValue = <T,>(obj: any, key: string, defaultValue: T): T => {
-    if (!obj) return defaultValue;
-    if (key in obj) return obj[key];
-    if (obj.attributes && key in obj.attributes) return obj.attributes[key];
-    return defaultValue;
-  };
-  
-  // Extrai os dados do footer, verificando diferentes estruturas possíveis
-  const title1 = getValue(data, 'title1', defaultData.title1);
-  const title2 = getValue(data, 'title2', defaultData.title2);
-  const text1 = getValue(data, 'text1', defaultData.text1);
-  const text2 = getValue(data, 'text2', defaultData.text2);
-  const image = getValue(data, 'image', defaultData.image);
+  // A API do Strapi retorna os dados em 'attributes', enquanto os dados de fallback não.
+  // Esta linha seleciona o objeto correto (seja 'attributes' ou o objeto de fallback) para extrair os dados.
+  const content = (data as any)?.attributes ? (data as any).attributes : data;
+
+  const title1 = content.title1 || defaultData.title1;
+  const title2 = content.title2 || defaultData.title2;
+  const text1 = content.text1 || defaultData.text1;
+  const text2 = content.text2 || defaultData.text2;
+  const image = content.image || defaultData.image;
   
   // URL da imagem de fallback
   const fallbackImageUrl = 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20branca%201.png?alt=media&token=01fdbdca-d77a-4cc2-96bf-cd7d9fe7367a';

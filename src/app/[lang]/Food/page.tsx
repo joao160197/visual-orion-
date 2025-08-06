@@ -9,12 +9,26 @@ interface PageProps {
 }
 
 export default async function AlimentosBebidasPage({ params }: PageProps) {
+
   const { lang } = params;
   
   try {
     // Obtém os dados estáticos
     const response = await getFoodContent(lang);
-    const { titleFood, textFood } = response.data;
+
+    const { data } = response;
+
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+    if (!strapiUrl) {
+      console.error('ERRO CRÍTICO: A variável de ambiente NEXT_PUBLIC_STRAPI_URL não está definida.');
+      throw new Error('Configuração do servidor incompleta.');
+    }
+
+    // Extrai os dados diretamente da nova estrutura
+    const { titleFood, textFood, imageFood } = data;
+    const imageUrl = imageFood?.url;
+    const imageAlt = imageFood?.alternativeText || 'Imagem sobre Alimentos e Bebidas';
+    
     
     return (
       <section className="py-20 px-6 max-w-5xl mx-auto">
@@ -22,33 +36,37 @@ export default async function AlimentosBebidasPage({ params }: PageProps) {
           <VoltarButton />
         </div>
         
-        <h1 className="text-4xl text-[#3c4494] font-bold text-center mb-8">{titleFood}</h1>
+        {titleFood && <h1 className="text-4xl text-[#3c4494] font-bold text-center mb-8">{titleFood}</h1>}
         
         <div className="prose max-w-3xl mx-auto text-justify">
-          {/* Imagem fixa */}
-          <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-[400px] bg-gray-100">
-            <Image
-              src="/images/food-banner.jpg"
-              alt="Alimentos e Bebidas"
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 75vw"
-            />
-          </div>
+          {/* Imagem do CMS */}
+          {imageUrl && (
+            <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-[400px] bg-gray-100">
+              <Image
+                src={`${strapiUrl}${imageUrl}`}
+                alt={imageAlt}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 75vw"
+              />
+            </div>
+          )}
           
-          <div className="prose-lg">
-            {textFood.split('\n').map((paragraph: string, index: number) => (
-              <p key={index} className="mb-4">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+                    {textFood && (
+            <div className="prose-lg">
+              {textFood.split('\n').map((paragraph: string, index: number) => (
+                <p key={index} className="mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     );
   } catch (error) {
-    console.error('Erro ao carregar a página de Alimentos e Bebidas:', error);
+    console.error('ERRO CAPTURADO NA PÁGINA FOOD:', error);
     return (
       <section className="py-20 px-6 max-w-5xl mx-auto text-center">
         <VoltarButton />

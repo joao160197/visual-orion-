@@ -41,35 +41,15 @@ interface Media {
 export interface AutomotiveContent {
   data: {
     id: string;
-    attributes: {
-      titleAuto: string;
-      textAuto: string;
-      imageAuto: {
-        data: {
-          attributes: {
-            url: string;
-            alternativeText?: string;
-            caption?: string;
-            width: number;
-            height: number;
-            formats: {
-              thumbnail?: MediaFormat;
-              small?: MediaFormat;
-              medium?: MediaFormat;
-              large?: MediaFormat;
-            };
-          };
-        } | null;
-      };
-      locale: string;
-      localizations: {
-        data: Array<{
-          id: number;
-          attributes: {
-            locale: string;
-          };
-        }>;
-      };
+    titleAuto: string;
+    textAuto: string;
+    imageAuto: {
+      url: string;
+      alternativeText: string | null;
+    } | null;
+    locale: string;
+    localizations: {
+      data: Array<{ id: number; locale: string; }>;
     };
   };
   meta?: any;
@@ -79,35 +59,15 @@ export interface AutomotiveContent {
 export interface WaterTreatmentContent {
   data: {
     id: string;
-    attributes: {
-      titleWater: string;
-      textWater: string;
-      imageWater: {
-        data: {
-          attributes: {
-            url: string;
-            alternativeText?: string;
-            caption?: string;
-            width: number;
-            height: number;
-            formats: {
-              thumbnail?: MediaFormat;
-              small?: MediaFormat;
-              medium?: MediaFormat;
-              large?: MediaFormat;
-            };
-          };
-        } | null;
-      };
-      locale: string;
-      localizations: {
-        data: Array<{
-          id: number;
-          attributes: {
-            locale: string;
-          };
-        }>;
-      };
+    titleWater: string;
+    textWater: string;
+    imageWater: {
+      url: string;
+      alternativeText: string | null;
+    } | null;
+    locale: string;
+    localizations: {
+      data: Array<{ id: number; locale: string; }>;
     };
   };
   meta?: any;
@@ -117,35 +77,15 @@ export interface WaterTreatmentContent {
 export interface LogisticContent {
   data: {
     id: string;
-    attributes: {
-      titleLogistic: string;
-      textLogistic: string;
-      imageLogistic: {
-        data: {
-          attributes: {
-            url: string;
-            alternativeText?: string;
-            caption?: string;
-            width: number;
-            height: number;
-            formats: {
-              thumbnail?: MediaFormat;
-              small?: MediaFormat;
-              medium?: MediaFormat;
-              large?: MediaFormat;
-            };
-          };
-        } | null;
-      };
-      locale: string;
-      localizations: {
-        data: Array<{
-          id: number;
-          attributes: {
-            locale: string;
-          };
-        }>;
-      };
+    titleLogistic: string;
+    textLogistic: string;
+    imageLogistic: {
+      url: string;
+      alternativeText: string | null;
+    } | null;
+    locale: string;
+    localizations: {
+      data: Array<{ id: number; locale: string; }>;
     };
   };
   meta?: any;
@@ -155,35 +95,27 @@ export interface LogisticContent {
 export interface FoodContent {
   data: {
     id: string;
-    attributes: {
-      titleFood: string;
-      textFood: string;
-      imageFood: {
-        data: {
-          attributes: {
-            url: string;
-            alternativeText?: string;
-            caption?: string;
-            width: number;
-            height: number;
-            formats: {
-              thumbnail?: MediaFormat;
-              small?: MediaFormat;
-              medium?: MediaFormat;
-              large?: MediaFormat;
-            };
-          };
-        } | null;
+    titleFood: string;
+    textFood: string;
+    imageFood: {
+      id: number;
+      url: string;
+      alternativeText: string | null;
+      width: number;
+      height: number;
+      formats: {
+        thumbnail?: MediaFormat;
+        small?: MediaFormat;
+        medium?: MediaFormat;
+        large?: MediaFormat;
       };
-      locale: string;
-      localizations: {
-        data: Array<{
-          id: number;
-          attributes: {
-            locale: string;
-          };
-        }>;
-      };
+    } | null;
+    locale: string;
+    localizations: {
+      data: Array<{
+        id: number;
+        locale: string;
+      }>;
     };
   };
   meta?: any;
@@ -211,17 +143,11 @@ export async function getAutomotiveContent(locale: string = 'pt-BR'): Promise<Au
     return {
       data: {
         id: '1',
-        attributes: {
-          titleAuto: 'Setor Automotivo',
-          textAuto: 'Atuamos no desenvolvimento de soluções voltadas para a automação de processos no setor automotivo, desde linhas de montagem até testes de qualidade. Com foco em eficiência e rastreabilidade, nossas tecnologias ajudam a otimizar tempo e reduzir falhas humanas em ambientes industriais altamente exigentes.',
-          imageAuto: {
-            data: null
-          },
-          locale: locale,
-          localizations: {
-            data: []
-          }
-        }
+        titleAuto: 'Setor Automotivo (Fallback)',
+        textAuto: 'O conteúdo desta página não pôde ser carregado.',
+        imageAuto: null,
+        locale: locale,
+        localizations: { data: [] }
       },
       meta: {}
     };
@@ -250,17 +176,11 @@ export async function getWaterTreatmentContent(locale: string = 'pt-BR'): Promis
     return {
       data: {
         id: '1',
-        attributes: {
-          titleWater: 'Tratamento de Água',
-          textWater: 'Desenvolvemos sistemas para monitoramento, controle e automação de estações de tratamento de água e efluentes. Nossos equipamentos garantem a conformidade ambiental e o uso eficiente dos recursos hídricos, promovendo sustentabilidade com confiabilidade.',
-          imageWater: {
-            data: null
-          },
-          locale: locale,
-          localizations: {
-            data: []
-          }
-        }
+        titleWater: 'Tratamento de Água (Fallback)',
+        textWater: 'O conteúdo desta página não pôde ser carregado.',
+        imageWater: null,
+        locale: locale,
+        localizations: { data: [] }
       },
       meta: {}
     };
@@ -289,17 +209,11 @@ export async function getLogisticContent(locale: string = 'pt-BR'): Promise<Logi
     return {
       data: {
         id: '1',
-        attributes: {
-          titleLogistic: 'Soluções Logísticas',
-          textLogistic: 'Nossas soluções logísticas integram tecnologia e automação para controle de estoque, movimentação de materiais e rastreabilidade. Atuamos com sistemas de identificação automática, sensores e painéis industriais para aumentar a visibilidade e agilidade da operação.',
-          imageLogistic: {
-            data: null
-          },
-          locale: locale,
-          localizations: {
-            data: []
-          }
-        }
+        titleLogistic: 'Soluções Logísticas (Fallback)',
+        textLogistic: 'O conteúdo desta página não pôde ser carregado.',
+        imageLogistic: null,
+        locale: locale,
+        localizations: { data: [] }
       },
       meta: {}
     };
@@ -316,28 +230,26 @@ export async function getFoodContent(locale: string = 'pt-BR'): Promise<FoodCont
 
     const response = await fetchApi<FoodContent>(`/api/food?${query.toString()}`);
     
-    if (!response?.data) {
-      throw new Error('Dados não encontrados');
+    // Validação robusta: verifica se os atributos existem
+    if (!response?.data?.titleFood) { // Valida um campo essencial
+      console.warn('Resposta da API para Food não contém titleFood:', response);
+      throw new Error('Dados de Food não encontrados ou em formato inesperado.');
     }
 
     return response;
   } catch (error) {
-    console.error('Erro ao buscar conteúdo do Prismic:', error);
+    console.error('Erro ao buscar conteúdo de Food do Strapi:', error);
     
     // Fallback em caso de erro
     return {
       data: {
         id: '1',
-        attributes: {
-          titleFood: 'Alimentos e Bebidas',
-          textFood: 'Aqui você encontra uma seleção especial de alimentos e bebidas para todos os gostos. Nossa equipe está pronta para atender você com excelência e qualidade.',
-          imageFood: {
-            data: null
-          },
-          locale: locale,
-          localizations: {
-            data: []
-          }
+        titleFood: 'Alimentos e Bebidas (Fallback)',
+        textFood: 'O conteúdo desta página não pôde ser carregado. Por favor, tente novamente mais tarde.',
+        imageFood: null,
+        locale: locale,
+        localizations: {
+          data: []
         }
       },
       meta: {}
