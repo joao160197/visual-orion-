@@ -12,8 +12,9 @@ interface FetchAPIOptions {
   next?: NextFetchRequestConfig;
 }
 
-export async function fetchAPI<T = any>(path: string, options: FetchAPIOptions = { method: 'GET' }): Promise<T> {
-  const { method = 'GET', authToken, body, next } = options;
+export async function fetchAPI<T = any>(path: string, options: FetchAPIOptions = {}): Promise<T> {
+    const { method = 'GET', body, next } = options;
+  const authToken = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   try {
     // Construir a URL completa usando getStrapiUrl
