@@ -23,8 +23,8 @@ export async function fetchAPI<T = any>(path: string, options: RequestInit = {})
         ...defaultHeaders,
         ...(options.headers || {}),
       },
-      // Garante que não usamos cache para pegar sempre a versão mais recente
-      cache: 'no-store',
+      // A configuração de cache foi removida para permitir que o Next.js
+      // gerencie o cache durante o build estático.
     });
 
     // Verifica se a resposta foi bem-sucedida

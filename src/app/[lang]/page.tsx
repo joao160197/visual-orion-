@@ -166,7 +166,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
   // Buscar soluções do Strapi
   let solutions: Array<{ id: number; attributes: { title: string; slug: string; icon: string } }> = [];
   let error: string | null = null;
-  
+
   try {
     const solutionsData = await getSolutions(lang);
     solutions = solutionsData.data || [];
@@ -200,7 +200,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       {/* Renderização dos blocos dinâmicos, incluindo o carrossel */}
       <section className="space-y-8">
         {Array.isArray(blocks) && blocks.length > 0 ? (
-          renderBlocks(blocks, lang)
+          renderBlocks(blocks, dictionary, lang)
         ) : (
           <div className="text-center py-8">
             <p>{dictionary.homePage.noBlocks}</p>

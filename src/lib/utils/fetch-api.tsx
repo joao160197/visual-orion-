@@ -35,7 +35,7 @@ export async function fetchAPI<T = any>(path: string, options: FetchAPIOptions =
       },
       ...(body && { body: JSON.stringify(body) }),
       next,
-      cache: 'no-store', // Desativa o cache para garantir que sempre pegue os dados mais recentes
+      // A opção de cache foi removida para permitir que o Next.js gerencie o cache.
     };
 
     const startTime = Date.now();

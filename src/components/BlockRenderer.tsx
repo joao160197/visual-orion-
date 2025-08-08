@@ -188,7 +188,7 @@ const extractImageData = (imageData: any) => {
 };
 
 // Função principal para renderizar blocos
-export function renderBlocks(blocks: any[], locale?: string) {
+export const renderBlocks = (blocks: any[], dictionary: any, locale?: string) => {
   try {
     if (!blocks || (Array.isArray(blocks) && blocks.length === 0)) {
       return null;
@@ -274,6 +274,7 @@ export function renderBlocks(blocks: any[], locale?: string) {
                   title={block.title}
                   about={block.about}
                   image={block.image}
+                  dictionary={dictionary}
                 />
               );
             default:
