@@ -1,5 +1,6 @@
 import VoltarButton from "@/components/BackButton";
 import { getFoodContent } from "@/services/contentService";
+import { getStrapiURL } from '@/lib/utils';
 import Image from 'next/image';
 
 interface PageProps {
@@ -17,12 +18,6 @@ export default async function AlimentosBebidasPage({ params }: PageProps) {
     const response = await getFoodContent(lang);
 
     const { data } = response;
-
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
-    if (!strapiUrl) {
-      console.error('ERRO CRÍTICO: A variável de ambiente NEXT_PUBLIC_STRAPI_URL não está definida.');
-      throw new Error('Configuração do servidor incompleta.');
-    }
 
     // Extrai os dados diretamente da nova estrutura
     const { titleFood, textFood, imageFood } = data;
@@ -43,7 +38,7 @@ export default async function AlimentosBebidasPage({ params }: PageProps) {
           {imageUrl && (
             <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-[400px] bg-gray-100">
               <Image
-                src={`${strapiUrl}${imageUrl}`}
+                src={getStrapiURL(imageUrl)}
                 alt={imageAlt}
                 fill
                 className="object-cover"

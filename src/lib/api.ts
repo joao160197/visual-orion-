@@ -1,9 +1,9 @@
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+import { getStrapiURL } from "@/lib/utils";
 
 // Função genérica para fazer requisições para a API do Strapi
 export async function fetchAPI<T = any>(path: string, options: RequestInit = {}): Promise<T> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+
     const apiToken = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     
     // Configuração padrão dos headers
@@ -17,7 +17,8 @@ export async function fetchAPI<T = any>(path: string, options: RequestInit = {})
     }
     
     // Faz a requisição
-    const response = await fetch(`${baseUrl}${path}`, {
+    const url = getStrapiURL(path);
+    const response = await fetch(url, {
       ...options,
       headers: {
         ...defaultHeaders,

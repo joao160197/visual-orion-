@@ -1,5 +1,6 @@
 import VoltarButton from "@/components/BackButton";
 import { getAutomotiveContent } from "@/services/contentService";
+import { getStrapiURL } from '@/lib/utils';
 import Image from 'next/image';
 
 interface PageProps {
@@ -16,8 +17,7 @@ export default async function AutomotivoPage({ params }: PageProps) {
     const response = await getAutomotiveContent(lang);
     const { titleAuto, textAuto, imageAuto } = response.data;
 
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
-    const imageUrl = imageAuto?.url ? `${strapiUrl}${imageAuto.url}` : '/images/automotive-banner.jpg';
+    const imageUrl = imageAuto?.url ? getStrapiURL(imageAuto.url) : '/images/automotive-banner.jpg';
     const imageAlt = imageAuto?.alternativeText || 'Setor Automotivo';
     
     return (
