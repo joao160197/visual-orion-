@@ -78,8 +78,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           {/* Text Content */}
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
               {title || dictionary.title}
             </h2>
             
@@ -99,7 +99,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
           </div>
           
           {/* Image */}
-          <div className="md:w-1/2 relative">
+          <div className="md:w-1/2 relative mt-8 md:mt-0">
             {imageUrl ? (
               <div className="relative h-96 overflow-hidden rounded-lg shadow-xl">
                 <Image
@@ -119,7 +119,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
               </div>
             )}
             
-            <div className="absolute bottom-[-20px] left-4 bg-white px-6 py-4 rounded-lg shadow-lg border border-gray-200">
+            <div className="relative md:absolute mt-4 md:mt-0 bottom-auto md:bottom-[-20px] left-auto md:left-4 bg-white px-6 py-4 rounded-lg shadow-lg border border-gray-200 w-max mx-auto md:mx-0">
               <p className="text-3xl font-bold text-pink-600">{count}+</p>
               <p className="text-sm text-gray-700">
                 {dictionary.yearsOfExperience}

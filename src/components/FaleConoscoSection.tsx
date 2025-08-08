@@ -125,11 +125,11 @@ export default function FaleConoscoSection({
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           {/* Conteúdo de texto */}
-          <div className="md:w-1/2 p-8 md:p-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+          <div className="md:w-1/2 p-6 text-center md:text-left md:p-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">
               {displayTitulo}
             </h2>
-            <p className="text-gray-600 mb-8 text-lg">
+            <p className="text-gray-600 mb-8 text-base sm:text-lg">
               {displayTexto}
             </p>
             <Link 
@@ -141,7 +141,7 @@ export default function FaleConoscoSection({
           </div>
           
           {/* Imagem */}
-          <div className="md:w-1/2 h-64 md:h-auto relative">
+          <div className="md:w-1/2 h-80 md:h-auto relative">
             <div className="w-full h-full">
               {/* Usando uma div com background para melhor controle */}
               <div 
@@ -150,7 +150,7 @@ export default function FaleConoscoSection({
                   backgroundImage: `url(${imageUrl || defaultImageUrl})`,
                   backgroundPosition: 'center',
                   backgroundSize: 'cover',
-                  minHeight: '400px',
+                  minHeight: '320px',
                   width: '100%',
                   height: '100%',
                   transition: 'background-image 0.3s ease-in-out'

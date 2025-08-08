@@ -211,10 +211,10 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
 
   return (
     <section className="py-12 relative">
-      {title && <h2 className="text-center text-2xl font-bold mb-6">{title}</h2>}
+      {title && <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">{title}</h2>}
 
       {/* Container do slider */}
-      <div className="w-full mx-auto relative overflow-hidden rounded-lg shadow-lg">
+      <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full overflow-hidden rounded-lg shadow-2xl">
         {/* Slides */}
         <div className="relative h-[500px] w-full">
           {validImages.map((img, index) => {
@@ -254,7 +254,7 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
         {/* Controles de navegação */}
         <button 
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 z-20 shadow-md"
+          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 z-20 shadow-md"
           aria-label="Slide anterior"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -264,7 +264,7 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
         
         <button 
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 z-20 shadow-md"
+          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 z-20 shadow-md"
           aria-label="Próximo slide"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

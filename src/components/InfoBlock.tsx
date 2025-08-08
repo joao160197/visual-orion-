@@ -127,9 +127,9 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
         </div>
 
         {/* Seção de Conteúdo */}
-        <div className="w-full md:w-1/2 px-4 space-y-6">
+        <div className="w-full md:w-1/2 px-4 space-y-6 text-center md:text-left">
           {headline && (
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
               {headline}
             </h2>
           )}

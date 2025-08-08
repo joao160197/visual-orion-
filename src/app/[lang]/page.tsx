@@ -189,10 +189,10 @@ export default async function Home({ params: { lang } }: HomePageProps) {
     <main>
       {/* Cabeçalho da página */}
       <section className="text-center py-12">
-        <h1 className="text-5xl font-bold font-GoodTimes text-[#3c4494]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-GoodTimes text-[#3c4494]">
           {title || dictionary.homePage.welcome}
         </h1>
-        <p className="text-lg font-ReportSb text-gray-600 mt-4 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg font-ReportSb text-gray-600 mt-4 max-w-3xl mx-auto px-4">
           {description || ""}
         </p>
       </section>
@@ -224,7 +224,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
             {dictionary.solutions.title}
           </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-gray-200">
+          <p className="text-base sm:text-lg mb-8 max-w-2xl mx-auto text-gray-200">
             {dictionary.solutions.subtitle}
           </p>
           
