@@ -129,13 +129,11 @@ export async function getAutomotiveContent(locale: string = 'pt-BR'): Promise<Au
       'locale': locale
     });
 
-    const response = await fetchApi<AutomotiveContent>(`/api/automative-page?${query.toString()}`);
-    
-    if (!response?.data) {
-      throw new Error('Dados não encontrados');
-    }
-
-    return response;
+    const path = `/api/automative-page?${query.toString()}`;
+    const data = await fetchApi<AutomotiveContent>(path, {
+      next: { revalidate: 60 } // Adiciona revalidação para caching
+    });
+    return data;
   } catch (error) {
     console.error('Erro ao buscar conteúdo do Strapi:', error);
     
