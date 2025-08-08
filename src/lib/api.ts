@@ -4,7 +4,7 @@ import { getStrapiURL } from "@/lib/utils";
 export async function fetchAPI<T = any>(path: string, options: RequestInit = {}): Promise<T> {
   try {
 
-    const apiToken = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+        const apiToken = process.env.STRAPI_API_TOKEN;
     
     // Configuração padrão dos headers
     const defaultHeaders: HeadersInit = {
