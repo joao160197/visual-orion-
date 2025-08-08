@@ -160,13 +160,11 @@ export async function getWaterTreatmentContent(locale: string = 'pt-BR'): Promis
       'locale': locale
     });
 
-    const response = await fetchApi<WaterTreatmentContent>(`/api/tratamento-agua?${query.toString()}`);
-    
-    if (!response?.data) {
-      throw new Error('Dados não encontrados');
-    }
-
-    return response;
+    const path = `/api/tratamento-agua?${query.toString()}`;
+    const data = await fetchApi<WaterTreatmentContent>(path, {
+        next: { revalidate: 60 }
+    });
+    return data;
   } catch (error) {
     console.error('Erro ao buscar conteúdo do Strapi:', error);
     
@@ -193,13 +191,11 @@ export async function getLogisticContent(locale: string = 'pt-BR'): Promise<Logi
       'locale': locale
     });
 
-    const response = await fetchApi<LogisticContent>(`/api/logistico?${query.toString()}`);
-    
-    if (!response?.data) {
-      throw new Error('Dados não encontrados');
-    }
-
-    return response;
+    const path = `/api/logistico?${query.toString()}`;
+    const data = await fetchApi<LogisticContent>(path, {
+        next: { revalidate: 60 }
+    });
+    return data;
   } catch (error) {
     console.error('Erro ao buscar conteúdo do Strapi:', error);
     
@@ -226,15 +222,18 @@ export async function getFoodContent(locale: string = 'pt-BR'): Promise<FoodCont
       'locale': locale
     });
 
-    const response = await fetchApi<FoodContent>(`/api/food?${query.toString()}`);
-    
+    const path = `/api/food?${query.toString()}`;
+    const data = await fetchApi<FoodContent>(path, {
+        next: { revalidate: 60 }
+    });
+
     // Validação robusta: verifica se os atributos existem
-    if (!response?.data?.titleFood) { // Valida um campo essencial
-      console.warn('Resposta da API para Food não contém titleFood:', response);
+    if (!data?.data?.titleFood) { // Valida um campo essencial
+      console.warn('Resposta da API para Food não contém titleFood:', data);
       throw new Error('Dados de Food não encontrados ou em formato inesperado.');
     }
 
-    return response;
+    return data;
   } catch (error) {
     console.error('Erro ao buscar conteúdo de Food do Strapi:', error);
     
