@@ -3,11 +3,7 @@ import { getStrapiURL } from "@/lib/utils";
 // Função genérica para fazer requisições para a API do Strapi
 export async function fetchAPI<T = any>(path: string, options: RequestInit = {}): Promise<T> {
   try {
-    console.log("--- DEBUGGING fetchAPI ---");
-    console.log("process.env.STRAPI_API_TOKEN:", process.env.STRAPI_API_TOKEN ? "Token Present" : "Token Not Found");
-    console.log("--- END DEBUGGING ---");
-
-    const apiToken = process.env.STRAPI_API_TOKEN;
+    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     
     // Configuração padrão dos headers
     const defaultHeaders: HeadersInit = {
@@ -15,8 +11,8 @@ export async function fetchAPI<T = any>(path: string, options: RequestInit = {})
     };
     
     // Adiciona o token de autorização se existir
-    if (apiToken) {
-      defaultHeaders['Authorization'] = `Bearer ${apiToken}`;
+    if (token) {
+      defaultHeaders['Authorization'] = `Bearer ${token}`;
     }
     
     // Faz a requisição
