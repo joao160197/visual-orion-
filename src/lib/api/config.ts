@@ -8,9 +8,18 @@ if (!apiToken) {
   console.log('✅ [Vercel Build] A variável STRAPI_API_TOKEN foi carregada com sucesso.');
 }
 
-export const API_CONFIG = {
-  headers: {
+export const getApiConfig = () => {
+  const apiToken = process.env.STRAPI_API_TOKEN;
+
+  const headers: { [key: string]: string } = {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiToken}`,
-  },
+  };
+
+  if (apiToken) {
+    headers['Authorization'] = `Bearer ${apiToken}`;
+  }
+
+  return {
+    headers,
+  };
 };
