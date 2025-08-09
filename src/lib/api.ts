@@ -3,7 +3,7 @@ import { getStrapiURL } from "@/lib/utils";
 // Função genérica para fazer requisições para a API do Strapi
 export async function fetchAPI<T = any>(path: string, options: RequestInit = {}): Promise<T> {
   try {
-    const token = process.env.STRAPI_API_TOKEN;
+    const token = process.env.STRAPI_BACKEND_TOKEN;
     
     // Configuração padrão dos headers
     const defaultHeaders: HeadersInit = {
