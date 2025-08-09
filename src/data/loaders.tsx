@@ -17,8 +17,7 @@ export async function getCompanyPage(locale: string = 'pt') {
     
     // Parâmetros de consulta otimizados
     const params = new URLSearchParams({
-      'populate[blocks][on][blocks.hero][populate]': 'image',
-      'populate[blocks][on][blocks.info-block][populate]': 'image',
+      'populate[blocks][populate]': '*',
       locale
     });
     
