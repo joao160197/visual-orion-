@@ -1,7 +1,7 @@
-import { API_BASE_URL, getApiConfig } from './config';
+import { API_URL, getApiConfig } from './config';
 
 export async function fetchApi<T>(endpoint: string, options: RequestInit = {}) {
-  const url = `${API_BASE_URL}${endpoint}`;
+  const url = `${API_URL}${endpoint}`;
   
     const config = getApiConfig();
 
