@@ -17,7 +17,8 @@ export async function getCompanyPage(locale: string = 'pt') {
     
     // Parâmetros de consulta otimizados
     const params = new URLSearchParams({
-      'populate[blocks][populate]': 'image',
+      'populate[blocks][on][blocks.hero][populate]': 'image',
+      'populate[blocks][on][blocks.info-block][populate]': 'image',
       locale
     });
     
@@ -28,8 +29,7 @@ export async function getCompanyPage(locale: string = 'pt') {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 60 },
-      cache: 'no-store' // Desativa o cache para desenvolvimento
+      next: { revalidate: 60 } // Usa ISR para revalidação
     });
 
     if (!response.ok) {
