@@ -5,7 +5,7 @@ const tokenForLog = process.env.STRAPI_BACKEND_TOKEN;
 if (!tokenForLog) {
   console.warn('⚠️ [Vercel Build] A variável de ambiente STRAPI_BACKEND_TOKEN  não foi encontrada!');
 } else {
-  console.log('✅ [Vercel Build] A variável STRAPI_BACKEND_TOKEN foi carregada com sucesso.');
+  console.log(`✅ [Vercel Build] STRAPI_BACKEND_TOKEN carregada. Usando token que começa com '${tokenForLog.substring(0, 4)}' e termina com '${tokenForLog.substring(tokenForLog.length - 4)}'.`);
 }
 
 export const getApiConfig = () => {
