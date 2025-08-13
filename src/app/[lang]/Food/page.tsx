@@ -9,7 +9,7 @@ interface PageProps {
   };
 }
 
-export default async function AlimentosBebidasPage({ params }: PageProps) {
+export default async function Food({ params }: PageProps) {
 
   const { lang } = params;
   

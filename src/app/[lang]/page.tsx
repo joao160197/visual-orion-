@@ -236,7 +236,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
                   'automotivo': 'AutomativePage',
                   'logistico': 'Logistico',
                   'tratamento-agua': 'TratamentoAgua',
-                  'Food': 'AlimentosBebidasPage' // Corrigido para corresponder ao slug
+                  'Food': 'Food' // Corrigido para corresponder ao slug
                 };
                 return routes[slug] || slug;
               };
