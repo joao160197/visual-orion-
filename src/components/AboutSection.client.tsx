@@ -26,7 +26,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageAlt, setImageAlt] = useState(title || dictionary.title);
 
-  // Processa a imagem quando o componente é montado ou a imagem muda
+  // Processa a imagem quando o componente é montado ou a imagem muda 
   useEffect(() => {
     if (image) {
       const url = extractImageUrl(image);
