@@ -1,8 +1,6 @@
-import qs from "qs";
-import { fetchAPI } from "@/lib/utils/fetch-api";
-import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
+// Todas as funções deste arquivo agora retornam conteúdo estático local.
 
-// Dados mock para desenvolvimento quando o Strapi não estiver disponível
+// Dados mock para desenvolvimento quando o Strapi não estiver disponível (base PT)
 const mockHomePageData = {
   data: {
     id: 1,
@@ -13,7 +11,19 @@ const mockHomePageData = {
       updatedAt: '2023-01-01T00:00:00.000Z',
       publishedAt: '2023-01-01T00:00:00.000Z',
       locale: 'pt',
-      blocks: [],
+      blocks: [
+        {
+          id: 101,
+          __component: 'blocks.carousel',
+          order: 1,
+          images: [
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fboys-helping-climb-1024x628.jpg?alt=media&token=32921c92-51d8-4078-b310-f75652090a45',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fmenino-escada.jpg?alt=media&token=80c0f87b-8a2f-4712-ad42-7f5066ebfc60',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsunset-vista-homem-1024x683.jpg?alt=media&token=2b9723ea-4e87-4244-96bf-6a1407f5047f',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F1666636483967.jpg?alt=media&token=52739564-0141-4a1c-beb4-61aa17d5fee7'
+          ]
+        }
+      ],
       about: {
         id: 1,
         title: 'Sobre Nós',
@@ -22,40 +32,17 @@ const mockHomePageData = {
           data: {
             id: 1,
             attributes: {
-              name: 'about-us.jpg',
+              name: 'placeholder.svg',
               alternativeText: 'Sobre Nós',
               caption: 'Sobre Nós',
               width: 800,
               height: 600,
-              formats: {
-                thumbnail: {
-                  name: 'thumbnail_about-us.jpg',
-                  hash: 'thumbnail_about_us',
-                  ext: '.jpg',
-                  mime: 'image/jpeg',
-                  path: null,
-                  width: 245,
-                  height: 184,
-                  size: 12.4,
-                  url: '/uploads/thumbnail_about_us_12345.jpg'
-                },
-                small: {
-                  name: 'small_about-us.jpg',
-                  hash: 'small_about_us',
-                  ext: '.jpg',
-                  mime: 'image/jpeg',
-                  path: null,
-                  width: 500,
-                  height: 375,
-                  size: 25.1,
-                  url: '/uploads/small_about_us_12345.jpg'
-                }
-              },
-              hash: 'about_us_12345',
-              ext: '.jpg',
-              mime: 'image/jpeg',
-              size: 45.6,
-              url: '/uploads/about_us_12345.jpg',
+              formats: {},
+              hash: 'placeholder',
+              ext: '.svg',
+              mime: 'image/svg+xml',
+              size: 1,
+              url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fphoto_of_automobile_production_line_welding_car_body_modern_car_assembly_plant_auto_industry_9478a59c49.webp?alt=media&token=856c34a9-9cf3-4243-9d8d-7056870453de',
               previewUrl: null,
               provider: 'local',
               provider_metadata: null,
@@ -72,7 +59,7 @@ const mockHomePageData = {
             attributes: {
               title: 'Fale Conosco',
               text: 'Entre em contato para saber mais sobre nossas soluções.',
-              link: '/contato',
+              link: '/contact',
               createdAt: '2023-01-01T00:00:00.000Z',
               updatedAt: '2023-01-01T00:00:00.000Z',
               publishedAt: '2023-01-01T00:00:00.000Z',
@@ -81,51 +68,17 @@ const mockHomePageData = {
                 data: {
                   id: 2,
                   attributes: {
-                    name: 'contact-us.jpg',
+                    name: 'placeholder.svg',
                     alternativeText: 'Entre em contato',
                     caption: 'Entre em contato',
                     width: 1200,
                     height: 800,
-                    formats: {
-                      thumbnail: {
-                        name: 'thumbnail_contact-us.jpg',
-                        hash: 'thumbnail_contact_us',
-                        ext: '.jpg',
-                        mime: 'image/jpeg',
-                        path: null,
-                        width: 245,
-                        height: 163,
-                        size: 10.2,
-                        url: '/uploads/thumbnail_contact_us_12345.jpg'
-                      },
-                      small: {
-                        name: 'small_contact-us.jpg',
-                        hash: 'small_contact_us',
-                        ext: '.jpg',
-                        mime: 'image/jpeg',
-                        path: null,
-                        width: 500,
-                        height: 333,
-                        size: 20.5,
-                        url: '/uploads/small_contact_us_12345.jpg'
-                      },
-                      medium: {
-                        name: 'medium_contact-us.jpg',
-                        hash: 'medium_contact_us',
-                        ext: '.jpg',
-                        mime: 'image/jpeg',
-                        path: null,
-                        width: 750,
-                        height: 500,
-                        size: 35.8,
-                        url: '/uploads/medium_contact_us_12345.jpg'
-                      }
-                    },
-                    hash: 'contact_us_12345',
-                    ext: '.jpg',
-                    mime: 'image/jpeg',
-                    size: 68.9,
-                    url: '/uploads/contact_us_12345.jpg',
+                    formats: {},
+                    hash: 'placeholder',
+                    ext: '.svg',
+                    mime: 'image/svg+xml',
+                    size: 1,
+                    url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F6225106_fc7fceac14.jpg?alt=media&token=a149cb6d-58b5-4297-a47d-f375614b8bf1',
                     previewUrl: null,
                     provider: 'local',
                     provider_metadata: null,
@@ -144,30 +97,69 @@ const mockHomePageData = {
 };
 
 export async function getHomePage(locale: string) {
-  try {
-    const query = qs.stringify({
-      locale,
-      populate: {
-        blocks: { populate: "*" },
-        about: { populate: "*" },
-        talktous: { populate: "*" }
-      }
-    });
-    
-    const response = await fetchAPI(`/api/home-page?${query}`, { 
-      method: 'GET',
-      next: { revalidate: 60 } 
-    });
-    
-    if (!response || !response.data) {
-      return null;
-    }
-    
-    return response;
-  } catch (error) {
-    console.error('Erro ao buscar dados da página inicial:', error);
-    return null;
+  // Localização simples PT/EN/ES para textos (mantém blocos e imagens)
+  const dict = {
+    pt: {
+      title: 'Bem-vindo à Visual Orion',
+      description: 'Soluções inovadoras para o seu negócio',
+      aboutTitle: 'Sobre Nós',
+      aboutText: 'Somos uma empresa focada em inovação e qualidade.',
+      talkTitle: 'Fale Conosco',
+      talkText: 'Entre em contato para saber mais sobre nossas soluções.',
+      aboutAlt: 'Sobre Nós',
+      talkAlt: 'Entre em contato',
+    },
+    en: {
+      title: 'Welcome to Visual Orion',
+      description: 'Innovative solutions for your business',
+      aboutTitle: 'About Us',
+      aboutText: 'We are a company focused on innovation and quality.',
+      talkTitle: 'Talk to Us',
+      talkText: 'Get in touch to learn more about our solutions.',
+      aboutAlt: 'About Us',
+      talkAlt: 'Get in touch',
+    },
+    es: {
+      title: 'Bienvenido a Visual Orion',
+      description: 'Soluciones innovadoras para su negocio',
+      aboutTitle: 'Sobre Nosotros',
+      aboutText: 'Somos una empresa enfocada en la innovación y la calidad.',
+      talkTitle: 'Hable con Nosotros',
+      talkText: 'Póngase en contacto para conocer más sobre nuestras soluciones.',
+      aboutAlt: 'Sobre Nosotros',
+      talkAlt: 'Hable con nosotros',
+    },
+  } as const;
+
+  const t = dict[(locale as 'pt' | 'en' | 'es')] ?? dict.pt;
+
+  // Clona e aplica traduções
+  const data = JSON.parse(JSON.stringify(mockHomePageData));
+  data.data.attributes.title = t.title;
+  data.data.attributes.description = t.description;
+  data.data.attributes.locale = locale || 'pt';
+
+  // About
+  data.data.attributes.about.title = t.aboutTitle;
+  data.data.attributes.about.about = t.aboutText;
+  if (data.data.attributes.about?.image?.data?.attributes) {
+    data.data.attributes.about.image.data.attributes.alternativeText = t.aboutAlt;
+    data.data.attributes.about.image.data.attributes.caption = t.aboutAlt;
   }
+
+  // Talk to us (considera primeiro item)
+  const talk = data.data.attributes.talktous?.data?.[0]?.attributes;
+  if (talk) {
+    talk.title = t.talkTitle;
+    talk.text = t.talkText;
+    talk.locale = locale || 'pt';
+    if (talk?.image?.data?.attributes) {
+      talk.image.data.attributes.alternativeText = t.talkAlt;
+      talk.image.data.attributes.caption = t.talkAlt;
+    }
+  }
+
+  return data;
 }
 
 /**
@@ -176,167 +168,29 @@ export async function getHomePage(locale: string) {
  * @returns Dados da página Company ou null em caso de erro
  */
 export async function getCompanyPage(locale: string) {
-  try {
-    // Configura a query para buscar os dados da página Company
-    const query = qs.stringify({
-      locale,
-      populate: {
-        // Popula os blocos dinâmicos
-        blocks: {
-          populate: {
-            // Para blocos de imagem (info-block)
-            image: {
-              populate: {
-                data: {
-                  populate: {
-                    attributes: {
-                      populate: ['url', 'alternativeText', 'formats', 'width', 'height']
-                    }
-                  }
-                }
-              }
-            },
-            // Para blocos de carrossel
-            images: {
-              populate: {
-                data: {
-                  populate: {
-                    attributes: {
-                      populate: ['url', 'alternativeText', 'formats', 'width', 'height']
-                    }
-                  }
-                }
-              }
-            },
-            // Campos comuns a vários tipos de blocos
-            Image: {
-              populate: {
-                data: {
-                  populate: {
-                    attributes: {
-                      populate: ['url', 'alternativeText', 'formats', 'width', 'height']
-                    }
-                  }
-                }
-              }
-            },
-            // Para o bloco de sobre (about-section)
-            aboutImage: {
-              populate: {
-                data: {
-                  populate: {
-                    attributes: {
-                      populate: ['url', 'alternativeText', 'formats', 'width', 'height']
-                    }
-                  }
-                }
-              }
-            },
-            // Campos de conteúdo rico
-            content: true,
-            description: true,
-            body: true
-          }
-        },
-        // SEO e metadados
-        seo: {
-          populate: ['metaTitle', 'metaDescription', 'metaImage', 'metaSocial', 'keywords']
-        },
-        // Imagem de capa
-        coverImage: {
-          populate: ['url', 'alternativeText', 'formats', 'width', 'height']
-        }
+  // Retorna estrutura mínima similar ao Strapi para compatibilidade, caso usada em algum lugar
+  return {
+    data: {
+      attributes: {
+        title: 'Sobre Nós',
+        description: 'Conheça mais sobre nossa empresa',
+        blocks: []
       }
-    }, {
-      encodeValuesOnly: true // Importante para o Strapi v4+
-    });
-    
-    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}/api/company?${query}`;
-    // Faz a requisição para a API do Strapi
-    const response = await fetch(apiUrl, { 
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN || ''}`
-      },
-      next: { revalidate: 60 } // Revalida a cada 60 segundos
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Erro na resposta da API: ${response.status} ${response.statusText}`);
     }
-    
-    const responseData = await response.json();
-    
-    if (!responseData || !responseData.data) {
-      return {
-        data: {
-          attributes: {
-            title: 'Sobre Nós',
-            description: 'Conheça mais sobre nossa empresa',
-            blocks: []
-          }
-        }
-      };
-    }
-    
-    // Processa os blocos para garantir a estrutura correta
-    if (responseData.data.attributes?.blocks?.data) {
-      const blocks = responseData.data.attributes.blocks.data.map((block: any) => ({
-        id: block.id,
-        ...block.attributes
-      }));
-      
-      responseData.data.attributes.blocks = blocks;
-    }
-    
-    return responseData;
-  } catch (error) {
-    return null;
-  }
+  };
 }
 
 export async function getGlobalData(locale: string) {
-  try {
-    const query = qs.stringify({
-      locale: locale,
-      populate: {
-        Logo: {
-          populate: '*' // Popula todos os campos da mídia
-        }
-      }
-    }, {
-      encodeValuesOnly: true // Importante para o Strapi v4+
-    });
-    
-    const response = await fetchAPI(`/api/global?${query}`, {
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
-    
-    // Verifica se há dados e formata o logo corretamente
-    if (response && response.data) {
-      const logoData = response.data.attributes?.Logo?.data?.attributes;
-      
-      // Se encontrou o logo, formata os dados para o formato esperado pelo componente
-      if (logoData) {
-        const formattedLogo = {
-          id: response.data.attributes.Logo.data.id,
-          url: logoData.url,
-          alternativeText: logoData.alternativeText || 'Logo',
-          width: logoData.width,
-          height: logoData.height,
-          formats: logoData.formats
-        };
-        
-        // Atualiza o objeto de resposta com o logo formatado
-        response.data.attributes.Logo = formattedLogo;
+  // Retorna logo local simples para o Header
+  return {
+    data: {
+      Logo: {
+        id: 1,
+        url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20varia%C3%A7%C3%A3o%2003.png?alt=media&token=b935408f-e43b-4c28-bc00-74572d7eb7e0',
+        alternativeText: 'Visual Orion',
+        width: 512,
+        height: 512
       }
     }
-    
-    return response;
-  } catch (error) {
-    throw error;
-  }
+  } as any;
 }
-

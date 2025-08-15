@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getStrapiUrl } from '@/lib/utils/get-strapi-url';
+import { LocaleLink } from './LocaleLink';
 import { Locale } from '@/i18n-config';
 
 interface FaleConoscoProps {
@@ -51,8 +51,8 @@ export default function FaleConoscoSection({
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageAlt, setImageAlt] = useState(titulo || 'Fale Conosco');
 
-  // URL da imagem padrão
-  const defaultImageUrl = 'http://localhost:1337/uploads/handsome_businessman_white_background_1368_6022_ad9b0fab86.avif';
+  // URL da imagem padrão local
+  const defaultImageUrl = '/images/food-banner.jpg';
 
   // Processa a imagem quando o componente é montado ou a imagem muda
   useEffect(() => {
@@ -84,14 +84,10 @@ export default function FaleConoscoSection({
         
         // Se for um formato direto com URL
         if (imgData.url) {
-          let url = imgData.url;
-          // Se a URL for relativa, adiciona o domínio do Strapi
-          if (url.startsWith('/')) {
-            url = url.substring(1); // Remove a barra inicial
-          }
-          
-          return { 
-            url: getStrapiUrl(url),
+          const raw = String(imgData.url);
+          const normalized = raw.startsWith('http') || raw.startsWith('/') ? raw : `/${raw.replace(/^\/+/, '')}`;
+          return {
+            url: normalized,
             alt: imgData.alternativeText || imgData.caption || imgData.name || titulo || 'Fale Conosco'
           };
         }
@@ -119,6 +115,10 @@ export default function FaleConoscoSection({
   const displayTitulo = titulo || defaultTitulo;
   const displayTexto = texto || defaultTexto;
   const displayTextoBotao = textoBotao || defaultTextoBotao;
+  // Garante URL absoluta para evitar prefixo de locale (ex.: /pt/...)
+  const resolvedUrl = (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('/')))
+    ? imageUrl
+    : `/${(imageUrl || '').replace(/^\/+/, '')}`;
   
   return (
     <section>
@@ -132,12 +132,12 @@ export default function FaleConoscoSection({
             <p className="text-gray-600 mb-8 text-base sm:text-lg">
               {displayTexto}
             </p>
-            <Link 
+            <LocaleLink 
               href={linkBotao}
               className="mt-4 px-6 py-2 border border-pink-600 text-pink-600 rounded hover:bg-pink-600 hover:text-white transition"
             >
               {displayTextoBotao}
-            </Link>
+            </LocaleLink>
           </div>
           
           {/* Imagem */}
@@ -147,7 +147,7 @@ export default function FaleConoscoSection({
               <div 
                 className="w-full h-full bg-cover bg-center bg-no-repeat"
                 style={{
-                  backgroundImage: `url(${imageUrl || defaultImageUrl})`,
+                  backgroundImage: `url(${resolvedUrl || defaultImageUrl})`,
                   backgroundPosition: 'center',
                   backgroundSize: 'cover',
                   minHeight: '320px',
@@ -166,7 +166,7 @@ export default function FaleConoscoSection({
               >
                 {/* Imagem invisível para manter o espaço e acessibilidade */}
                 <img 
-                  src={imageUrl || defaultImageUrl} 
+                  src={resolvedUrl || defaultImageUrl} 
                   alt={imageAlt} 
                   className="opacity-0 w-full h-full object-cover" 
                   aria-hidden="true"

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LocaleLink } from './LocaleLink';
 import { extractImageUrl } from './BlockRenderer';
 
 interface AboutDictionary {
@@ -90,12 +91,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
               }} 
             />
             
-            <Link 
+            <LocaleLink 
               href="/company" 
-             className="mt-4 px-6 py-2 border border-pink-600 text-pink-600 rounded hover:bg-pink-600 hover:text-white transition"
+              className="mt-4 px-6 py-2 border border-pink-600 text-pink-600 rounded hover:bg-pink-600 hover:text-white transition"
             >
               {dictionary.learnMore}
-            </Link>
+            </LocaleLink>
           </div>
           
           {/* Image */}

@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
-import { StrapiImage } from '@/components/ui/StrapiImage';
-import { getFooter, FooterAttributes } from '@/lib/api';
-import { getStrapiUrl } from '@/lib/utils/get-strapi-url';
+import { useMemo } from 'react';
+import Image from 'next/image';
 
 // Função auxiliar para sanitizar HTML
 const sanitizeHtml = (html: string): string => {
@@ -24,32 +22,6 @@ const SafeHtml = ({ html, className = '' }: { html: string; className?: string }
 };
 
 export default function Footer() {
-  const [footerData, setFooterData] = useState<FooterAttributes | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      setIsLoading(true);
-      setError(null);
-      
-      try {
-        const apiData = await getFooter();
-        
-        if (apiData) {
-          setFooterData(apiData);
-        }
-      } catch (err) {
-        const error = err instanceof Error ? err : new Error('Erro desconhecido ao buscar dados do footer');
-        console.error('[Footer] Erro ao buscar dados do footer:', error);
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchFooterData();
-  }, []);
 
   // Dados padrão
   const defaultData = useMemo(() => ({
@@ -66,18 +38,15 @@ export default function Footer() {
     image: {
       data: {
         attributes: {
-          url: '/uploads/default_logo.png'
+          url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20branca%201.png?alt=media&token=66679013-160c-4474-8dc5-5693005e00cb'
         }
       }
     }
   }), []);
 
-  // Usa os dados da API ou os valores padrão
-  const data = footerData || defaultData;
-  
-  // A API do Strapi retorna os dados em 'attributes', enquanto os dados de fallback não.
-  // Esta linha seleciona o objeto correto (seja 'attributes' ou o objeto de fallback) para extrair os dados.
-  const content = (data as any)?.attributes ? (data as any).attributes : data;
+  // Usa apenas dados locais
+  const data = defaultData;
+  const content = data;
 
   const title1 = content.title1 || defaultData.title1;
   const title2 = content.title2 || defaultData.title2;
@@ -86,7 +55,7 @@ export default function Footer() {
   const image = content.image || defaultData.image;
   
   // URL da imagem de fallback
-  const fallbackImageUrl = 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20branca%201.png?alt=media&token=01fdbdca-d77a-4cc2-96bf-cd7d9fe7367a';
+  const fallbackImageUrl = 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20branca%201.png?alt=media&token=66679013-160c-4474-8dc5-5693005e00cb';
   
   // Obtém a URL da imagem do Strapi ou usa a de fallback
   const getImageUrl = (img: any): string => {
@@ -97,7 +66,7 @@ export default function Footer() {
     
     // Se a imagem for uma string (URL direta)
     if (typeof img === 'string') {
-      return img.startsWith('http') ? img : getStrapiUrl(img);
+      return img.startsWith('http') || img.startsWith('/') ? img : `/${img.replace(/^\/+/, '')}`;
     }
 
     // Função auxiliar para extrair a URL da imagem
@@ -109,7 +78,7 @@ export default function Footer() {
         
         // Se for uma string, retorna a URL
         if (typeof obj === 'string') {
-          return obj.startsWith('http') ? obj : getStrapiUrl(obj);
+          return obj.startsWith('http') || obj.startsWith('/') ? obj : `/${obj.replace(/^\/+/, '')}`;
         }
         
         // Se for um array, pega o primeiro item
@@ -120,19 +89,19 @@ export default function Footer() {
         // Se tiver uma propriedade 'url' direta
         if (obj.url) {
           const url = obj.url;
-          return url.startsWith('http') ? url : getStrapiUrl(url);
+          return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
         }
         
         // Se tiver uma propriedade 'data' com 'url' direta
         if (obj.data?.url) {
           const url = obj.data.url;
-          return url.startsWith('http') ? url : getStrapiUrl(url);
+          return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
         }
         
         // Se tiver uma propriedade 'data' com 'attributes' e 'url'
         if (obj.data?.attributes?.url) {
           const url = obj.data.attributes.url;
-          return url.startsWith('http') ? url : getStrapiUrl(url);
+          return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
         }
         
         // Se tiver uma propriedade 'data' que é um array
@@ -141,12 +110,12 @@ export default function Footer() {
           
           if (firstItem.attributes?.url) {
             const url = firstItem.attributes.url;
-            return url.startsWith('http') ? url : getStrapiUrl(url);
+            return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
           }
           
           if (firstItem.url) {
             const url = firstItem.url;
-            return url.startsWith('http') ? url : getStrapiUrl(url);
+            return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
           }
           
           // Se o primeiro item for um objeto, tenta extrair a URL dele
@@ -164,14 +133,14 @@ export default function Footer() {
                          formats.thumbnail?.url;
           
           if (imageUrl) {
-            return imageUrl.startsWith('http') ? imageUrl : getStrapiUrl(imageUrl);
+            return imageUrl.startsWith('http') || imageUrl.startsWith('/') ? imageUrl : `/${imageUrl.replace(/^\/+/, '')}`;
           }
         }
         
         // Se tiver atributos diretos com URL
         if (obj.attributes?.url) {
           const url = obj.attributes.url;
-          return url.startsWith('http') ? url : getStrapiUrl(url);
+          return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
         }
         
         // Se tiver uma propriedade 'data' que é um objeto, tenta extrair a URL dele
@@ -231,52 +200,22 @@ export default function Footer() {
     }
   }, [image]);
 
-  // Estado de carregamento
-  if (isLoading) {
-    return (
-      <footer className="bg-[#1a1a1a] text-white py-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="h-40 bg-gray-800 rounded-lg animate-pulse"></div>
-        </div>
-      </footer>
-    );
-  }
-
-  // Estado de erro
-  if (error) {
-    return (
-      <footer className="bg-[#1a1a1a] text-white py-10">
-        <div className="max-w-7xl mx-auto px-6 text-center text-red-400">
-          <p>Erro ao carregar o rodapé. Por favor, tente novamente mais tarde.</p>
-          <p className="text-sm opacity-75 mt-2">Detalhes: {error.message}</p>
-        </div>
-      </footer>
-    );
-  }
+  // Sem estados de carregamento/erro: conteúdo local
 
   return (
     <footer className="bg-[#1a1a1a] text-white">
       <section className="py-10 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
           <div className="flex flex-col gap-4 w-40">
-            {imageUrl === fallbackImageUrl ? (
-              // Imagem de fallback
-              <img
-                src={fallbackImageUrl}
-                alt="Logo Orion"
-                className="w-full h-auto object-contain"
-              />
-            ) : (
-              // Imagem do Strapi
-              <StrapiImage
-                src={imageUrl}
-                alt="Logo Orion"
-                width={160}
-                height={60}
-                className="w-full h-auto object-contain"
-                priority
-              />
-            )}
+            <Image
+              src={imageUrl}
+              alt="Logo Orion"
+              width={160}
+              height={40}
+              className="w-full h-auto object-contain"
+              unoptimized
+              priority
+            />
           </div>
 
           <div className="text-sm leading-relaxed">
@@ -288,6 +227,7 @@ export default function Footer() {
             <h3 className="font-bold mb-2">{title2}</h3>
             <SafeHtml html={text2 || ''} />
           </div>
+    
         </div>
       </section>
 

@@ -4,8 +4,8 @@
 import { useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { LocaleLink } from "./LocaleLink";
 import { LogoData } from "@/lib/utils/types/types"; 
 
 interface HeaderProps {
@@ -20,12 +20,12 @@ interface HeaderProps {
 
 const Header = ({ logo, dictionary }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [imageSrc, setImageSrc] = useState("/imgs/logo.png");
+  const [imageSrc, setImageSrc] = useState("/img/logo.png");
   const [imageAlt, setImageAlt] = useState("Visual Orion Logo");
 
   // Efeito para processar o logo quando o componente montar ou o logo mudar
   useEffect(() => {
-    let newUrl = "/imgs/logo.png";
+    let newUrl = "/img/logo.png";
     let newAlt = "Visual Orion Logo";
 
     // Verifica se o logo existe e tem uma URL válida
@@ -41,10 +41,13 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
         const pathFromLogo = typeof imageUrl === 'string' ? imageUrl.trim() : '';
         
         if (pathFromLogo) {
-          const calculatedStrapiUrl = getStrapiUrl(pathFromLogo);
-          newUrl = calculatedStrapiUrl;
+          // Accept absolute (http...) or root-relative (/...) or convert bare paths to root-relative
+          newUrl = pathFromLogo.startsWith('http') || pathFromLogo.startsWith('/')
+            ? pathFromLogo
+            : `/${pathFromLogo.replace(/^\/+/, '')}`;
           newAlt = logo.alternativeText || logo.name || "Logo da empresa";
         }
+
       } catch (error) {
         // Em caso de erro, usa os valores padrão já definidos
       }
@@ -59,7 +62,7 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <Link href="/" className="flex items-center">
+            <LocaleLink href="/" className="flex items-center">
               <div className="relative" style={{ width: '200px', height: '50px' }}>
                 <Image
                   src={imageSrc}
@@ -68,22 +71,23 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
                   height={50}
                   className="object-contain object-left"
                   priority
+                  unoptimized
                   onError={() => {
                     // Atualiza o estado para o fallback em caso de erro
-                    setImageSrc('/imgs/logo.png');
+                    setImageSrc('/img/logo.png');
                     setImageAlt('Visual Orion Logo');
                   }}
                 />
               </div>
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/" className="text-gray-600 hover:text-[#3c4494]">{dictionary.home}</Link>
-            <Link href="/features" className="text-gray-600 hover:text-[#3c4494]">{dictionary.features}</Link>
-            <Link href="/company" className="text-gray-600 hover:text-[#3c4494]">{dictionary.company}</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-[#3c4494]">{dictionary.contact}</Link>
+            <LocaleLink href="/" className="text-gray-600 hover:text-[#3c4494]">{dictionary.home}</LocaleLink>
+            <LocaleLink href="/features" className="text-gray-600 hover:text-[#3c4494]">{dictionary.features}</LocaleLink>
+            <LocaleLink href="/company" className="text-gray-600 hover:text-[#3c4494]">{dictionary.company}</LocaleLink>
+            <LocaleLink href="/contact" className="text-gray-600 hover:text-[#3c4494]">{dictionary.contact}</LocaleLink>
             <LocaleSwitcher />
           </div>
 
@@ -106,10 +110,10 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
       {isMenuOpen && (
         <div className="md:hidden bg-white">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
-            <Link href="/" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.home}</Link>
-            <Link href="/features" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.features}</Link>
-            <Link href="/company" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.company}</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.contact}</Link>
+            <LocaleLink href="/" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.home}</LocaleLink>
+            <LocaleLink href="/features" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.features}</LocaleLink>
+            <LocaleLink href="/company" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.company}</LocaleLink>
+            <LocaleLink href="/contact" className="text-gray-600 hover:text-[#3c4494] block px-3 py-2 rounded-md text-base font-medium">{dictionary.contact}</LocaleLink>
             <div className="mt-2">
               <LocaleSwitcher />
             </div>

@@ -1,7 +1,0 @@
-Por favor, crie um arquivo chamado '.env.local' na raiz do projeto com o seguinte conteúdo:
-
-# URL da API do Strapi (se estiver rodando localmente, use http://localhost:1337)
-NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
-
-# Se o Strapi estiver hospedado em outro lugar, substitua a URL acima pela URL correta.
-# Exemplo: NEXT_PUBLIC_STRAPI_URL=https://api.seusite.com

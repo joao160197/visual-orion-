@@ -12,12 +12,10 @@ export default async function TratamentoAguaPage({ params }: PageProps) {
   const { lang } = params;
   
   try {
-    // Obtém os dados do Strapi
+    // Obtém os dados estáticos
     const response = await getWaterTreatmentContent(lang);
     const { titleWater, textWater, imageWater } = response.data;
-
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
-    const imageUrl = imageWater?.url ? `${strapiUrl}${imageWater.url}` : '/images/water-treatment-banner.jpg';
+    const imageUrl = imageWater?.url || '/images/placeholder.svg';
     const imageAlt = imageWater?.alternativeText || 'Tratamento de Água';
     
     return (

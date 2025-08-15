@@ -1,4 +1,4 @@
-import { fetchApi } from '@/lib/api/fetch';
+import { staticSolutionsPages, resolveLocale } from '@/data/staticContent';
 
 interface MediaFormat {
   url: string;
@@ -123,133 +123,120 @@ export interface FoodContent {
 
 // Função para buscar os dados da página Automotive
 export async function getAutomotiveContent(locale: string = 'pt-BR'): Promise<AutomotiveContent> {
-  try {
-    const query = new URLSearchParams({
-      'populate': '*',
-      'locale': locale
-    });
-
-    const path = `/api/automative-page?${query.toString()}`;
-    const data = await fetchApi<AutomotiveContent>(path, {
-      next: { revalidate: 60 } // Adiciona revalidação para caching
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar conteúdo do Strapi:', error);
-    
-    // Fallback em caso de erro
-    return {
+  const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
+  const base = (loc as any).automotive;
+  if (base) {
+    return Promise.resolve({
       data: {
         id: '1',
-        titleAuto: 'Setor Automotivo (Fallback)',
-        textAuto: 'O conteúdo desta página não pôde ser carregado.',
-        imageAuto: null,
+        titleAuto: base.titleAuto,
+        textAuto: base.textAuto,
+        imageAuto: base.imageAuto,
         locale: locale,
         localizations: { data: [] }
       },
       meta: {}
-    };
+    } as AutomotiveContent);
   }
+  return Promise.resolve({
+    data: {
+      id: '1',
+      titleAuto: 'Setor Automotivo (Fallback)',
+      textAuto: 'Conteúdo indisponível.',
+      imageAuto: null,
+      locale: locale,
+      localizations: { data: [] }
+    },
+    meta: {}
+  });
 }
 
 // Função para buscar os dados da página de Tratamento de Água
 export async function getWaterTreatmentContent(locale: string = 'pt-BR'): Promise<WaterTreatmentContent> {
-  try {
-    const query = new URLSearchParams({
-      'populate': '*',
-      'locale': locale
-    });
-
-    const path = `/api/tratamento-agua?${query.toString()}`;
-    const data = await fetchApi<WaterTreatmentContent>(path, {
-        next: { revalidate: 60 }
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar conteúdo do Strapi:', error);
-    
-    // Fallback em caso de erro
-    return {
+  const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
+  const base = (loc as any).water;
+  if (base) {
+    return Promise.resolve({
       data: {
         id: '1',
-        titleWater: 'Tratamento de Água (Fallback)',
-        textWater: 'O conteúdo desta página não pôde ser carregado.',
-        imageWater: null,
+        titleWater: base.titleWater,
+        textWater: base.textWater,
+        imageWater: base.imageWater,
         locale: locale,
         localizations: { data: [] }
       },
       meta: {}
-    };
+    } as WaterTreatmentContent);
   }
+  return Promise.resolve({
+    data: {
+      id: '1',
+      titleWater: 'Tratamento de Água (Fallback)',
+      textWater: 'Conteúdo indisponível.',
+      imageWater: null,
+      locale: locale,
+      localizations: { data: [] }
+    },
+    meta: {}
+  });
 }
 
 // Função para buscar os dados da página Logístico
 export async function getLogisticContent(locale: string = 'pt-BR'): Promise<LogisticContent> {
-  try {
-    const query = new URLSearchParams({
-      'populate': '*',
-      'locale': locale
-    });
-
-    const path = `/api/logistico?${query.toString()}`;
-    const data = await fetchApi<LogisticContent>(path, {
-        next: { revalidate: 60 }
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar conteúdo do Strapi:', error);
-    
-    // Fallback em caso de erro
-    return {
+  const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
+  const base = (loc as any).logistic;
+  if (base) {
+    return Promise.resolve({
       data: {
         id: '1',
-        titleLogistic: 'Soluções Logísticas (Fallback)',
-        textLogistic: 'O conteúdo desta página não pôde ser carregado.',
-        imageLogistic: null,
+        titleLogistic: base.titleLogistic,
+        textLogistic: base.textLogistic,
+        imageLogistic: base.imageLogistic,
         locale: locale,
         localizations: { data: [] }
       },
       meta: {}
-    };
+    } as LogisticContent);
   }
+  return Promise.resolve({
+    data: {
+      id: '1',
+      titleLogistic: 'Soluções Logísticas (Fallback)',
+      textLogistic: 'Conteúdo indisponível.',
+      imageLogistic: null,
+      locale: locale,
+      localizations: { data: [] }
+    },
+    meta: {}
+  });
 }
 
 // Função para buscar os dados da página Food
 export async function getFoodContent(locale: string = 'pt-BR'): Promise<FoodContent> {
-  try {
-    const query = new URLSearchParams({
-      'populate': '*',
-      'locale': locale
-    });
-
-    const path = `/api/food?${query.toString()}`;
-    const data = await fetchApi<FoodContent>(path, {
-        next: { revalidate: 60 }
-    });
-
-    // Validação robusta: verifica se os atributos existem
-    if (!data?.data?.titleFood) { // Valida um campo essencial
-      console.warn('Resposta da API para Food não contém titleFood:', data);
-      throw new Error('Dados de Food não encontrados ou em formato inesperado.');
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar conteúdo de Food do Strapi:', error);
-    
-    // Fallback em caso de erro
-    return {
+  const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
+  const base = (loc as any).food;
+  if (base && base.titleFood) {
+    return Promise.resolve({
       data: {
         id: '1',
-        titleFood: 'Alimentos e Bebidas (Fallback)',
-        textFood: 'O conteúdo desta página não pôde ser carregado. Por favor, tente novamente mais tarde.',
-        imageFood: null,
+        titleFood: base.titleFood,
+        textFood: base.textFood,
+        imageFood: base.imageFood,
         locale: locale,
-        localizations: {
-          data: []
-        }
+        localizations: { data: [] }
       },
       meta: {}
-    };
+    } as FoodContent);
   }
+  return Promise.resolve({
+    data: {
+      id: '1',
+      titleFood: 'Alimentos e Bebidas (Fallback)',
+      textFood: 'Conteúdo indisponível.',
+      imageFood: null,
+      locale: locale,
+      localizations: { data: [] }
+    },
+    meta: {}
+  });
 }

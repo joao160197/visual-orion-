@@ -3,7 +3,6 @@ import CarouselBlock from "./CarouselBlock";
 import AboutSection from "./AboutSection";
 import { Block } from "@/lib/utils/types/types";
 
-import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 
 // Função auxiliar para extrair a URL da imagem da estrutura do Strapi
 export const extractImageUrl = (imageData: any): string | null => {
@@ -14,7 +13,9 @@ export const extractImageUrl = (imageData: any): string | null => {
     
     // Se for uma string, assume que já é uma URL
     if (typeof imageData === 'string') {
-      return getStrapiUrl(imageData);
+      return imageData.startsWith('http') || imageData.startsWith('/')
+        ? imageData
+        : `/${imageData.replace(/^\/+/, '')}`;
     }
     
     // Se for um array, pega o primeiro item
@@ -73,8 +74,8 @@ export const extractImageUrl = (imageData: any): string | null => {
       url = url.substring(1);
     }
     
-    // Garante que a URL seja absoluta usando getStrapiUrl
-    return getStrapiUrl(url);
+    // Normaliza para raiz se não for absoluta
+    return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
     
   } catch (error) {
     return null;

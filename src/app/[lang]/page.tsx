@@ -5,9 +5,7 @@ import { renderBlocks } from "@/components/BlockRenderer";
 import AboutSection from "@/components/AboutSection";
 import FaleConoscoSection from "@/components/FaleConoscoSection";
 import Footer from "@/components/Footer";
-import { getSolutions } from "@/services/solutions";
 import { getDictionary } from "../../get-dictionary";
-import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 import Link from 'next/link';
 import { Locale } from '@/i18n-config';
 
@@ -23,7 +21,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Home({ params: { lang } }: HomePageProps) {
-  // Buscar dados da página inicial
+  // Buscar dados da página inicial (estático/local)
   const dictionary = await getDictionary(lang as Locale);
   const homePageData = await getHomePage(lang);
 
@@ -47,7 +45,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
     return null;
   }
 
-  // Processar dados do Fale Conosco
+  // Processar dados do Fale Conosco (compatível com estrutura local)
   const processarDadosFaleConosco = () => {
     // Se não houver itens, retornar null
     if (safeTalktous.length === 0) {
@@ -105,27 +103,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
     // Log detalhado da estrutura da mídia
     if (midia) {
       console.log('Estrutura da mídia encontrada:', JSON.stringify(midia, null, 2));
-      
-      // Verificar se a URL da imagem está acessível
-      if (midia.data) {
-        const mediaData = Array.isArray(midia.data) ? midia.data[0] : midia.data;
-        if (mediaData?.attributes?.url) {
-          const imageUrl = getStrapiUrl(mediaData.attributes.url);
-          console.log('URL da imagem processada:', imageUrl);
-          
-          // Verificar se a URL é acessível
-          fetch(imageUrl, { method: 'HEAD' })
-            .then(response => {
-              console.log(`Status da verificação da imagem (${imageUrl}):`, response.status);
-              if (!response.ok) {
-                console.error(`Erro ao carregar imagem: ${response.status} ${response.statusText}`);
-              }
-            })
-            .catch(error => {
-              console.error('Erro ao verificar a imagem:', error);
-            });
-        }
-      }
+      // Sem chamadas externas; URLs são tratadas nos componentes com caminhos locais/root-relativos
     } else {
       console.log('Nenhuma mídia encontrada nos atributos');
     }
@@ -144,38 +122,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
   
   const faleConosco = processarDadosFaleConosco();
 
-  // Log detalhado da estrutura dos dados recebidos do Strapi
-  console.log('[HomePage] Estrutura completa dos dados recebidos do Strapi:', 
-    JSON.stringify({
-      data: homePageData?.data?.attributes ? {
-        ...homePageData.data,
-        attributes: {
-          ...homePageData.data.attributes,
-          // Reduzir o tamanho dos logs de blocos se existirem
-          blocks: homePageData.data.attributes.blocks ? 
-            `[Array com ${homePageData.data.attributes.blocks.length} itens]` : 'nenhum bloco'
-        }
-      } : 'sem dados',
-      meta: homePageData?.meta
-    }, null, 2));
-  
-  // Dados de depuração removidos para limpar o console
-  
-  // Dados de depuração removidos para limpar o console
-    
-  // Buscar soluções do Strapi
-  let solutions: Array<{ id: number; attributes: { title: string; slug: string; icon: string } }> = [];
-  let error: string | null = null;
-
-  try {
-    const solutionsData = await getSolutions(lang);
-    solutions = solutionsData.data || [];
-  } catch (err) {
-    console.error('Erro ao carregar soluções:', err);
-    error = 'Erro ao carregar soluções';
-  }
-  
-  // Dados de fallback para desenvolvimento
+  // Lista de soluções (local)
   const solutionsToShow = [
     { id: 1, title: dictionary.solutions.items.automotive, slug: 'automotivo', icon: '🚗' },
     { id: 2, title: dictionary.solutions.items.logistics, slug: 'logistico', icon: '🚚' },

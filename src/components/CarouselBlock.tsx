@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { getStrapiUrl } from "@/lib/utils/get-strapi-url";
 
 type ImageFormat = {
   url: string;
@@ -52,11 +51,11 @@ type ImageData = {
 type CarouselBlockProps = {
   title?: string;
   order?: number;
-  images?: (ImageData | null)[];
+  images?: (ImageData | string | null)[];
 };
 
 // Função auxiliar para extrair URL de imagem que pode ser usada em vários lugares
-const extractCarouselImageUrl = (image: ImageData | null | undefined): string | null => {
+const extractCarouselImageUrl = (image: ImageData | string | null | undefined): string | null => {
   if (!image) {
     return null;
   }
@@ -66,7 +65,7 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
     
     // Se for uma string, assume que já é uma URL
     if (typeof image === 'string') {
-      return getStrapiUrl(image);
+      return image.startsWith('http') || image.startsWith('/') ? image : `/${image.replace(/^\/+/, '')}`;
     }
     
     // Função auxiliar para buscar em objetos com case insensitive
@@ -131,8 +130,8 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
     // Remove barras iniciais duplicadas
     url = url.replace(/^\/\//, '/');
     
-    // Garante que a URL seja absoluta usando getStrapiUrl
-    return getStrapiUrl(url);
+    // Normaliza para raiz se não for absoluta
+    return url.startsWith('http') || url.startsWith('/') ? url : `/${url.replace(/^\/+/, '')}`;
     
   } catch (error) {
     return null;
@@ -140,8 +139,9 @@ const extractCarouselImageUrl = (image: ImageData | null | undefined): string | 
 };
 
 // Função para extrair o texto alternativo da imagem
-const getImageAlt = (image: ImageData | null | undefined, index: number): string => {
+const getImageAlt = (image: ImageData | string | null | undefined, index: number): string => {
   if (!image) return `Imagem ${index + 1}`;
+  if (typeof image === 'string') return `Imagem ${index + 1}`;
   
   return (
     image.alternativeText ||

@@ -1,6 +1,5 @@
 import VoltarButton from "@/components/BackButton";
 import { getFoodContent } from "@/services/contentService";
-import { getStrapiURL } from '@/lib/utils';
 import Image from 'next/image';
 
 interface PageProps {
@@ -38,7 +37,7 @@ export default async function Food({ params }: PageProps) {
           {imageUrl && (
             <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-[400px] bg-gray-100">
               <Image
-                src={getStrapiURL(imageUrl)}
+                src={imageUrl}
                 alt={imageAlt}
                 fill
                 className="object-cover"

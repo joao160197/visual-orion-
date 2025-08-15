@@ -12,12 +12,10 @@ export default async function LogisticoPage({ params }: PageProps) {
   const { lang } = params;
   
   try {
-    // Obtém os dados do Strapi
+    // Obtém os dados estáticos
     const response = await getLogisticContent(lang);
     const { titleLogistic, textLogistic, imageLogistic } = response.data;
-
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
-    const imageUrl = imageLogistic?.url ? `${strapiUrl}${imageLogistic.url}` : '/images/logistic-banner.jpg';
+    const imageUrl = imageLogistic?.url || '/images/placeholder.svg';
     const imageAlt = imageLogistic?.alternativeText || 'Soluções Logísticas';
     
     return (

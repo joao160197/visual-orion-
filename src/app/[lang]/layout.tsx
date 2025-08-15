@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import type { Metadata } from "next";
 import "../globals.css";
 import Header from "../../components/Header";
 import { getGlobalData } from "@/data/loader";
@@ -16,7 +16,15 @@ export async function generateStaticParams() {
 
 export const metadata: Metadata = {
   title: "Visual Orion",
-  description: "A modern web application",
+  description: "Soluções inovadoras para o seu negócio",
+  icons: {
+    icon: [
+      {
+        url: "https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20orion%20-%20elemento%20azul.png?alt=media&token=152fa53f-8593-4cd4-8688-912717c1e8fa",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({

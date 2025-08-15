@@ -16,13 +16,10 @@ interface Block {
 export default async function CompanyPage({ params }: PageProps) {
   const { lang } = params;
 
-  console.log('=== RENDERIZANDO PÁGINA DA EMPRESA ===');
-  console.log('Idioma:', lang);
+  // Company page (local data)
 
   try {
-    console.log('Iniciando busca dos dados...');
     const pageData = await getCompanyPage(lang);
-    console.log('Dados recebidos na página:', JSON.stringify(pageData, null, 2));
 
     const { title, description, blocks = [] } = pageData;
 
@@ -127,16 +124,14 @@ export default async function CompanyPage({ params }: PageProps) {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-yellow-700">
-                      Bloco do tipo <code className="font-mono">{block.__component}</code> não pode ser exibido.
-                    </p>
+                    <p className="text-sm text-yellow-700">Bloco não suportado para exibição.</p>
                   </div>
                 </div>
               </div>
             );
         }
       } catch (error) {
-        console.error('Erro ao renderizar bloco:', error, block);
+        console.error('Erro ao renderizar bloco:', error);
         return (
           <div key={`error-${blockKey}`} className="bg-red-50 border-l-4 border-red-400 p-4 my-4">
             <div className="flex">
@@ -189,7 +184,7 @@ export default async function CompanyPage({ params }: PageProps) {
                   Nenhum bloco de conteúdo encontrado
                 </h3>
                 <p className="text-gray-600">
-                  Adicione blocos de conteúdo no painel do Strapi para vê-los aqui.
+                  Conteúdo em breve.
                 </p>
               </div>
             )}

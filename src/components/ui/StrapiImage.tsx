@@ -1,6 +1,5 @@
 'use client';
 
-import { getStrapiUrl } from '@/lib/utils/get-strapi-url';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -40,7 +39,10 @@ export function StrapiImage({
     return null; // Em produção, não renderiza nada
   }
 
-  const fullUrl = imageSrc.startsWith('http') ? imageSrc : getStrapiUrl(imageSrc);
+  // Se a URL for absoluta (http) ou root-relative (/images/..), usa direto
+  const fullUrl = imageSrc.startsWith('http') || imageSrc.startsWith('/')
+    ? imageSrc
+    : `/${imageSrc.replace(/^\\+/,'').replace(/^\/+/, '')}`;
 
   return (
     <div className={`relative ${className}`}>
