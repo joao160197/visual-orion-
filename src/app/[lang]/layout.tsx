@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 
 export const metadata: Metadata = {
   title: "Visual Orion",
-  description: "A modern web application",
+  description: "Soluções inovadoras para o seu negócio",
 };
 
 export default async function RootLayout({
