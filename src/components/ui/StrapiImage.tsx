@@ -11,6 +11,8 @@ interface StrapiImageProps {
   height?: number;
   fill?: boolean;
   priority?: boolean;
+  placeholderBlur?: boolean;
+  blurDataURL?: string;
 }
 
 export function StrapiImage({
@@ -21,6 +23,8 @@ export function StrapiImage({
   height,
   fill = false,
   priority = false,
+  placeholderBlur = true,
+  blurDataURL,
 }: StrapiImageProps) {
   const [imageSrc, setImageSrc] = useState<string | null>(src);
   const [hasError, setHasError] = useState(false);
@@ -44,6 +48,13 @@ export function StrapiImage({
     ? imageSrc
     : `/${imageSrc.replace(/^\\+/,'').replace(/^\/+/, '')}`;
 
+  // Blur placeholder padrão (cinza claro)
+  const defaultBlur =
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"><rect width="16" height="9" fill="#e5e7eb"/></svg>`
+    );
+
   return (
     <div className={`relative ${className}`}>
       <Image
@@ -56,6 +67,8 @@ export function StrapiImage({
         onError={() => setHasError(true)}
         priority={priority}
         unoptimized={process.env.NODE_ENV !== 'production'}
+        placeholder={placeholderBlur ? 'blur' : 'empty'}
+        blurDataURL={placeholderBlur ? (blurDataURL || defaultBlur) : undefined}
       />
     </div>
   );

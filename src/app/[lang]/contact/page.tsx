@@ -43,23 +43,23 @@ export default function ContactPage({ params }: { params: { lang: Locale } }) {
         {/* United States */}
         <Reveal>
         <div className="border rounded-2xl shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">{dict.contactPage.locations.us.title}</h2>
+          <h2 className="text-2xl font-semibold mb-4">Visual Orion</h2>
           <div className="space-y-3">
             <div className="flex items-start">
               <MapPin className="mt-1 mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.us.address}</p>
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."</p>
             </div>
             <div className="flex items-center">
               <Phone className="mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.us.phone}</p>
+              <p>(000) 000-0000</p>
             </div>
             <div className="flex items-center">
               <Phone className="mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.us.fax}</p>
+              <p>(000) 000-0000</p>
             </div>
             <div className="flex items-center">
               <Mail className="mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.us.email}</p>
+              <p>lorem.ipsum@example.com</p>
             </div>
           </div>
           <iframe
@@ -74,19 +74,19 @@ export default function ContactPage({ params }: { params: { lang: Locale } }) {
         {/* Brazil */}
         <Reveal delay={0.08}>
         <div className="border rounded-2xl shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">{dict.contactPage.locations.brazil.title}</h2>
+          <h2 className="text-2xl font-semibold mb-4">Visual Orion</h2>
           <div className="space-y-3">
             <div className="flex items-start">
               <MapPin className="mt-1 mr-2 text-blue-600" />
-              <p dangerouslySetInnerHTML={{ __html: dict.contactPage.locations.brazil.address.replace('\n', '<br />') }} />
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."</p>
             </div>
             <div className="flex items-center">
               <Phone className="mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.brazil.phone}</p>
+              <p>(00) 0000-0000</p>
             </div>
             <div className="flex items-center">
               <Mail className="mr-2 text-blue-600" />
-              <p>{dict.contactPage.locations.brazil.email}</p>
+              <p>lorem.ipsum@example.com</p>
             </div>
           </div>
           <iframe

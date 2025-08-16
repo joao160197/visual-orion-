@@ -27,14 +27,14 @@ export default function Footer() {
   const defaultData = useMemo(() => ({
     title1: 'United States',
     title2: 'Brazil',
-    text1: `4300 Stone Station Rd,<br />
-            Roebuck, SC 29376<br />
-            Phone: (864) 877-8871<br />
-            Fax: (864) 877-9289`,
-    text2: `Condomínio Perini Business Park<br />
-            Rua Dona Francisca, nº 8300<br />
-            Sala 08, Bloco L<br />
-            Joinville - SC, 89239-270`,
+    text1: `Lorem ipsum dolor sit amet,<br />
+            consectetur adipiscing elit.<br />
+            Sed do eiusmod tempor incididunt<br />
+            ut labore et dolore magna aliqua.`,
+    text2: `Lorem ipsum dolor sit amet,<br />
+            consectetur adipiscing elit.<br />
+            Sed do eiusmod tempor incididunt<br />
+            ut labore et dolore magna aliqua.`,
     image: {
       data: {
         attributes: {
@@ -215,6 +215,8 @@ export default function Footer() {
               className="w-full h-auto object-contain"
               unoptimized
               priority
+              placeholder="blur"
+              blurDataURL={'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"><rect width="16" height="9" fill="#111827"/></svg>')}
             />
           </div>
 

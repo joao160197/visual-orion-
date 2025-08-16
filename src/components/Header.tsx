@@ -56,6 +56,8 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
                   priority
                   loading="eager"
                   unoptimized={isRemote}
+                  placeholder="blur"
+                  blurDataURL={'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"9\" viewBox=\"0 0 16 9\"><rect width=\"16\" height=\"9\" fill=\"#f3f4f6\"/></svg>')}
                 />
               </div>
             </LocaleLink>

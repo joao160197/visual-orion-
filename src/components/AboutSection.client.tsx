@@ -115,6 +115,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
                     className="object-cover object-center"
                     sizes="100vw"
                     priority
+                    placeholder="blur"
+                    blurDataURL={'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"><rect width="16" height="9" fill="#e5e7eb"/></svg>')}
                   />
                 </div>
 
@@ -130,6 +132,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
                     className="object-cover object-center"
                     sizes="(max-width: 1024px) 80vw, 50vw"
                     priority
+                    placeholder="blur"
+                    blurDataURL={'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"><rect width="16" height="9" fill="#e5e7eb"/></svg>')}
                   />
                 </div>
               </>
