@@ -175,7 +175,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
             {dictionary.solutions.subtitle}
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mt-12">
             {solutionsToShow.map((solution) => {
               // Mapear slugs para as rotas corretas
               const getRouteFromSlug = (slug: string) => {
@@ -196,7 +196,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
                   key={solution.id}
                   className="group block"
                 >
-                  <div className="bg-white/10 p-6 rounded-lg h-full transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105">
+                  <div className="bg-white/10 p-4 sm:p-6 rounded-lg h-full transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105">
                     <div className="bg-white/20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <span className="text-2xl">{solution.icon}</span>
                     </div>

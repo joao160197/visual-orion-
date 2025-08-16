@@ -46,12 +46,12 @@ export default async function FeaturesPage({ params: { lang } }: FeaturesPagePro
           {featuresDictionary.subtitle}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 place-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 place-items-stretch">
           {features.map((item, index) => (
             <Link
               key={index}
               href={item.href}
-              className="bg-[#0082ad] text-white flex flex-col items-center justify-center gap-4 py-10 px-6 w-64 rounded-md shadow-md hover:scale-105 transition-transform"
+              className="bg-[#0082ad] text-white flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 sm:px-6 w-full rounded-md shadow-md transition-all hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105"
             >
               {item.icon}
               <span className="text-lg font-semibold">{item.title}</span>

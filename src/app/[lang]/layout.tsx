@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import "../globals.css";
 import Header from "../../components/Header";
+import PageTransition from "@/components/PageTransition.client";
 import { getGlobalData } from "@/data/loader";
 import { getDictionary } from "../../get-dictionary";
 import { i18n, Locale } from "../../i18n-config";
@@ -73,7 +74,9 @@ export default async function RootLayout({
       <body className="bg-background">
         <I18nProvider lang={lang}>
           <Header logo={logo} dictionary={dictionary.navigation} />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen">
+            <PageTransition>{children}</PageTransition>
+          </main>
         </I18nProvider>
       </body>
     </html>
