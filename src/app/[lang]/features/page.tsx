@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from '@/components/Reveal';
 import { Car, LineChart, Waves, Pizza } from "lucide-react";
 import { getDictionary } from "../../../get-dictionary";
 import { Locale } from "../../../i18n-config";
@@ -46,16 +47,17 @@ export default async function FeaturesPage({ params: { lang } }: FeaturesPagePro
           {featuresDictionary.subtitle}
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 place-items-stretch">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 place-items-stretch items-stretch">
           {features.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className="bg-[#0082ad] text-white flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 sm:px-6 w-full rounded-md shadow-md transition-all hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105"
-            >
-              {item.icon}
-              <span className="text-lg font-semibold">{item.title}</span>
-            </Link>
+            <Reveal key={index} delay={index * 0.06} className="h-full">
+              <Link
+                href={item.href}
+                className="bg-[#0082ad] text-white h-full min-h-[160px] sm:min-h-[180px] rounded-md shadow-md transition-all hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105 flex flex-col items-center justify-between gap-4 py-8 sm:py-10 px-4 sm:px-6"
+              >
+                {item.icon}
+                <span className="text-lg font-semibold">{item.title}</span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

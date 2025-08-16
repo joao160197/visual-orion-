@@ -1,5 +1,6 @@
 import { getCompanyPage } from '@/data/loaders';
 import { StrapiImage } from '@/components/ui/StrapiImage';
+import { Reveal } from '@/components/Reveal';
 
 interface PageProps {
   params: {
@@ -38,28 +39,30 @@ export default async function CompanyPage({ params }: PageProps) {
                 key={blockKey}
                 className="relative bg-gray-50 rounded-xl p-8 md:p-12 my-12 text-center"
               >
-                <div className="max-w-3xl mx-auto">
-                  <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                    {block.title || 'Título não definido'}
-                  </h2>
-                  {block.description && (
-                    <div
-                      className="prose mx-auto mb-8 text-gray-600"
-                      dangerouslySetInnerHTML={{ __html: block.description }}
-                    />
-                  )}
-                  {heroImage && (
-                    <div className="mt-8">
-                      <StrapiImage
-                        src={heroImage.url}
-                        alt={heroImage.alternativeText || block.title || 'Imagem'}
-                        className="mx-auto rounded-lg shadow-lg max-w-full h-auto"
-                        width={1200}
-                        height={630}
+                <Reveal>
+                  <div className="max-w-3xl mx-auto">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                      {block.title || 'Título não definido'}
+                    </h2>
+                    {block.description && (
+                      <div
+                        className="prose mx-auto mb-8 text-gray-600"
+                        dangerouslySetInnerHTML={{ __html: block.description }}
                       />
-                    </div>
-                  )}
-                </div>
+                    )}
+                    {heroImage && (
+                      <div className="mt-8">
+                        <StrapiImage
+                          src={heroImage.url}
+                          alt={heroImage.alternativeText || block.title || 'Imagem'}
+                          className="mx-auto rounded-lg shadow-lg max-w-full h-auto"
+                          width={1200}
+                          height={630}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Reveal>
               </section>
             );
 
@@ -73,35 +76,37 @@ export default async function CompanyPage({ params }: PageProps) {
                   block.reversed ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                {/* Imagem */}
-                <div>
-                  {infoImage && (
-                    <StrapiImage
-                      src={infoImage.url}
-                      alt={infoImage.alternativeText || block.headline || 'Imagem'}
-                      className="rounded-lg shadow-lg w-full h-auto object-cover"
-                      width={600}
-                      height={400}
-                    />
-                  )}
-                </div>
+                <Reveal>
+                  <div className="flex flex-col-reverse md:flex-row items-center gap-8">
+                    {/* Imagem */}
+                    <div>
+                      {infoImage && (
+                        <StrapiImage
+                          src={infoImage.url}
+                          alt={infoImage.alternativeText || block.headline || 'Imagem'}
+                          className="rounded-lg shadow-lg w-full h-auto object-cover"
+                          width={600}
+                          height={400}
+                        />
+                      )}
+                    </div>
 
-                {/* Texto */}
-                <div className="md:w-1/2 w-full text-center md:text-left">
-
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                    {block.headline || 'Título não definido'}
-                  </h3>
-
-                  {block.content ? (
-                    <div
-                      className="prose max-w-none text-gray-600"
-                      dangerouslySetInnerHTML={{ __html: block.content }}
-                    />
-                  ) : (
-                    <p className="text-gray-500 italic">Conteúdo não disponível</p>
-                  )}
-                </div>
+                    {/* Texto */}
+                    <div className="md:w-1/2 w-full text-center md:text-left">
+                      <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                        {block.headline || 'Título não definido'}
+                      </h3>
+                      {block.content ? (
+                        <div
+                          className="prose max-w-none text-gray-600"
+                          dangerouslySetInnerHTML={{ __html: block.content }}
+                        />
+                      ) : (
+                        <p className="text-gray-500 italic">Conteúdo não disponível</p>
+                      )}
+                    </div>
+                  </div>
+                </Reveal>
               </section>
             );
 
@@ -164,15 +169,19 @@ export default async function CompanyPage({ params }: PageProps) {
       <main className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-12">
           <header className="mb-16 text-center">
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              {title || 'Nossa Empresa'}
-            </h1>
-            {description && (
-              <div
-                className="prose max-w-3xl mx-auto text-gray-600"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            )}
+            <Reveal>
+              <div>
+                <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                  {title || 'Nossa Empresa'}
+                </h1>
+                {description && (
+                  <div
+                    className="prose max-w-3xl mx-auto text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                )}
+              </div>
+            </Reveal>
           </header>
 
           <div className="space-y-20">

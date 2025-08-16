@@ -1,7 +1,8 @@
 // src/components/Header.tsx
 "use client"; 
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
 import Image from "next/image";
 import Link from "next/link";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -20,42 +21,23 @@ interface HeaderProps {
 
 const Header = ({ logo, dictionary }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [imageSrc, setImageSrc] = useState("/img/logo.png");
-  const [imageAlt, setImageAlt] = useState("Visual Orion Logo");
+  // Resolve o logo de forma síncrona para evitar flicker/atraso
+  const resolvedSrc = (() => {
+    const imageUrl =
+      logo?.formats?.thumbnail?.url ||
+      logo?.formats?.small?.url ||
+      logo?.formats?.medium?.url ||
+      logo?.url ||
+      "/img/logo.png";
+    const path = typeof imageUrl === "string" ? imageUrl.trim() : "";
+    if (!path) return "/img/logo.png";
+    return path.startsWith("http") || path.startsWith("/")
+      ? path
+      : `/${path.replace(/^\/+/, "")}`;
+  })();
 
-  // Efeito para processar o logo quando o componente montar ou o logo mudar
-  useEffect(() => {
-    let newUrl = "/img/logo.png";
-    let newAlt = "Visual Orion Logo";
-
-    // Verifica se o logo existe e tem uma URL válida
-    if (logo?.url) {
-      try {
-        // Obtém a URL da imagem, priorizando formatos menores se disponíveis
-        const imageUrl = 
-          logo.formats?.thumbnail?.url || 
-          logo.formats?.small?.url || 
-          logo.formats?.medium?.url || 
-          logo.url;
-        
-        const pathFromLogo = typeof imageUrl === 'string' ? imageUrl.trim() : '';
-        
-        if (pathFromLogo) {
-          // Accept absolute (http...) or root-relative (/...) or convert bare paths to root-relative
-          newUrl = pathFromLogo.startsWith('http') || pathFromLogo.startsWith('/')
-            ? pathFromLogo
-            : `/${pathFromLogo.replace(/^\/+/, '')}`;
-          newAlt = logo.alternativeText || logo.name || "Logo da empresa";
-        }
-
-      } catch (error) {
-        // Em caso de erro, usa os valores padrão já definidos
-      }
-    }
-
-    setImageSrc(newUrl);
-    setImageAlt(newAlt);
-  }, [logo, dictionary]);
+  const resolvedAlt = logo?.alternativeText || logo?.name || "Visual Orion Logo";
+  const isRemote = resolvedSrc.startsWith("http");
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -65,21 +47,19 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
             <LocaleLink href="/" className="flex items-center">
               <div className="relative" style={{ width: '200px', height: '50px' }}>
                 <Image
-                  src={imageSrc}
-                  alt={imageAlt}
+                  src={resolvedSrc}
+                  alt={resolvedAlt}
                   width={200}
                   height={50}
+                  sizes="200px"
                   className="object-contain object-left"
                   priority
-                  unoptimized
-                  onError={() => {
-                    // Atualiza o estado para o fallback em caso de erro
-                    setImageSrc('/img/logo.png');
-                    setImageAlt('Visual Orion Logo');
-                  }}
+                  loading="eager"
+                  unoptimized={isRemote}
                 />
               </div>
             </LocaleLink>
+
           </div>
 
           {/* Desktop Menu */}

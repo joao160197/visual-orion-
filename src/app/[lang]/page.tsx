@@ -7,6 +7,7 @@ import FaleConoscoSection from "@/components/FaleConoscoSection";
 import Footer from "@/components/Footer";
 import { getDictionary } from "../../get-dictionary";
 import Link from 'next/link';
+import { Reveal } from '@/components/Reveal';
 import { Locale } from '@/i18n-config';
 
 
@@ -175,8 +176,8 @@ export default async function Home({ params: { lang } }: HomePageProps) {
             {dictionary.solutions.subtitle}
           </p>
           
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12">
-            {solutionsToShow.map((solution) => {
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 items-stretch">
+            {solutionsToShow.map((solution, index) => {
               // Mapear slugs para as rotas corretas
               const getRouteFromSlug = (slug: string) => {
                 const routes: {[key: string]: string} = {
@@ -191,19 +192,20 @@ export default async function Home({ params: { lang } }: HomePageProps) {
               const route = getRouteFromSlug(solution.slug);
               
               return (
-                <Link 
-                  href={`/${lang}/${route}`}
-                  key={solution.id}
-                  className="group block"
-                >
-                  <div className="bg-white/10 p-4 sm:p-6 rounded-lg h-full transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105">
-                    <div className="bg-white/20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <span className="text-2xl">{solution.icon}</span>
+                <Reveal key={solution.id} delay={index * 0.06} className="h-full">
+                  <Link 
+                    href={`/${lang}/${route}`}
+                    className="group block h-full"
+                  >
+                    <div className="bg-white/10 p-4 sm:p-6 rounded-lg h-full min-h-[160px] sm:min-h-[180px] flex flex-col items-center justify-between transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105">
+                      <div className="bg-white/20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span className="text-2xl">{solution.icon}</span>
+                      </div>
+                      <h3 className="text-xl font-medium mb-1 text-center">{solution.title}</h3>
+                      <p className="text-sm text-white/80">{dictionary.solutions.learnMore}</p>
                     </div>
-                    <h3 className="text-xl font-medium mb-2">{solution.title}</h3>
-                    <p className="text-sm text-white/80">{dictionary.solutions.learnMore}</p>
-                  </div>
-                </Link>
+                  </Link>
+                </Reveal>
               );
             })}
           </div>
