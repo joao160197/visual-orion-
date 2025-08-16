@@ -31,10 +31,9 @@ export default function Footer() {
             consectetur adipiscing elit.<br />
             Sed do eiusmod tempor incididunt<br />
             ut labore et dolore magna aliqua.`,
-    text2: `Lorem ipsum dolor sit amet,<br />
-            consectetur adipiscing elit.<br />
-            Sed do eiusmod tempor incididunt<br />
-            ut labore et dolore magna aliqua.`,
+    text2: `Rua São Simão, 152. Centro<br />
+            Japaraíba, MG. 35580-000<br />
+            +55 (48) 99183-0315`,
     image: {
       data: {
         attributes: {
@@ -221,13 +220,35 @@ export default function Footer() {
           </div>
 
           <div className="text-sm leading-relaxed">
-            <h3 className="font-bold mb-2">{title1}</h3>
-            <SafeHtml html={text1 || ''} />
+            <h3 className="font-bold mb-2">{title2}</h3>
+            <SafeHtml html={text2 || ''} />
           </div>
 
           <div className="text-sm leading-relaxed">
-            <h3 className="font-bold mb-2">{title2}</h3>
-            <SafeHtml html={text2 || ''} />
+            <h3 className="font-bold mb-2">Links</h3>
+            <ul className="space-y-1 text-gray-300">
+              <li><a href="/" className="hover:text-white">Início</a></li>
+              <li><a href="/features" className="hover:text-white">Soluções</a></li>
+              <li><a href="/company" className="hover:text-white">Empresa</a></li>
+              <li><a href="/contact" className="hover:text-white">Contato</a></li>
+            </ul>
+          </div>
+
+          <div className="text-sm leading-relaxed">
+            <h3 className="font-bold mb-2">Contato</h3>
+            <ul className="space-y-1 text-gray-300">
+              <li>
+                <a href="mailto:lorem.ipsum@example.com" className="hover:text-white">
+                  lorem.ipsum@example.com
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/5548991830315" className="hover:text-white" target="_blank" rel="noopener noreferrer">
+                  WhatsApp: +55 (48) 99183-0315
+                </a>
+              </li>
+              <li>Seg–Sex: 09:00–18:00</li>
+            </ul>
           </div>
     
         </div>
