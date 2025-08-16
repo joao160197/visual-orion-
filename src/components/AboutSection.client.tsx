@@ -136,7 +136,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
             ) : (
               <>
                 <div
-                  className="bg-gray-200 block md:hidden -mx-4 w-[calc(100%+2rem)] rounded-none flex items-center justify-center"
+                  className="bg-gray-200 md:hidden -mx-4 w-[calc(100%+2rem)] rounded-none flex items-center justify-center"
                   style={{ aspectRatio: '4 / 3' }}
                 >
                   <span className="text-gray-500">{dictionary.noImage}</span>

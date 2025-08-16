@@ -175,7 +175,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
             {dictionary.solutions.subtitle}
           </p>
           
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12">
             {solutionsToShow.map((solution) => {
               // Mapear slugs para as rotas corretas
               const getRouteFromSlug = (slug: string) => {
