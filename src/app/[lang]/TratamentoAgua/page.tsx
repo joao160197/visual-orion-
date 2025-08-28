@@ -41,7 +41,7 @@ export default async function TratamentoAguaPage({ params }: PageProps) {
             />
           </div>
           
-          <div className="prose-lg">
+          <div className="prose-lg text-justify prose-p:text-justify">
             {textWater.split('\n').map((paragraph: string, index: number) => (
               <p key={index} className="mb-4">
                 {paragraph}

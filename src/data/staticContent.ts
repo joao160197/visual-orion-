@@ -50,8 +50,16 @@ export const staticSolutionsPages = {
   pt: {
     automotive: {
       titleAuto: 'Setor Automotivo',
-      textAuto:
-        'Atuamos no desenvolvimento de soluções voltadas para automação de processos no setor automotivo, desde linhas de montagem até testes de qualidade. Nossas tecnologias ajudam a otimizar tempo e reduzir falhas humanas em ambientes industriais exigentes.',
+      textAuto: `Atuamos no desenvolvimento de soluções voltadas para a automação de processos no setor automotivo, desde linhas de montagem até testes de qualidade. Nossas tecnologias apoiam fabricantes e fornecedores em projetos que exigem alta precisão e confiabilidade, otimizando tempo e reduzindo falhas humanas em ambientes industriais exigentes.
+
+Principais serviços aplicados ao setor automotivo:
+- Projeto de layout de automação de linhas, segurança e equipamentos
+- Programação de PLC e robôs industriais
+- Desenvolvimento de HMI e SCADA
+- Comissionamento virtual e partida de equipamentos
+- Testes, otimização de programação e ciclo de tempo
+- Suporte à manutenção e controle de produção
+- Treinamento de equipes e padronização de processos`,
       imageAuto: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fevoluc%CC%A7a%CC%83o-linha-de-montagem-de-veiculos.png?alt=media&token=aff65fc1-4f66-4d68-baf9-e0833c5bad7b',
         alternativeText: 'Linha de montagem de veículos',
@@ -61,8 +69,15 @@ export const staticSolutionsPages = {
     },
     water: {
       titleWater: 'Tratamento de Água',
-      textWater:
-        'Soluções para tratamento, monitoramento e automação de processos hídricos, garantindo qualidade, rastreabilidade e eficiência operacional.',
+      textWater: `Contribuímos para a eficiência e confiabilidade de estações de tratamento de água e efluentes com soluções de automação que garantem estabilidade operacional, monitoramento em tempo real e conformidade com normas ambientais.
+
+Principais serviços aplicados ao setor de tratamento de água:
+- Programação de PLCs para controle de bombas, válvulas e processos de filtração
+- Desenvolvimento de sistemas SCADA e HMI para supervisão remota
+- Projeto elétrico e auditorias de instalação
+- Projeto de redes industriais para comunicação confiável entre equipamentos
+- Partida, testes e otimização de programação
+- Documentação técnica e padronização de processos`,
       imageWater: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Ftratamento-de-agua.jpg?alt=media&token=e1e5b2bc-69f6-4386-937d-b01882bf274c',
         alternativeText: 'Estação de tratamento de água industrial',
@@ -71,9 +86,16 @@ export const staticSolutionsPages = {
       localizations: { data: [] },
     },
     logistic: {
-      titleLogistic: 'Soluções Logísticas',
-      textLogistic:
-        'Integramos tecnologia e automação para controle de estoque, movimentação de materiais e rastreabilidade, aumentando a visibilidade e a agilidade da operação.',
+      titleLogistic: 'Setor Logístico',
+      textLogistic: `No setor logístico, apoiamos a transformação digital de armazéns, centros de distribuição e operações de transporte, por meio de soluções de automação que aumentam a agilidade, reduzem custos operacionais e garantem maior rastreabilidade dos processos.
+
+Principais serviços aplicados ao setor logístico:
+- Projeto de redes industriais para sistemas integrados de movimentação
+- Programação de PLC em transportadores, classificadores e sistemas automatizados
+- Integração de sistemas de supervisão (SCADA) e interfaces HMI
+- Desenvolvimento de softwares de alto nível para rastreamento e controle
+- Testes e otimização de programação em fluxos logísticos
+- Suporte à manutenção e operação de sistemas de movimentação`,
       imageLogistic: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsolucoes-logisticas-para-empresas.jpg?alt=media&token=8ea94167-fb0e-4aeb-883a-4a1287c18ecc',
         alternativeText: 'Centro de distribuição e movimentação de materiais',
@@ -83,8 +105,15 @@ export const staticSolutionsPages = {
     },
     food: {
       titleFood: 'Alimentos e Bebidas',
-      textFood:
-        'Automação e controle para processos de alimentos e bebidas, com foco em segurança, qualidade e produtividade.',
+      textFood: `No setor de alimentos e bebidas, garantimos soluções que unem automação, segurança e rastreabilidade, atendendo às rigorosas normas de qualidade. Nossos serviços otimizam linhas de envase, embalagem e controle de processos, sempre com foco em eficiência e segurança alimentar.
+
+Principais serviços aplicados ao setor de alimentos e bebidas:
+- Projeto de layout de automação de linhas de produção
+- Programação de PLC e robôs para envase e embalagem
+- Desenvolvimento de HMI e SCADA para supervisão de processos
+- Comissionamento virtual para validação de linhas antes da instalação
+- Testes, otimização de ciclo e suporte à produção
+- Treinamento de equipes e documentação técnica conforme normas regulatórias`,
       imageFood: {
         id: 3,
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Findustria-alimentos-e-bebidas.jpg?alt=media&token=a1e12721-7d63-49d6-b479-68c5e719dadc',

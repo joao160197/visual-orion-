@@ -121,63 +121,45 @@ export default function FaleConoscoSection({
     : `/${(imageUrl || '').replace(/^\/+/, '')}`;
   
   return (
-    <section>
+    <section className="py-8 sm:py-10">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center">
-          {/* Conteúdo de texto */}
-          <div className="md:w-1/2 p-6 text-center md:text-left md:p-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-              {displayTitulo}
-            </h2>
-            <p className="text-gray-600 mb-8 text-base sm:text-lg">
-              {displayTexto}
-            </p>
-            <LocaleLink 
-              href={linkBotao}
-              className="mt-4 px-6 py-2 border border-pink-600 text-pink-600 rounded hover:bg-pink-600 hover:text-white transition"
-            >
-              {displayTextoBotao}
-            </LocaleLink>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          {/* Card de texto */}
+          <div className="flex">
+            <div className="bg-gray-50 rounded-xl shadow-sm border border-gray-100 p-5 sm:p-6 md:p-8 lg:p-10 w-full flex flex-col justify-center text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl lg:text-[34px] leading-tight font-bold text-gray-900 mb-4">
+                {displayTitulo}
+              </h2>
+              <p className="text-gray-700 text-base sm:text-lg mb-6">
+                {displayTexto}
+              </p>
+              <div>
+                <LocaleLink
+                  href={linkBotao}
+                  className="inline-block mt-2 px-6 sm:px-7 py-2.5 sm:py-3 border border-pink-600 text-pink-600 rounded-lg hover:bg-pink-600 hover:text-white transition-colors duration-200"
+                >
+                  {displayTextoBotao}
+                </LocaleLink>
+              </div>
+            </div>
           </div>
           
           {/* Imagem */}
-          <div className="md:w-1/2 h-80 md:h-auto relative">
-            <div className="w-full h-full">
-              {/* Usando uma div com background para melhor controle */}
-              <div 
-                className="w-full h-full bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: `url(${resolvedUrl || defaultImageUrl})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  minHeight: '320px',
-                  width: '100%',
-                  height: '100%',
-                  transition: 'background-image 0.3s ease-in-out'
-                }}
-                onError={() => {
-                  // Tenta carregar a imagem padrão em caso de erro
-                  if (imageUrl !== defaultImageUrl) {
-                    setImageUrl(defaultImageUrl);
-                  }
-                  setImageUrl(defaultImageUrl);
-                  setImageAlt('Imagem padrão - Homem de negócios');
-                }}
-              >
-                {/* Imagem invisível para manter o espaço e acessibilidade */}
-                <img 
-                  src={resolvedUrl || defaultImageUrl} 
-                  alt={imageAlt} 
-                  className="opacity-0 w-full h-full object-cover" 
-                  aria-hidden="true"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null; // Previne loops
-                    target.src = defaultImageUrl;
-                  }}
-                />
-              </div>
-            </div>
+          <div className="relative rounded-xl overflow-hidden min-h-[240px] sm:min-h-[320px] md:min-h-[380px]">
+            <div className="absolute inset-0 bg-cover bg-center" 
+                 style={{ backgroundImage: `url(${resolvedUrl || defaultImageUrl})` }} />
+            {/* Imagem invisível para fallback/acessibilidade */}
+            <img
+              src={resolvedUrl || defaultImageUrl}
+              alt={imageAlt}
+              className="opacity-0 w-full h-full object-cover"
+              aria-hidden="true"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = defaultImageUrl;
+              }}
+            />
           </div>
         </div>
       </div>

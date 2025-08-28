@@ -6,7 +6,7 @@ const mockHomePageData = {
     id: 1,
     attributes: {
       title: 'Bem-vindo à Visual Orion',
-      description: 'Soluções inovadoras para o seu negócio',
+      description: 'Sua estrela-guia em automação industrial',
       createdAt: '2023-01-01T00:00:00.000Z',
       updatedAt: '2023-01-01T00:00:00.000Z',
       publishedAt: '2023-01-01T00:00:00.000Z',
@@ -17,17 +17,17 @@ const mockHomePageData = {
           __component: 'blocks.carousel',
           order: 1,
           images: [
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fboys-helping-climb-1024x628.jpg?alt=media&token=32921c92-51d8-4078-b310-f75652090a45',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fmenino-escada.jpg?alt=media&token=80c0f87b-8a2f-4712-ad42-7f5066ebfc60',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsunset-vista-homem-1024x683.jpg?alt=media&token=2b9723ea-4e87-4244-96bf-6a1407f5047f',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F1666636483967.jpg?alt=media&token=52739564-0141-4a1c-beb4-61aa17d5fee7'
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.24.jpeg?alt=media&token=5340adb0-ae4e-4ad0-88bf-248dcf1d7584',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.37.jpeg?alt=media&token=cfd653ef-00ed-4c86-b866-9b461300cfd5',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.57.jpeg?alt=media&token=77f69b80-5cfa-45c2-be29-c57b23a0b287',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.43.03.jpeg?alt=media&token=cf87febc-1a9b-4d47-a941-1c40ef97407e'
           ]
         }
       ],
       about: {
         id: 1,
         title: 'Sobre Nós',
-        about: 'Somos uma empresa focada em inovação e qualidade.',
+        about: 'Somos uma empresa focada em inovação e qualida.',
         image: {
           data: {
             id: 1,
@@ -78,7 +78,7 @@ const mockHomePageData = {
                     ext: '.svg',
                     mime: 'image/svg+xml',
                     size: 1,
-                    url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F6225106_fc7fceac14.jpg?alt=media&token=a149cb6d-58b5-4297-a47d-f375614b8bf1',
+                    url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Ftalktous.jpeg?alt=media&token=d34af89e-3f0b-47a2-b422-9a64a313295c',
                     previewUrl: null,
                     provider: 'local',
                     provider_metadata: null,
@@ -100,10 +100,10 @@ export async function getHomePage(locale: string) {
   // Localização simples PT/EN/ES para textos (mantém blocos e imagens)
   const dict = {
     pt: {
-      title: 'Bem-vindo à Visual Orion',
-      description: 'Soluções inovadoras para o seu negócio',
+      title: 'Bem-vindo à Orion',
+      description: 'Sua estrela-guia em automação industrial',
       aboutTitle: 'Sobre Nós',
-      aboutText: 'Somos uma empresa focada em inovação e qualidade.',
+      aboutText: 'Desde a sua fundação, a Orion Engineering Group tem trilhado novos caminhos na área de automação industrial, sempre guiada pela inovação e pela excelência em engenharia. Nosso compromisso é oferecer soluções que transformam processos e impulsionam resultados, atuando lado a lado com empresas e parceiros que acreditam no poder da tecnologia para moldar o futuro.',
       talkTitle: 'Fale Conosco',
       talkText: 'Entre em contato para saber mais sobre nossas soluções.',
       aboutAlt: 'Sobre Nós',

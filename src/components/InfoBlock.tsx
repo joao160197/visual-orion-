@@ -136,7 +136,7 @@ const InfoBlock: React.FC<InfoBlockComponentProps> = ({
           
           {content && (
             <div 
-              className="prose prose-lg text-gray-600 max-w-none"
+              className="prose prose-lg text-gray-600 max-w-none text-justify prose-p:text-justify"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           )}

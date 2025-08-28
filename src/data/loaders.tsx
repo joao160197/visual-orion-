@@ -2,8 +2,8 @@ export async function getHomePage() {
   return {
     data: {
       attributes: {
-        title: 'Bem-vindo à Visual Orion',
-        description: 'Soluções inovadoras para o seu negócio',
+        title: 'Bem-vindo à Orion',
+        description: 'Sua estrela-guia em automação industrial',
         blocks: [],
         about: {
           id: 1,
@@ -28,7 +28,7 @@ export async function getHomePage() {
               id: 1,
               attributes: {
                 title: 'Fale Conosco',
-                text: 'Entre em contato para saber mais sobre nossas soluções.',
+                text: 'Entre em contato e descubra como nossas soluções podem agregar valor ao seu negócio com inovação, eficiência e confiabilidade.',
                 link: '/contact',
                 image: {
                   data: {
@@ -54,15 +54,15 @@ export async function getHomePage() {
 export async function getCompanyPage(locale: string = 'pt') {
   const dict = {
     pt: {
-      title: 'Missão, Visão e Valores',
+      title: 'Nossa História',
       description:
-        'A KING Automation tem um forte conjunto de crenças que orientam todas as nossas ações. Aprendemos ao longo do caminho que esses valores estão entre as coisas mais importantes que temos e entendemos que faz parte de nossa missão compartilhá-los com o mundo.',
+        'O Orion Engineering Group nasceu da união de três consultores de engenharia experientes, movidos pelo propósito de aplicar conhecimento sólido, expertise e inovação na indústria de automação. Inspirados pela constelação de Órion — uma das formações mais marcantes do céu noturno — seguimos o mesmo princípio que guiou exploradores ao longo da história: ser um farol de confiança e direção para aqueles que enfrentam desafios complexos de engenharia.',
       mission: 'Missão',
       vision: 'Visão',
-      values: 'Valores',
+      values: 'Objetivos',
       altMission: 'Missão',
       altVision: 'Visão',
-      altValues: 'Valores',
+      altValues: 'Objetivos',
     },
     en: {
       title: 'Mission, Vision and Values',
@@ -99,10 +99,10 @@ export async function getCompanyPage(locale: string = 'pt') {
         __component: 'blocks.info-block',
         headline: t.mission,
         content:
-          '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie suscipit sem, eu placerat tortor viverra ac. Sed nec odio magna. Integer lobortis, elit nec tristique pellentesque, justo diam bibendum turpis, sed feugiat felis massa at nunc. Fusce vel leo nisi. Nunc volutpat lorem magna.</p>',
+          '<p>Assim como Órion sempre foi símbolo de orientação, nossa visão é ser a estrela-guia na automação industrial, oferecendo soluções de engenharia de ponta que impulsionem inovação, eficiência e sustentabilidade.</p>',
         reversed: false,
         image: [
-          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsunset-vista-homem-1024x683.jpg?alt=media&token=2b9723ea-4e87-4244-96bf-6a1407f5047f', alternativeText: t.altMission }
+          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F1.jpeg?alt=media&token=02b21579-53b8-402e-bd80-608a84a5c356', alternativeText: t.altMission }
         ]
       },
       {
@@ -110,10 +110,10 @@ export async function getCompanyPage(locale: string = 'pt') {
         __component: 'blocks.info-block',
         headline: t.vision,
         content:
-          '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie suscipit sem, eu placerat tortor viverra ac. Sed nec odio magna. Integer lobortis, elit nec tristique pellentesque, justo diam bibendum turpis, sed feugiat felis massa at nunc. Fusce vel leo nisi. Nunc volutpat lorem magna.</p>',
+          '<p>Nossa missão é desenvolver soluções de automação industrial de classe mundial para o setor automotivo, aliando expertise técnica à busca incansável pela qualidade. Cada projeto é movido pela paixão pela excelência em engenharia, pelo compromisso com o sucesso de nossos clientes e pela determinação em antecipar o futuro</p>',
         reversed: true,
         image: [
-          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fmenino-escada.jpg?alt=media&token=80c0f87b-8a2f-4712-ad42-7f5066ebfc60', alternativeText: t.altVision }
+          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F2.jpeg?alt=media&token=35977b43-d12b-4bd7-b474-8a5e8d879d9b', alternativeText: t.altVision }
         ]
       },
       {
@@ -121,10 +121,10 @@ export async function getCompanyPage(locale: string = 'pt') {
         __component: 'blocks.info-block',
         headline: t.values,
         content:
-          '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie suscipit sem, eu placerat tortor viverra ac. Sed nec odio magna. Integer lobortis, elit nec tristique pellentesque, justo diam bibendum turpis, sed feugiat felis massa at nunc. Fusce vel leo nisi. Nunc volutpat lorem magna.</p>',
+          '<p>Nosso objetivo é construir parcerias sólidas e duradouras, entregando soluções que não apenas respondam às necessidades atuais, mas que também abram caminho para os desafios e oportunidades de amanhã — iluminando o futuro da indústria automotiva e além.</p>',
         reversed: false,
         image: [
-          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F1666636483967.jpg?alt=media&token=52739564-0141-4a1c-beb4-61aa17d5fee7', alternativeText: t.altValues }
+          { url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2F3.jpeg?alt=media&token=f3074c51-4dab-4948-809e-e4875cdda143', alternativeText: t.altValues }
         ]
       }
     ]

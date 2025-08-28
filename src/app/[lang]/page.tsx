@@ -9,6 +9,7 @@ import { getDictionary } from "../../get-dictionary";
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
 import { Locale } from '@/i18n-config';
+import { Car, LineChart, Waves, Pizza } from "lucide-react";
 
 
 interface HomePageProps {
@@ -116,6 +117,12 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       href: link,
       image: midia  // Inclui a mídia processada
     };
+
+    // Override apenas para PT-BR
+    if ((lang as string) === 'pt') {
+      resultado.title = 'Fale Conosco';
+      resultado.text = 'Entre em contato e descubra como nossas soluções podem agregar valor ao seu negócio com inovação, eficiência e confiabilidade.';
+    }
     
     console.log('Dados processados do Fale Conosco:', JSON.stringify(resultado, null, 2));
     return resultado;
@@ -123,12 +130,12 @@ export default async function Home({ params: { lang } }: HomePageProps) {
   
   const faleConosco = processarDadosFaleConosco();
 
-  // Lista de soluções (local)
+  // Lista de soluções (local) com os mesmos ícones usados em `features/page.tsx`
   const solutionsToShow = [
-    { id: 1, title: dictionary.solutions.items.automotive, slug: 'automotivo', icon: '🚗' },
-    { id: 2, title: dictionary.solutions.items.logistics, slug: 'logistico', icon: '🚚' },
-    { id: 3, title: dictionary.solutions.items.waterTreatment, slug: 'tratamento-agua', icon: '💧' },
-    { id: 4, title: dictionary.solutions.items.foodAndBeverage, slug: 'Food', icon: '🍽️' },
+    { id: 1, title: dictionary.solutions.items.automotive, slug: 'automotivo', Icon: Car },
+    { id: 2, title: dictionary.solutions.items.logistics, slug: 'logistico', Icon: LineChart },
+    { id: 3, title: dictionary.solutions.items.waterTreatment, slug: 'tratamento-agua', Icon: Waves },
+    { id: 4, title: dictionary.solutions.items.foodAndBeverage, slug: 'Food', Icon: Pizza },
   ];
 
   // Logs de depuração removidos para limpar o console
@@ -199,7 +206,7 @@ export default async function Home({ params: { lang } }: HomePageProps) {
                   >
                     <div className="bg-white/10 p-4 sm:p-6 rounded-lg h-full min-h-[160px] sm:min-h-[180px] flex flex-col items-center justify-between transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-[1.02] sm:hover:scale-105">
                       <div className="bg-white/20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span className="text-2xl">{solution.icon}</span>
+                        <solution.Icon size={40} />
                       </div>
                       <h3 className="text-xl font-medium mb-1 text-center">{solution.title}</h3>
                       <p className="text-sm text-white/80">{dictionary.solutions.learnMore}</p>

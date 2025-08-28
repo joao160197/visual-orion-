@@ -86,19 +86,19 @@ export default async function CompanyPage({ params }: PageProps) {
                           alt={infoImage.alternativeText || block.headline || 'Imagem'}
                           className="rounded-lg shadow-lg w-full h-auto object-cover"
                           width={600}
-                          height={400}
+                          height={500}
                         />
                       )}
                     </div>
 
                     {/* Texto */}
                     <div className="md:w-1/2 w-full text-center md:text-left">
-                      <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                      <h3 className="text-3xl font-bold text-gray-900 mb-4 text-center">
                         {block.headline || 'Título não definido'}
                       </h3>
                       {block.content ? (
                         <div
-                          className="prose max-w-none text-gray-600"
+                          className="prose max-w-none text-gray-950 text-3xl text-justify prose-p:text-justify"
                           dangerouslySetInnerHTML={{ __html: block.content }}
                         />
                       ) : (

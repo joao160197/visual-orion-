@@ -85,7 +85,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ title, about, image, dictio
             </h2>
             
             <div 
-              className="prose prose-lg text-gray-600 mb-8"
+              className="prose prose-lg text-gray-600 mb-8 text-justify prose-p:text-justify"
               dangerouslySetInnerHTML={{ 
                 __html: about || dictionary.description
               }} 
