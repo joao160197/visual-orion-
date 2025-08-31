@@ -118,10 +118,16 @@ export default async function Home({ params: { lang } }: HomePageProps) {
       image: midia  // Inclui a mídia processada
     };
 
-    // Override apenas para PT-BR
+    // Overrides por idioma quando não há conteúdo do CMS adequado
     if ((lang as string) === 'pt') {
       resultado.title = 'Fale Conosco';
       resultado.text = 'Entre em contato e descubra como nossas soluções podem agregar valor ao seu negócio com inovação, eficiência e confiabilidade.';
+    } else if ((lang as string) === 'es') {
+      resultado.title = 'Contáctenos';
+      resultado.text = 'Póngase en contacto y descubra cómo nuestras soluciones pueden aportar valor a su negocio con innovación, eficiencia y confiabilidad.';
+    } else if ((lang as string) === 'en') {
+      resultado.title = 'Contact Us';
+      resultado.text = 'Get in touch and discover how our solutions can add value to your business with innovation, efficiency, and reliability.';
     }
     
     console.log('Dados processados do Fale Conosco:', JSON.stringify(resultado, null, 2));
@@ -176,12 +182,16 @@ export default async function Home({ params: { lang } }: HomePageProps) {
           {/* Seção Soluções */}
       <section className="bg-[#0f4c75] text-white py-16 px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
-            {dictionary.solutions.title}
-          </h2>
-          <p className="text-base sm:text-lg mb-8 max-w-2xl mx-auto text-gray-200">
-            {dictionary.solutions.subtitle}
-          </p>
+          <Reveal direction="up" distance={24} duration={0.55}>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
+              {dictionary.solutions.title}
+            </h2>
+          </Reveal>
+          <Reveal direction="up" delay={0.08} distance={20} duration={0.55}>
+            <p className="text-base sm:text-lg mb-8 max-w-2xl mx-auto text-gray-200">
+              {dictionary.solutions.subtitle}
+            </p>
+          </Reveal>
           
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 items-stretch">
             {solutionsToShow.map((solution, index) => {
@@ -199,7 +209,15 @@ export default async function Home({ params: { lang } }: HomePageProps) {
               const route = getRouteFromSlug(solution.slug);
               
               return (
-                <Reveal key={solution.id} delay={index * 0.06} className="h-full">
+                <Reveal
+                  key={solution.id}
+                  delay={index * 0.06}
+                  direction={index % 2 === 0 ? 'left' : 'right'}
+                  distance={28}
+                  duration={0.6}
+                  hoverScale={1.02}
+                  className="h-full"
+                >
                   <Link 
                     href={`/${lang}/${route}`}
                     className="group block h-full"

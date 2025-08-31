@@ -5,9 +5,9 @@ import { initReactI18next } from 'react-i18next';
 // Configuração base para o i18next
 const i18nConfig = {
   // Idioma padrão
-  lng: 'pt-BR',
+  lng: 'pt',
   // Idioma de fallback
-  fallbackLng: 'pt-BR',
+  fallbackLng: 'pt',
   // Debug apenas em desenvolvimento
   debug: process.env.NODE_ENV === 'development',
   // Namespaces

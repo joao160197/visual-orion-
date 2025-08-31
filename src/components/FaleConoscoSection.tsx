@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { LocaleLink } from './LocaleLink';
 import { Locale } from '@/i18n-config';
+import { Reveal } from './Reveal';
 
 interface FaleConoscoProps {
   titulo?: string;
@@ -125,7 +126,7 @@ export default function FaleConoscoSection({
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Card de texto */}
-          <div className="flex">
+          <Reveal direction="left" distance={28} duration={0.6} className="flex">
             <div className="bg-gray-50 rounded-xl shadow-sm border border-gray-100 p-5 sm:p-6 md:p-8 lg:p-10 w-full flex flex-col justify-center text-center md:text-left">
               <h2 className="text-2xl sm:text-3xl lg:text-[34px] leading-tight font-bold text-gray-900 mb-4">
                 {displayTitulo}
@@ -142,25 +143,27 @@ export default function FaleConoscoSection({
                 </LocaleLink>
               </div>
             </div>
-          </div>
+          </Reveal>
           
           {/* Imagem */}
-          <div className="relative rounded-xl overflow-hidden min-h-[240px] sm:min-h-[320px] md:min-h-[380px]">
-            <div className="absolute inset-0 bg-cover bg-center" 
-                 style={{ backgroundImage: `url(${resolvedUrl || defaultImageUrl})` }} />
-            {/* Imagem invisível para fallback/acessibilidade */}
-            <img
-              src={resolvedUrl || defaultImageUrl}
-              alt={imageAlt}
-              className="opacity-0 w-full h-full object-cover"
-              aria-hidden="true"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src = defaultImageUrl;
-              }}
-            />
-          </div>
+          <Reveal direction="right" distance={28} duration={0.6}>
+            <div className="relative rounded-xl overflow-hidden min-h-[240px] sm:min-h-[320px] md:min-h-[380px]">
+              <div className="absolute inset-0 bg-cover bg-center" 
+                   style={{ backgroundImage: `url(${resolvedUrl || defaultImageUrl})` }} />
+              {/* Imagem invisível para fallback/acessibilidade */}
+              <img
+                src={resolvedUrl || defaultImageUrl}
+                alt={imageAlt}
+                className="opacity-0 w-full h-full object-cover"
+                aria-hidden="true"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = defaultImageUrl;
+                }}
+              />
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -17,10 +17,10 @@ const mockHomePageData = {
           __component: 'blocks.carousel',
           order: 1,
           images: [
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.24.jpeg?alt=media&token=5340adb0-ae4e-4ad0-88bf-248dcf1d7584',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.37.jpeg?alt=media&token=cfd653ef-00ed-4c86-b866-9b461300cfd5',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.42.57.jpeg?alt=media&token=77f69b80-5cfa-45c2-be29-c57b23a0b287',
-            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2FWhatsApp%20Image%202025-08-27%20at%2013.43.03.jpeg?alt=media&token=cf87febc-1a9b-4d47-a941-1c40ef97407e'
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fphoto-1610891015188-5369212db097.jpg?alt=media&token=bce8b5ba-1cff-4d4a-acd2-04a3c1431b09',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fpremium_photo-1682144748274-add3d8ed04ea.jpg?alt=media&token=50556bdb-12fc-4715-a3bd-9954e0797d47',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fgettyimages-1352428937.jpg?alt=media&token=f1ca0899-afb5-4aa3-a4ab-237c95c90de4',
+            'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fequipamento-de-producao-automatizado-de-linha-de-producao-de-automoveis-modernos-loja-para-a-montagem-de-novos-carros-modernos-o-modo-de-montagem-do-carro-na-linha-de-montagem-na-fabrica_645730-596.avif?alt=media&token=5687acf2-4576-4d42-ba04-7cd7409307b0'
           ]
         }
       ],

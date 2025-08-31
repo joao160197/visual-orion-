@@ -1,10 +1,10 @@
-import ptCommon from '../../public/locales/pt-BR/common.json';
-import ptFood from '../../public/locales/pt-BR/food.json';
-import enCommon from '../../public/locales/en/translation.json';
-import esCommon from '../../public/locales/es/translation.json';
+import ptCommon from '../../public/locales/pt/common.json';
+import ptFood from '../../public/locales/pt/food.json';
+import enCommon from '../../public/locales/en/common.json';
+import esCommon from '../../public/locales/es/common.json';
 
 const resources = {
-  'pt-BR': {
+  pt: {
     common: ptCommon,
     food: ptFood,
   },

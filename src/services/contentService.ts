@@ -122,7 +122,7 @@ export interface FoodContent {
 }
 
 // Função para buscar os dados da página Automotive
-export async function getAutomotiveContent(locale: string = 'pt-BR'): Promise<AutomotiveContent> {
+export async function getAutomotiveContent(locale: string = 'pt'): Promise<AutomotiveContent> {
   const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
   const base = (loc as any).automotive;
   if (base) {
@@ -152,7 +152,7 @@ export async function getAutomotiveContent(locale: string = 'pt-BR'): Promise<Au
 }
 
 // Função para buscar os dados da página de Tratamento de Água
-export async function getWaterTreatmentContent(locale: string = 'pt-BR'): Promise<WaterTreatmentContent> {
+export async function getWaterTreatmentContent(locale: string = 'pt'): Promise<WaterTreatmentContent> {
   const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
   const base = (loc as any).water;
   if (base) {
@@ -182,7 +182,7 @@ export async function getWaterTreatmentContent(locale: string = 'pt-BR'): Promis
 }
 
 // Função para buscar os dados da página Logístico
-export async function getLogisticContent(locale: string = 'pt-BR'): Promise<LogisticContent> {
+export async function getLogisticContent(locale: string = 'pt'): Promise<LogisticContent> {
   const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
   const base = (loc as any).logistic;
   if (base) {
@@ -212,7 +212,7 @@ export async function getLogisticContent(locale: string = 'pt-BR'): Promise<Logi
 }
 
 // Função para buscar os dados da página Food
-export async function getFoodContent(locale: string = 'pt-BR'): Promise<FoodContent> {
+export async function getFoodContent(locale: string = 'pt'): Promise<FoodContent> {
   const loc = resolveLocale(staticSolutionsPages as any, locale, 'pt');
   const base = (loc as any).food;
   if (base && base.titleFood) {

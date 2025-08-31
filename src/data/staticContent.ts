@@ -44,6 +44,90 @@ export const staticCompany = {
       },
     ],
   },
+  en: {
+    title: 'Visual Orion',
+    description: 'Innovative solutions for your business',
+    blocks: [],
+    about: {
+      title: 'More about us',
+      about:
+        'We develop solutions focused on automation and technology, with an emphasis on efficiency and reliability.',
+      image: {
+        data: {
+          id: 1,
+          attributes: {
+            url: '/images/food-banner.jpg',
+            alternativeText: 'About us',
+            width: 1200,
+            height: 800,
+            formats: {},
+          },
+        },
+      },
+    },
+    talktous: [
+      {
+        title: 'Contact Us',
+        text:
+          'If your company can benefit from faster processes, talk to us and learn what automation can do for you.',
+        link: '/contact',
+        image: {
+          data: {
+            id: 2,
+            attributes: {
+              url: '/images/placeholder.svg',
+              alternativeText: 'Contact Us',
+              width: 800,
+              height: 533,
+              formats: {},
+            },
+          },
+        },
+      },
+    ],
+  },
+  es: {
+    title: 'Visual Orion',
+    description: 'Soluciones innovadoras para su negocio',
+    blocks: [],
+    about: {
+      title: 'Más sobre nosotros',
+      about:
+        'Desarrollamos soluciones enfocadas en automatización y tecnología, con énfasis en eficiencia y confiabilidad.',
+      image: {
+        data: {
+          id: 1,
+          attributes: {
+            url: '/images/food-banner.jpg',
+            alternativeText: 'Sobre nosotros',
+            width: 1200,
+            height: 800,
+            formats: {},
+          },
+        },
+      },
+    },
+    talktous: [
+      {
+        title: 'Contáctenos',
+        text:
+          'Si su empresa puede beneficiarse de procesos más rápidos, hable con nosotros y descubra lo que la automatización puede hacer por usted.',
+        link: '/contacto',
+        image: {
+          data: {
+            id: 2,
+            attributes: {
+              url: '/images/placeholder.svg',
+              alternativeText: 'Contáctenos',
+              width: 800,
+              height: 533,
+              formats: {},
+            },
+          },
+        },
+      },
+    ],
+  },
 } as const;
 
 export const staticSolutionsPages = {
@@ -129,8 +213,16 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
   en: {
     automotive: {
       titleAuto: 'Automotive Sector',
-      textAuto:
-        'We develop automation solutions for the automotive sector, from assembly lines to quality tests. Our technologies help optimize time and reduce human errors in demanding industrial environments.',
+      textAuto: `We develop solutions focused on automating processes in the automotive sector, from assembly lines to quality tests. Our technologies support manufacturers and suppliers in projects that require high precision and reliability, optimizing time and reducing human failures in demanding industrial environments.
+
+Main services applied to the automotive sector:
+- Layout design for line automation, safety and equipment
+- PLC and industrial robot programming
+- HMI and SCADA development
+- Virtual commissioning and equipment start-up
+- Testing, programming optimization and cycle time improvement
+- Maintenance support and production control
+- Team training and process standardization`,
       imageAuto: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fevoluc%CC%A7a%CC%83o-linha-de-montagem-de-veiculos.png?alt=media&token=aff65fc1-4f66-4d68-baf9-e0833c5bad7b',
         alternativeText: 'Vehicle assembly line',
@@ -140,8 +232,15 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
     },
     water: {
       titleWater: 'Water Treatment',
-      textWater:
-        'Solutions for treatment, monitoring, and automation of water processes, ensuring quality, traceability, and operational efficiency.',
+      textWater: `We contribute to the efficiency and reliability of water and wastewater treatment plants with automation solutions that ensure operational stability, real-time monitoring, and compliance with environmental standards.
+
+Main services applied to the water treatment sector:
+- PLC programming for pump, valve and filtration process control
+- SCADA and HMI systems development for remote supervision
+- Electrical design and installation audits
+- Industrial network design for reliable equipment communication
+- Commissioning, testing and programming optimization
+- Technical documentation and process standardization`,
       imageWater: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Ftratamento-de-agua.jpg?alt=media&token=e1e5b2bc-69f6-4386-937d-b01882bf274c',
         alternativeText: 'Industrial water treatment plant',
@@ -150,9 +249,16 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
       localizations: { data: [] },
     },
     logistic: {
-      titleLogistic: 'Logistics Solutions',
-      textLogistic:
-        'We integrate technology and automation for inventory control, material handling, and traceability, increasing visibility and operational agility.',
+      titleLogistic: 'Logistics Sector',
+      textLogistic: `In the logistics sector, we support the digital transformation of warehouses, distribution centers and transport operations through automation solutions that increase agility, reduce operating costs and ensure greater process traceability.
+
+Main services applied to the logistics sector:
+- Industrial network design for integrated material handling systems
+- PLC programming in conveyors, sorters and automated systems
+- Integration of SCADA supervision systems and HMI interfaces
+- Development of higher-level software for tracking and control
+- Testing and programming optimization in logistics flows
+- Maintenance support and operation of handling systems`,
       imageLogistic: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsolucoes-logisticas-para-empresas.jpg?alt=media&token=8ea94167-fb0e-4aeb-883a-4a1287c18ecc',
         alternativeText: 'Logistics warehouse and material handling',
@@ -162,8 +268,15 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
     },
     food: {
       titleFood: 'Food and Beverage',
-      textFood:
-        'Automation and control for food and beverage processes, focusing on safety, quality, and productivity.',
+      textFood: `In the food and beverage sector, we deliver solutions that combine automation, safety and traceability, meeting strict quality standards. Our services optimize filling, packaging and process control lines, always focused on efficiency and food safety.
+
+Main services applied to the food and beverage sector:
+- Layout design for production line automation
+- PLC and robot programming for filling and packaging
+- HMI and SCADA development for process supervision
+- Virtual commissioning to validate lines before installation
+- Testing, cycle optimization and production support
+- Team training and technical documentation according to regulatory standards`,
       imageFood: {
         id: 3,
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Findustria-alimentos-e-bebidas.jpg?alt=media&token=a1e12721-7d63-49d6-b479-68c5e719dadc',
@@ -179,8 +292,16 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
   es: {
     automotive: {
       titleAuto: 'Sector Automotriz',
-      textAuto:
-        'Desarrollamos soluciones de automatización para el sector automotriz, desde líneas de montaje hasta pruebas de calidad. Nuestras tecnologías ayudan a optimizar el tiempo y reducir errores humanos en entornos industriales exigentes.',
+      textAuto: `Desarrollamos soluciones enfocadas en la automatización de procesos en el sector automotriz, desde líneas de montaje hasta pruebas de calidad. Nuestras tecnologías apoyan a fabricantes y proveedores en proyectos que exigen alta precisión y confiabilidad, optimizando el tiempo y reduciendo fallas humanas en entornos industriales exigentes.
+
+Servicios principales aplicados al sector automotriz:
+- Diseño de layout para automatización de líneas, seguridad y equipos
+- Programación de PLC y robots industriales
+- Desarrollo de HMI y SCADA
+- Comisionamiento virtual y puesta en marcha de equipos
+- Pruebas, optimización de programación y mejora del tiempo de ciclo
+- Soporte de mantenimiento y control de producción
+- Capacitación de equipos y estandarización de procesos`,
       imageAuto: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fevoluc%CC%A7a%CC%83o-linha-de-montagem-de-veiculos.png?alt=media&token=aff65fc1-4f66-4d68-baf9-e0833c5bad7b',
         alternativeText: 'Línea de ensamblaje de vehículos',
@@ -190,8 +311,15 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
     },
     water: {
       titleWater: 'Tratamiento de Agua',
-      textWater:
-        'Soluciones para tratamiento, monitoreo y automatización de procesos de agua, garantizando calidad, trazabilidad y eficiencia operativa.',
+      textWater: `Contribuimos a la eficiencia y confiabilidad de plantas de tratamiento de agua y efluentes con soluciones de automatización que garantizan estabilidad operativa, monitoreo en tiempo real y conformidad con normas ambientales.
+
+Servicios principales aplicados al sector de tratamiento de agua:
+- Programación de PLC para control de bombas, válvulas y procesos de filtración
+- Desarrollo de sistemas SCADA y HMI para supervisión remota
+- Proyecto eléctrico y auditorías de instalación
+- Diseño de redes industriales para comunicación confiable entre equipos
+- Puesta en marcha, pruebas y optimización de programación
+- Documentación técnica y estandarización de procesos`,
       imageWater: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Ftratamento-de-agua.jpg?alt=media&token=e1e5b2bc-69f6-4386-937d-b01882bf274c',
         alternativeText: 'Planta industrial de tratamiento de agua',
@@ -200,9 +328,16 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
       localizations: { data: [] },
     },
     logistic: {
-      titleLogistic: 'Soluciones Logísticas',
-      textLogistic:
-        'Integramos tecnología y automatización para el control de inventario, manejo de materiales y trazabilidad, aumentando la visibilidad y la agilidad operativa.',
+      titleLogistic: 'Sector Logístico',
+      textLogistic: `En el sector logístico, apoyamos la transformación digital de almacenes, centros de distribución y operaciones de transporte, mediante soluciones de automatización que aumentan la agilidad, reducen costos operativos y garantizan mayor trazabilidad de los procesos.
+
+Servicios principales aplicados al sector logístico:
+- Diseño de redes industriales para sistemas integrados de movimiento de materiales
+- Programación de PLC en transportadores, clasificadores y sistemas automatizados
+- Integración de sistemas de supervisión (SCADA) e interfaces HMI
+- Desarrollo de software de alto nivel para trazabilidad y control
+- Pruebas y optimización de programación en flujos logísticos
+- Soporte de mantenimiento y operación de sistemas de movimiento`,
       imageLogistic: {
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fsolucoes-logisticas-para-empresas.jpg?alt=media&token=8ea94167-fb0e-4aeb-883a-4a1287c18ecc',
         alternativeText: 'Almacén logístico y manejo de materiales',
@@ -212,8 +347,15 @@ Principais serviços aplicados ao setor de alimentos e bebidas:
     },
     food: {
       titleFood: 'Alimentos y Bebidas',
-      textFood:
-        'Automatización y control para procesos de alimentos y bebidas, con foco en seguridad, calidad y productividad.',
+      textFood: `En el sector de alimentos y bebidas, garantizamos soluciones que combinan automatización, seguridad y trazabilidad, cumpliendo con normas de calidad rigurosas. Nuestros servicios optimizan líneas de llenado, empaquetado y control de procesos, siempre con foco en eficiencia y seguridad alimentaria.
+
+Servicios principales aplicados al sector de alimentos y bebidas:
+- Diseño de layout para automatización de líneas de producción
+- Programación de PLC y robots para llenado y empaquetado
+- Desarrollo de HMI y SCADA para supervisión de procesos
+- Comisionamiento virtual para validación de líneas antes de la instalación
+- Pruebas, optimización de ciclo y soporte a la producción
+- Capacitación de equipos y documentación técnica conforme normas regulatorias`,
       imageFood: {
         id: 3,
         url: 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Findustria-alimentos-e-bebidas.jpg?alt=media&token=a1e12721-7d63-49d6-b479-68c5e719dadc',

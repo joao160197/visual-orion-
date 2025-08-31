@@ -189,7 +189,7 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
     if (autoplay) {
       intervalId = setInterval(() => {
         nextSlide();
-      }, 5000); // Troca a cada 5 segundos
+      }, 5000); // Troca a cada 5 segundosJ
     }
     
     return () => {

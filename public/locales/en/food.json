@@ -1,0 +1,13 @@
+{
+  "title": "Food and Beverage",
+  "description": "Automation solutions for the food and beverage industry",
+  "sections": {
+    "introduction": "Introduction",
+    "solutions": "Our Solutions",
+    "benefits": "Benefits"
+  },
+  "fallback": {
+    "title": "Food and Beverage",
+    "description": "Content under development. More information coming soon."
+  }
+}
