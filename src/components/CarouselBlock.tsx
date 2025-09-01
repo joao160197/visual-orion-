@@ -240,10 +240,8 @@ const CarouselBlock: React.FC<CarouselBlockProps> = ({ title, images = [] }) => 
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                     priority={index === 0} // Prioriza o carregamento da primeira imagem
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                    }}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    unoptimized
                   />
                 </div>
               </div>
