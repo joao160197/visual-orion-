@@ -21,23 +21,9 @@ interface HeaderProps {
 
 const Header = ({ logo, dictionary }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Resolve o logo de forma síncrona para evitar flicker/atraso
-  const resolvedSrc = (() => {
-    const imageUrl =
-      logo?.formats?.thumbnail?.url ||
-      logo?.formats?.small?.url ||
-      logo?.formats?.medium?.url ||
-      logo?.url ||
-      "/img/logo.png";
-    const path = typeof imageUrl === "string" ? imageUrl.trim() : "";
-    if (!path) return "/img/logo.png";
-    return path.startsWith("http") || path.startsWith("/")
-      ? path
-      : `/${path.replace(/^\/+/, "")}`;
-  })();
-
-  const resolvedAlt = logo?.alternativeText || logo?.name || "Visual Orion Logo";
-  const isRemote = resolvedSrc.startsWith("http");
+  // Logo configuration
+  const resolvedSrc = 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20varia%C3%A7%C3%A3o%2003.png?alt=media&token=b935408f-e43b-4c28-bc00-74572d7eb7e0';
+  const resolvedAlt = "Orion Logo";
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -45,19 +31,17 @@ const Header = ({ logo, dictionary }: HeaderProps) => {
         <div className="flex justify-between h-16">
           <div className="flex">
             <LocaleLink href="/" className="flex items-center">
-              <div className="relative" style={{ width: '200px', height: '50px' }}>
-                <Image
+              <div className="relative w-[200px] h-[50px]">
+                <img
                   src={resolvedSrc}
                   alt={resolvedAlt}
-                  width={200}
-                  height={50}
-                  sizes="200px"
-                  className="object-contain object-left"
-                  priority
-                  loading="eager"
-                  unoptimized={isRemote}
-                  placeholder="blur"
-                  blurDataURL={'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"9\" viewBox=\"0 0 16 9\"><rect width=\"16\" height=\"9\" fill=\"#f3f4f6\"/></svg>')}
+                  className="w-full h-full object-contain object-left"
+                  onError={(e) => {
+                    console.error('Failed to load logo:', resolvedSrc);
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = '/img/logo.png';
+                  }}
                 />
               </div>
             </LocaleLink>

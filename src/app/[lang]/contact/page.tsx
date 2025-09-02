@@ -44,7 +44,7 @@ export default function ContactPage({ params }: { params: { lang: Locale } }) {
         {/* Brazil */}
         <Reveal delay={0.08}>
         <div className="border rounded-2xl shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">Visual Orion</h2>
+          <h2 className="text-2xl font-semibold mb-4">Orion</h2>
           <div className="space-y-3">
             <div className="flex items-start">
               <MapPin className="mt-1 mr-2 text-blue-600" />

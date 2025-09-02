@@ -16,8 +16,8 @@ export async function generateStaticParams() {
 
 
 export const metadata: Metadata = {
-  title: "Visual Orion",
-  description: "Soluções inovadoras para o seu negócio",
+  title: "Orion",
+  description: "Sua estrela-guia em automação industrial",
   icons: {
     icon: [
       {

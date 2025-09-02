@@ -12,32 +12,47 @@ export interface ImageFormat {
   url: string;
 }
 
-export interface LogoData {
+// Types for Strapi response format
+type StrapiResponseFormat<T> = {
+  data: {
+    id: number;
+    attributes: T;
+  } | null;
+} | null;
+
+type StrapiImageFormat = {
+  thumbnail?: ImageFormat;
+  small?: ImageFormat;
+  medium?: ImageFormat;
+  large?: ImageFormat;
+};
+
+type BaseLogoData = {
   id: number;
-  documentId?: string; // Adicionado como opcional, pois não estava no seu log de dados do Strapi
   name?: string;
   alternativeText: string | null;
   caption?: string | null;
   width?: number;
   height?: number;
-  formats?: {
-    thumbnail?: ImageFormat;
-    medium?: ImageFormat;
-    large?: ImageFormat;
-    small?: ImageFormat;
-  };
+  formats?: StrapiImageFormat;
   hash?: string;
   ext?: string;
   mime?: string;
   size?: number;
-  url: string; // Esta é a propriedade crucial que estamos usando
+  url: string;
   previewUrl?: string | null;
   provider?: string;
-  provider_metadata?: any; // Pode ser 'any' ou um tipo mais específico se conhecido
+  provider_metadata?: any;
   createdAt?: string;
   updatedAt?: string;
-  publishedAt?: string; // Adicionado como opcional, pois não estava no seu log de dados do Strapi
-}
+  publishedAt?: string;
+};
+
+type StrapiLogoData = StrapiResponseFormat<BaseLogoData>;
+
+type DirectLogoData = BaseLogoData;
+
+export type LogoData = DirectLogoData | StrapiLogoData;
 
 // Adicione quaisquer outros tipos que você possa ter neste arquivo
 // Por exemplo, se você tinha ImageProps antes, pode mantê-lo ou ajustá-lo:

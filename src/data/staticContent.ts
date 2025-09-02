@@ -3,7 +3,7 @@ export type Locale = 'pt' | 'en' | 'es' | 'pt-BR' | 'es-AR';
 
 export const staticCompany = {
   pt: {
-    title: 'Visual Orion',
+    title: 'Orion',
     description: 'Soluções inovadoras para o seu negócio',
     blocks: [],
     about: {
@@ -45,7 +45,7 @@ export const staticCompany = {
     ],
   },
   en: {
-    title: 'Visual Orion',
+    title: 'Orion',
     description: 'Innovative solutions for your business',
     blocks: [],
     about: {
@@ -87,7 +87,7 @@ export const staticCompany = {
     ],
   },
   es: {
-    title: 'Visual Orion',
+    title: 'Orion',
     description: 'Soluciones innovadoras para su negocio',
     blocks: [],
     about: {
