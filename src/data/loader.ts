@@ -304,38 +304,37 @@ export async function getGlobalData(locale: string = 'pt') {
   
   const t = dict[locale as keyof typeof dict] || dict.pt;
   
+  const logoData = {
+    id: 1,
+    url: logoUrl,
+    alternativeText: t.logoAlt,
+    formats: {
+      thumbnail: {
+        url: logoUrl,
+        width: 156,
+        height: 156
+      },
+      small: {
+        url: logoUrl,
+        width: 256,
+        height: 256
+      },
+      medium: {
+        url: logoUrl,
+        width: 384,
+        height: 384
+      },
+      large: {
+        url: logoUrl,
+        width: 512,
+        height: 512
+      }
+    }
+  };
+
   return {
     data: {
-      Logo: {
-        id: 1,
-        url: logoUrl,
-        alternativeText: t.logoAlt,
-        name: 'orion-logo',
-        width: 512,
-        height: 512,
-        formats: {
-          thumbnail: {
-            url: logoUrl,
-            width: 156,
-            height: 156
-          },
-          small: {
-            url: logoUrl,
-            width: 256,
-            height: 256
-          },
-          medium: {
-            url: logoUrl,
-            width: 384,
-            height: 384
-          },
-          large: {
-            url: logoUrl,
-            width: 512,
-            height: 512
-          }
-        }
-      },
+      Logo: logoData,
       // Adiciona outras traduções globais que possam ser necessárias
       siteName: 'Orion',
       defaultSeo: {
@@ -344,5 +343,5 @@ export async function getGlobalData(locale: string = 'pt') {
         shareImage: null
       }
     }
-  } as const;
+  };
 }

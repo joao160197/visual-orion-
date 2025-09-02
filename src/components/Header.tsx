@@ -10,7 +10,16 @@ import { LocaleLink } from "./LocaleLink";
 import { LogoData } from "@/lib/utils/types/types"; 
 
 interface HeaderProps {
-  logo: LogoData | null; 
+  logo: {
+    id: number;
+    url: string;
+    alternativeText: string | null;
+    formats?: {
+      thumbnail?: { url: string };
+      small?: { url: string };
+      medium?: { url: string };
+    };
+  } | null;
   dictionary: {
     home: string;
     features: string;
@@ -21,9 +30,9 @@ interface HeaderProps {
 
 const Header = ({ logo, dictionary }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Logo configuration
-  const resolvedSrc = 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20varia%C3%A7%C3%A3o%2003.png?alt=media&token=b935408f-e43b-4c28-bc00-74572d7eb7e0';
-  const resolvedAlt = "Orion Logo";
+  // Resolve logo URL and alt text
+  const resolvedSrc = logo?.url || 'https://firebasestorage.googleapis.com/v0/b/pessoal-8849f.appspot.com/o/freela%2Fid%20visual%20%20orion%20-%20logo%20varia%C3%A7%C3%A3o%2003.png?alt=media&token=b935408f-e43b-4c28-bc00-74572d7eb7e0';
+  const resolvedAlt = logo?.alternativeText || 'Orion Logo';
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">

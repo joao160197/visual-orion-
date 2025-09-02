@@ -53,7 +53,13 @@ export default async function RootLayout({
     });
     
     dictionary = await getDictionary(lang as Locale);
-    logo = globalData?.data?.Logo || null;
+    // Extract the Logo object from the nested structure
+    logo = globalData?.data?.Logo ? {
+      id: globalData.data.Logo.id,
+      url: globalData.data.Logo.url,
+      alternativeText: globalData.data.Logo.alternativeText,
+      formats: globalData.data.Logo.formats
+    } : null;
     
     console.log('[RootLayout] Logo extraído:', {
       logo,
